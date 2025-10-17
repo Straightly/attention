@@ -46,9 +46,63 @@ header h1 {
     margin-bottom: 20px;
 }
 
-#setup-section ol {
-    margin: 20px 0 20px 30px;
+#setup-section h3 {
+    color: #333;
+    margin: 20px 0 10px 0;
+    font-size: 1.1em;
+}
+
+.token-instructions {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.token-instructions ol {
+    margin: 10px 0 0 20px;
     line-height: 1.8;
+}
+
+.token-instructions a {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.token-instructions a:hover {
+    text-decoration: underline;
+}
+
+.token-input-form {
+    margin: 30px 0;
+}
+
+.token-input-form label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.token-input-form input {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1em;
+    font-family: 'Courier New', monospace;
+    margin-bottom: 15px;
+}
+
+.token-input-form input:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.token-actions {
+    display: flex;
+    gap: 10px;
 }
 
 #setup-section code {
@@ -56,16 +110,6 @@ header h1 {
     padding: 2px 6px;
     border-radius: 4px;
     font-family: 'Courier New', monospace;
-}
-
-#setup-section a {
-    color: #667eea;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-#setup-section a:hover {
-    text-decoration: underline;
 }
 
 .controls {

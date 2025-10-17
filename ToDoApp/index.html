@@ -14,16 +14,30 @@
         </header>
 
         <div id="setup-section" class="section">
-            <h2>⚙️ Setup Required</h2>
-            <p>Please configure your GitHub token in <code>config.js</code></p>
-            <ol>
-                <li>Go to <a href="https://github.com/settings/tokens?type=beta" target="_blank">GitHub Settings → Personal Access Tokens</a></li>
-                <li>Click "Generate new token" (Fine-grained)</li>
-                <li>Repository access: Select only <strong>Straightly/attention</strong></li>
-                <li>Permissions: <strong>Contents</strong> → Read and write</li>
-                <li>Copy the token and paste it in <code>config.js</code></li>
-            </ol>
-            <button id="test-connection" class="btn btn-primary">Test Connection</button>
+            <h2>🔐 GitHub Authentication</h2>
+            <p>Enter your GitHub Personal Access Token to get started. Your token will be stored securely in your browser.</p>
+            
+            <div class="token-instructions">
+                <h3>How to create a token:</h3>
+                <ol>
+                    <li>Go to <a href="https://github.com/settings/tokens?type=beta" target="_blank">GitHub Settings → Personal Access Tokens</a></li>
+                    <li>Click <strong>"Generate new token"</strong> (Fine-grained)</li>
+                    <li><strong>Token name:</strong> Attention Todo App</li>
+                    <li><strong>Repository access:</strong> Only select repositories → <strong>Straightly/attention</strong></li>
+                    <li><strong>Permissions:</strong> Repository permissions → <strong>Contents</strong> → Read and write</li>
+                    <li>Click <strong>"Generate token"</strong> and copy it</li>
+                </ol>
+            </div>
+            
+            <div class="token-input-form">
+                <label for="token-input">GitHub Personal Access Token:</label>
+                <input type="password" id="token-input" placeholder="github_pat_xxxxxxxxxxxxx..." />
+                <div class="token-actions">
+                    <button id="save-token" class="btn btn-primary">Save & Connect</button>
+                    <button id="show-token" class="btn btn-secondary">👁️ Show</button>
+                </div>
+            </div>
+            
             <div id="connection-status"></div>
         </div>
 
@@ -32,6 +46,7 @@
                 <div class="file-info">
                     <span class="file-label">📄 Managing: <strong>ToDos/List.json</strong></span>
                     <button id="refresh-file" class="btn btn-secondary">🔄 Refresh</button>
+                    <button id="logout-btn" class="btn btn-secondary">🚪 Logout</button>
                 </div>
                 <div class="status" id="status"></div>
             </div>

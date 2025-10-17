@@ -7,9 +7,14 @@ class GitHubAPI {
     }
 
     async request(endpoint, options = {}) {
+        const token = TokenManager.get();
+        if (!token) {
+            throw new Error('No authentication token found');
+        }
+        
         const url = `${this.baseUrl}${endpoint}`;
         const headers = {
-            'Authorization': `Bearer ${this.config.GITHUB_TOKEN}`,
+            'Authorization': `Bearer ${token}`,
             'Accept': 'application/vnd.github.v3+json',
             'Content-Type': 'application/json',
             ...options.headers
@@ -146,9 +151,12 @@ class TodoUI {
     setupElements() {
         this.setupSection = document.getElementById('setup-section');
         this.appSection = document.getElementById('app-section');
-        this.testConnectionBtn = document.getElementById('test-connection');
+        this.tokenInput = document.getElementById('token-input');
+        this.saveTokenBtn = document.getElementById('save-token');
+        this.showTokenBtn = document.getElementById('show-token');
         this.connectionStatus = document.getElementById('connection-status');
         this.refreshFileBtn = document.getElementById('refresh-file');
+        this.logoutBtn = document.getElementById('logout-btn');
         this.todoList = document.getElementById('todo-list');
         this.newTodoInput = document.getElementById('new-todo');
         this.addTodoBtn = document.getElementById('add-todo-btn');
@@ -158,8 +166,13 @@ class TodoUI {
     }
 
     attachEventListeners() {
-        this.testConnectionBtn.addEventListener('click', () => this.testConnection());
+        this.saveTokenBtn.addEventListener('click', () => this.saveToken());
+        this.showTokenBtn.addEventListener('click', () => this.toggleTokenVisibility());
+        this.tokenInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') this.saveToken();
+        });
         this.refreshFileBtn.addEventListener('click', () => this.loadFile());
+        this.logoutBtn.addEventListener('click', () => this.logout());
         this.addTodoBtn.addEventListener('click', () => this.addTodo());
         this.newTodoInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') this.addTodo();
@@ -168,10 +181,48 @@ class TodoUI {
     }
 
     async checkSetup() {
-        if (CONFIG.GITHUB_TOKEN === 'YOUR_GITHUB_TOKEN_HERE') {
-            this.showSetup();
-        } else {
+        if (TokenManager.exists()) {
             await this.testConnection();
+        } else {
+            this.showSetup();
+        }
+    }
+
+    toggleTokenVisibility() {
+        if (this.tokenInput.type === 'password') {
+            this.tokenInput.type = 'text';
+            this.showTokenBtn.textContent = '🙈 Hide';
+        } else {
+            this.tokenInput.type = 'password';
+            this.showTokenBtn.textContent = '👁️ Show';
+        }
+    }
+
+    async saveToken() {
+        const token = this.tokenInput.value.trim();
+        if (!token) {
+            this.connectionStatus.innerHTML = '❌ Please enter a token';
+            this.connectionStatus.className = 'status error';
+            return;
+        }
+
+        if (!token.startsWith('github_pat_') && !token.startsWith('ghp_')) {
+            this.connectionStatus.innerHTML = '⚠️ Token should start with github_pat_ or ghp_';
+            this.connectionStatus.className = 'status error';
+            return;
+        }
+
+        TokenManager.set(token);
+        await this.testConnection();
+    }
+
+    logout() {
+        if (confirm('Are you sure you want to logout? Your token will be removed from this browser.')) {
+            TokenManager.clear();
+            this.tokenInput.value = '';
+            this.showSetup();
+            this.connectionStatus.innerHTML = '✅ Logged out successfully';
+            this.connectionStatus.className = 'status success';
         }
     }
 
@@ -186,8 +237,8 @@ class TodoUI {
     }
 
     async testConnection() {
-        this.testConnectionBtn.disabled = true;
-        this.testConnectionBtn.innerHTML = 'Testing... <span class="loading"></span>';
+        this.saveTokenBtn.disabled = true;
+        this.saveTokenBtn.innerHTML = 'Testing... <span class="loading"></span>';
         
         try {
             await this.manager.api.testConnection();
@@ -199,10 +250,11 @@ class TodoUI {
                 this.loadFile();
             }, 1000);
         } catch (error) {
-            this.connectionStatus.innerHTML = `❌ ${error.message}<br><br>Please check your token in config.js`;
+            this.connectionStatus.innerHTML = `❌ ${error.message}<br><br>Please check your token`;
             this.connectionStatus.className = 'status error';
-            this.testConnectionBtn.disabled = false;
-            this.testConnectionBtn.textContent = 'Test Connection';
+            TokenManager.clear(); // Clear invalid token
+            this.saveTokenBtn.disabled = false;
+            this.saveTokenBtn.textContent = 'Save & Connect';
         }
     }
 
