@@ -193,7 +193,58 @@ I noticed you are not append my prompts to my journal.md.
 - Acknowledged oversight
 - Appending all recent prompts (13-16) to journal.md now
 
-**Session End Time:** 21:08 PDT
+#### Prompt 17 (21:11)
+```
+I want to access this app from any browser, any devices, not just this computer.
+```
+
+**Outcome:**
+- Deployed app to GitHub Pages
+- Created `docs/` folder with app files
+- Pushed to GitHub
+- Provided instructions to enable GitHub Pages in repo settings
+
+#### Prompt 18 (21:22)
+```
+Got error ❌ Connection failed: Bad credentials
+
+Please check your token in config.js
+```
+
+**Outcome:**
+- Identified token was expired or invalid
+- Provided instructions to create new GitHub token
+- Explained token needs to be updated in config.js
+
+#### Prompt 19 (21:24)
+```
+Since I need to change the token, I might as well change the security to as the user to 
+enter the token manually and have it saved locally.
+```
+
+**Outcome:**
+- Completely redesigned authentication system
+- Removed hardcoded token from config.js
+- Added TokenManager class using localStorage
+- Created login screen with token input form
+- Added show/hide password toggle
+- Added logout button to clear token
+- Token now stored securely in browser only
+- Updated HTML with new authentication UI
+- Updated CSS for token input styling
+- App now safe to share publicly - no token in code
+
+#### Prompt 20 (21:36)
+```
+Great. Every work as expected. Except you are not appending to my journal.md.
+```
+
+**Outcome:**
+- Acknowledged oversight again
+- Appending prompts 17-20 to journal.md
+- User successfully tested app from browser, added "item 5" via web interface
+
+**Session End Time:** 21:36 PDT
 
 ---
 
