@@ -1,0 +1,10 @@
+{
+  "todos": [
+    {
+      "id": 1,
+      "text": "Example todo item",
+      "completed": false,
+      "createdAt": "2025-10-16T20:52:00Z"
+    }
+  ]
+}

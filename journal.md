@@ -61,7 +61,99 @@ the prompt?  I have done this on a few my projects in Windsurf before and it wor
 - This file tells Cascade AI to append prompts to journal.md in future sessions
 - Updated journal.md with this prompt
 
-**Session End Time:** 19:58 PDT
+#### Prompt 5 (20:04)
+```
+I want to start write a paper on Security of Using AI. I want to analyze the operations of 
+spawning off an agent, for the agent to retrieve confidential information, to invoke privileged 
+actions, analyzing both the authentication flow and the authorization flow using Auth0 protocols 
+as an example. Can you get me started in a subfolder of Writing? And copy all contents you can 
+find in my folders related to security, authentication, and authorization there?
+```
+
+**Outcome:**
+- Created `Writing/AI-Security-Paper/` folder structure
+- Drafted comprehensive paper: `AI-Agent-Security-Authentication-Authorization.md` (~2,500 words)
+- Copied reference materials: security notes, agent identity concepts, InfoSec notes
+- Paper includes Yin/Yang security framework, chain of trust proposal, Auth0 analysis sections
+
+#### Prompt 6 (20:27)
+```
+Can I write simple apps to be hosted online for free?
+```
+
+**Outcome:**
+- Provided comprehensive list of free hosting platforms
+- Recommended: Vercel (frontend), Railway (full-stack), GitHub Pages (static)
+- Explained limitations and best use cases for each platform
+
+#### Prompt 7 (20:31)
+```
+I want to create a list of todos in this project. I want to write an app, currently only display 
+the list, allow me to check off items and add new items. When item is added, it will be change 
+the file and commit to github. Will I be able to host that in any of the free sites you mentioned? 
+Which one will be the easiest and best fit for this app?
+```
+
+**Outcome:**
+- Recommended client-side approach with GitHub API
+- Suggested GitHub Pages or Vercel for hosting
+- Explained GitHub personal access token setup
+
+#### Prompt 8 (20:36)
+```
+I login into my github account with my google account. I am also logged in using chrome browser 
+to this google account. Can I use the SSO to access and modify my github file?
+```
+
+**Outcome:**
+- Explained SSO doesn't provide API access
+- Recommended Personal Access Token (easiest) or OAuth App (more secure)
+- Discussed security trade-offs
+
+#### Prompt 9 (20:38)
+```
+Yes. Please create my app in a subfolder called ToDoApp.
+```
+
+**Outcome:**
+- Created complete todo web app in `ToDoApp/` folder
+- Files: index.html, style.css, app.js, config.js
+- Features: Load from GitHub, check/uncheck, add/delete, auto-commit
+- Beautiful responsive UI with animations
+
+#### Prompt 10 (20:41)
+```
+Can I even more fine tune the security by limit the access to only one file?
+```
+
+**Outcome:**
+- Explained GitHub tokens cannot be scoped to individual files
+- Repository-level is most granular
+- Recommended accepting current security or creating separate todos repository
+
+#### Prompt 11 (20:42)
+```
+no. Whoever want to breach using my token will not hesitate to change my code in the browser.
+```
+
+**Outcome:**
+- Agreed client-side validation is useless for security
+- Discussed realistic threat models
+- Recommended separate repository approach for better isolation
+
+#### Prompt 12 (20:52)
+```
+I think you misunderstood me. I want the app to read only one file. ToDos/List.json, and 
+add/remove items from that file also. Can you please change?
+```
+
+**Outcome:**
+- Updated app to work with single JSON file: `ToDos/List.json`
+- Removed file selector, hardcoded to one file
+- Simplified TodoManager to work with JSON structure
+- Created initial List.json with proper structure
+
+**Session End Time:** 20:52 PDT
 
 ---
 
