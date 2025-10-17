@@ -501,6 +501,16 @@ This is testing to see if all prompts will be journaled before they are responde
 Next time when yo do the journal, do not journal the outcome as it is too lengthy.  Simply journal the prompts.
 ```
 
+#### Prompt 35 (12:59)
+```
+What is wrong with this json? [FHIR Bundle with MedicationRequest resources]
+```
+
+#### Prompt 36 (13:05)
+```
+How to change my json view to show all white spaces
+```
+
 ---
 
 ## How to Update This Journal

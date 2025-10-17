@@ -1,0 +1,343 @@
+{ "resourceType": "Bundle",
+ "type": "transaction",
+ "entry": [
+  {
+      "resource": {
+        "parameter": [
+          {
+            "name": "source",
+            "valueString": "Neighborhood Physicians Practice"
+          },
+          {
+            "name": "contextId",
+            "valueId": "432"
+          },
+          {
+            "name": "patientId",
+            "valueId": "7"
+          },
+          {
+            "name": "chartId",
+            "valueId": "1587"
+          },
+          {
+            "name": "chartSharingGroupId",
+            "valueId": "21"
+          },
+          {
+            "name": "channel",
+            "valueString": "prs_prefetch.data_pipelines"
+          }
+        ],
+        "resourceType": "Parameters"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "MedicationRequest",
+        "intent": "order",
+        "medicationReference": {
+          "reference": "#athena-medication-id-338638"
+        },
+        "id": "db22b6c4-e276-1516-506e-e2f84d988fa6",
+        "identifier": [
+          {
+            "system": "urn:ietf:rfc:3986",
+            "value": "urn:uuid:cdbd33f0-6cde-11db-9fe1-0800200c9a66"
+          }
+        ],
+        "status": "active",
+        "dosageInstruction": [
+          {
+            "text": "Once a week",
+            "timing": {
+              "repeat": {
+                "boundsPeriod": {
+                  "start": "2015-02-22",
+                  "end": "2025-03-10"
+                },
+                "period": 7,
+                "periodUnit": "d"
+              }
+            },
+            "route": {
+              "coding": [
+                {
+                  "system": "http://ncithesaurus-stage.nci.nih.gov",
+                  "code": "C38276",
+                  "display": "INTRAVENOUS"
+                }
+              ]
+            },
+            "doseAndRate": [
+              {
+                "doseQuantity": {
+                  "value": 1
+                }
+              }
+            ]
+          }
+        ],
+        "contained": [
+          {
+            "resourceType": "Medication",
+            "id": "athena-medication-id-338638",
+            "identifier": [
+                {
+                    "value": "338638"
+                }
+            ],
+            "code": {
+              "coding": [
+                  {
+                      "code": "545587",
+                      "system": "https://fdb.com/medication"
+                  }
+              ],
+              "text": "Aranesp 500 mcg/mL (in polysorbate) injection syringe"
+            }
+          }
+        ],
+        "subject": {
+          "reference": "Patient/a-432.E-440"
+        }
+      },
+      "fullUrl": "urn:uuid:db22b6c4-e276-1516-506e-e2f84d988fa6",
+      "request": {
+        "method": "PUT",
+        "url": "MedicationRequest/db22b6c4-e276-1516-506e-e2f84d988fa6"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "MedicationRequest",
+        "intent": "order",
+        "medicationReference": {
+          "reference": "#athena-medication-id-257560"
+        },
+        "id": "7fc60296-0667-4a44-86e5-4c432403532e",
+        "identifier": [
+          {
+            "system": "urn:ietf:rfc:3986",
+            "value": "urn:uuid:cdbd33f0-6cde-11db-9fe1-0800200c9a66"
+          }
+        ],
+        "status": "active",
+        "contained": [
+          {
+            "resourceType": "Medication",
+            "id": "athena-medication-id-257560",
+            "identifier": [
+                {
+                    "value": "257560"
+                }
+            ],
+            "code": {
+              "coding": [
+                  {
+                      "code": "297946",
+                      "system": "https://fdb.com/medication"
+                  }
+              ],
+              "text": "Tylenol Extra Strength 500 mg tablet"
+            }
+          }
+        ],
+        "subject": {
+          "reference": "Patient/a-432.E-440"
+        },
+        "authoredOn": "2013-09-11T16:03:00-07:00",
+        "dosageInstruction": [
+          {
+            "text": "For 10 days As needed",
+            "timing": {
+              "repeat": {
+                "boundsPeriod": {
+                  "start": "2015-02-22",
+                  "end": "2025-04-10"
+                },
+                "period": 24,
+                "periodUnit": "h"
+              }
+            },
+            "route": {
+              "coding": [
+                {
+                  "system": "http://ncithesaurus-stage.nci.nih.gov",
+                  "code": "C38288",
+                  "display": "ORAL"
+                }
+              ]
+            },
+            "doseAndRate": [
+              {
+                "doseQuantity": {
+                  "value": 1
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "fullUrl": "urn:uuid:7fc60296-0667-4a44-86e5-4c432403532e",
+      "request": {
+        "method": "PUT",
+        "url": "MedicationRequest/7fc60296-0667-4a44-86e5-4c432403532e"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "MedicationRequest",
+        "intent": "order",
+        "medicationReference": {
+          "reference": "#athena-medication-id-232203"
+        },
+        "id": "db22b6c4-e276-1516-506e-e2f84d988fa6",
+        "identifier": [
+          {
+            "system": "urn:ietf:rfc:3986",
+            "value": "urn:uuid:cdbd33f0-6cde-11db-9fe1-0800200c9a66"
+          }
+        ],
+        "status": "active",
+        "dosageInstruction": [
+          {
+            "text": "Once a week",
+            "timing": {
+              "repeat": {
+                "boundsPeriod": {
+                  "start": "2015-02-26",
+                  "end": "2025-05-10"
+                },
+                "period": 7,
+                "periodUnit": "d"
+              }
+            },
+            "route": {
+              "coding": [
+                {
+                  "system": "http://ncithesaurus-stage.nci.nih.gov",
+                  "code": "C38276",
+                  "display": "INTRAVENOUS"
+                }
+              ]
+            },
+            "doseAndRate": [
+              {
+                "doseQuantity": {
+                  "value": 1
+                }
+              }
+            ]
+          }
+        ],
+        "contained": [
+          {
+            "resourceType": "Medication",
+            "id": "athena-medication-id-232203",
+            "identifier": [
+                {
+                    "value": "232203"
+                }
+            ],
+            "code": {
+              "coding": [
+                  {
+                      "code": "185452",
+                      "system": "https://fdb.com/medication"
+                  }
+              ],
+              "text": "RIZATRIPTAN 10 MG TABLET"
+            }
+          }
+        ],
+        "subject": {
+          "reference": "Patient/a-432.E-440"
+        }
+      },
+      "fullUrl": "urn:uuid:db22b6c4-e276-1516-506e-e2f84d988fa6",
+      "request": {
+        "method": "PUT",
+        "url": "MedicationRequest/db22b6c4-e276-1516-506e-e2f84d988fa6"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "MedicationRequest",
+        "intent": "order",
+        "medicationReference": {
+          "reference": "#athena-medication-id-232203"
+        },
+        "id": "db22b6c4-e276-1516-506e-e2f84d988fa6",
+        "identifier": [
+          {
+            "system": "urn:ietf:rfc:3986",
+            "value": "urn:uuid:cdbd33f0-6cde-11db-9fe1-0800200c9a66"
+          }
+        ],
+        "status": "active",
+        "dosageInstruction": [
+          {
+            "text": "Once a week",
+            "timing": {
+              "repeat": {
+                "boundsPeriod": {
+                  "start": "2025-03-28",
+                  "end": "2025-06-10"
+                },
+                "period": 7,
+                "periodUnit": "d"
+              }
+            },
+            "route": {
+              "coding": [
+                {
+                  "system": "http://ncithesaurus-stage.nci.nih.gov",
+                  "code": "C38276",
+                  "display": "INTRAVENOUS"
+                }
+              ]
+            },
+            "doseAndRate": [
+              {
+                "doseQuantity": {
+                  "value": 1
+                }
+              }
+            ]
+          }
+        ],
+        "contained": [
+          {
+            "resourceType": "Medication",
+            "id": "athena-medication-id-232203",
+            "identifier": [
+                {
+                    "value": "232203"
+                }
+            ],
+            "code": {
+              "coding": [
+                  {
+                      "code": "185452",
+                      "system": "https://fdb.com/medication"
+                  }
+              ],
+              "text": "RIZATRIPTAN 10 MG TABLET"
+            }
+          }
+        ],
+        "subject": {
+          "reference": "Patient/a-432.E-440"
+        }
+      },
+      "fullUrl": "urn:uuid:db22b6c4-e276-1516-506e-e2f84d988fa6",
+      "request": {
+        "method": "PUT",
+        "url": "MedicationRequest/db22b6c4-e276-1516-506e-e2f84d988fa6"
+      }
+    }
+  ]
+} 
+
+

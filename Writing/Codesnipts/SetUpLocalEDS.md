@@ -15,7 +15,7 @@
 ``` start/myHarr
 ```
 ### process 3: Tunnel from AthenaNet to EDS
-``` ssh -L 8080:localhost:8080 zan@athenaNet
+``` ssh -R 57126:localhost:8080 preprod512506.athenahealth.com
 ```
 ### process 4: Tunnel for CORS
 ``` lcp --proxyUrl http://localhost:8080 --proxyPartial '' --port 57126
