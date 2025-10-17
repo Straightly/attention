@@ -23,6 +23,12 @@
       "text": "item 5",
       "completed": false,
       "createdAt": "2025-10-17T04:35:11.007Z"
+    },
+    {
+      "id": 7,
+      "text": "Research the museum in Kansas.",
+      "completed": false,
+      "createdAt": "2025-10-17T04:48:53.115Z"
     }
   ]
 }
