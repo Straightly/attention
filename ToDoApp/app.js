@@ -118,14 +118,15 @@ class TodoManager {
             };
             const content = JSON.stringify(data, null, 2);
             
-            await this.api.updateFile(
+            const response = await this.api.updateFile(
                 content,
                 commitMessage,
                 this.currentSha
             );
             
-            // Reload to get new SHA
-            await this.loadFile();
+            // Update SHA from response to avoid conflicts
+            this.currentSha = response.content.sha;
+            this.hasChanges = false;
             return true;
         } catch (error) {
             throw new Error(`Failed to save changes: ${error.message}`);
