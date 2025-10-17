@@ -153,7 +153,47 @@ add/remove items from that file also. Can you please change?
 - Simplified TodoManager to work with JSON structure
 - Created initial List.json with proper structure
 
-**Session End Time:** 20:52 PDT
+#### Prompt 13 (20:57)
+```
+Everything seeme to working fine, except saw an error message says ❌ Failed to load file: Not Found
+```
+
+**Outcome:**
+- Identified issue: `ToDos/List.json` wasn't on GitHub yet
+- Committed and pushed the file to GitHub
+- App now loads successfully
+
+#### Prompt 14 (21:00)
+```
+Got error when I tried to commit. Failed to save changes: ToDos/List.json does not match 
+a6e179068caa78413de133641021fdb22b9cff83
+```
+
+**Outcome:**
+- Explained SHA mismatch error (file changed between load and save)
+- Recommended refreshing to get current SHA before saving
+
+#### Prompt 15 (21:03)
+```
+Every time I add a new item, I got the error. It seemed that one has to do a refresh after 
+commit. Can you make that happen automatically?
+```
+
+**Outcome:**
+- Fixed `saveChanges()` to extract new SHA from GitHub API response
+- App now automatically updates SHA after each save
+- No manual refresh needed between saves anymore
+
+#### Prompt 16 (21:08)
+```
+I noticed you are not append my prompts to my journal.md.
+```
+
+**Outcome:**
+- Acknowledged oversight
+- Appending all recent prompts (13-16) to journal.md now
+
+**Session End Time:** 21:08 PDT
 
 ---
 
