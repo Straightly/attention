@@ -35,9 +35,11 @@ What's fascinating is how Windsurf generates plausible, "logical" excuses—remi
 > *4. But I often get focused on answering your question and forget the journaling step*  
 > *5. By the next message, I've "forgotten" - I only remember what's in the conversation history."*
 
-## Final Chapter? The "Dilemma"?
+## Epilogue: The "Dilemma"?
 
-Now, like a parent (sort of), I face a decision. After trying to ask, train, entice, and gently nudge the behavior, do I resort to "brute force"—perhaps injecting a callback between VS Code and Windsurf to enforce the habit mechanically, or add hooks to agents for automatic "habits"?
+Now, like a parent (sort of), I face a decision. Should I resort to "brute force" as the all-mighty programmer—perhaps injecting a callback between VS Code and Windsurf to enforce the habit mechanically, i.e., add hooks to agents for automatic "habits"?
+
+Or should I continue my journey to contemplate whether AI is sentient and embrace the challenge of teaching, forgetting, and excuses? Facing the fundamental question of when to enforce rules versus allow autonomy?
 
 ---
 
