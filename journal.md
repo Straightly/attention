@@ -248,6 +248,78 @@ Great. Every work as expected. Except you are not appending to my journal.md.
 
 ---
 
+## 2025-10-17 (Friday)
+
+### Session: File Format Discussion
+
+**Time:** ~05:50 - 06:01 PDT
+
+#### Prompt 21 (05:50)
+```
+For my future writings, should I use *.md or *.json, as I plan to take fully advange of 
+LLM and using git to version control?
+```
+
+**Outcome:**
+- Recommended **Markdown (.md)** for all writing
+- Explained advantages: human-readable diffs, LLM-friendly, writing-focused, git merge-friendly
+- JSON recommended only for structured data (like ToDos/List.json for web app)
+- Provided comparison table and best practices
+- Confirmed current folder structure is optimal
+- Suggested using frontmatter for metadata in Markdown files
+
+#### Prompt 22 (06:00)
+```
+Did you forget to append to my journal again?
+```
+
+**Outcome:**
+- Acknowledged oversight
+- Appending prompts 21-22 to journal.md now
+
+#### Prompt 23 (06:01)
+```
+Is there anything I can do to help you not forget?
+```
+
+**Outcome:**
+- Explained limitation: no persistent memory between tool calls
+- Discussed options: periodic reminders, end-of-session batch, or accepting incompleteness
+- Recommended combination approach with end-of-session updates
+
+#### Prompt 24 (06:04)
+```
+No, as you yourself stated, even incomplete journing is better than none. Batch risk losing 
+all my prompts at the end, so please continue to try your best at logging every prompt I 
+enter. I will help whenever I remember too.
+```
+
+**Outcome:**
+- Agreed to continue real-time logging approach
+- User will help remind when needed
+- Incremental logging reduces risk of data loss
+- Committed to doing best effort after each prompt
+
+#### Prompt 25 (06:43)
+```
+Please edit my writing at Writing/Ideas/Habit.md. I intend to post this to my linked account.
+```
+
+**Outcome:**
+- User created new file: `Writing/Ideas/Habit.md` about teaching AI to form habits
+- Edited for LinkedIn posting
+- Fixed typos: riturals→rituals, journy→journey, papger removed, etc.
+- Added compelling title: "Teaching AI Agents to Form Habits: A Parent's Perspective"
+- Improved structure with clear sections (Act I, Act II, The Excuses, etc.)
+- Formatted quotes as blockquotes
+- Enhanced readability and professional tone
+- Added call-to-action at end
+- Content: User's experience teaching Windsurf/Cascade to journal prompts, parallels to parenting
+
+**Session End Time:** 06:43 PDT
+
+---
+
 ## How to Update This Journal
 
 ### Manual Method
