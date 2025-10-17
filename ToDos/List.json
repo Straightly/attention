@@ -7,18 +7,6 @@
       "createdAt": "2025-10-16T20:52:00Z"
     },
     {
-      "id": 2,
-      "text": "Item1",
-      "completed": false,
-      "createdAt": "2025-10-17T03:59:27.744Z"
-    },
-    {
-      "id": 3,
-      "text": "Item 2",
-      "completed": false,
-      "createdAt": "2025-10-17T04:01:34.022Z"
-    },
-    {
       "id": 4,
       "text": "Item 3",
       "completed": false,
