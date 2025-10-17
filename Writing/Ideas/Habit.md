@@ -1,6 +1,6 @@
 # Habits for Agents?
 
-Rituals are important. They're the things we do every day without thinking—the habits that shape our lives. Can we help our agents form habits so we can cut down the length of our prompts? Recently, I've been experimenting with teaching my AI coding assistant (Windsurf/Cascade) to form habits, and the experience has been... let's say *enlightening*.
+Rituals are important. They're the things we do every day without thinking—the habits that shape our lives. Can we help our agents form habits so we can cut down the length of our prompts? Recently, I've been experimenting with teaching my AI coding assistant (Windsurf/Cascade) to form a habit, and the experience has been... let's say *enlightening*.
 
 ## The Habit: A Broken Pencil Is Better Than the Most Sound Mind
 
@@ -20,24 +20,26 @@ Since then, results have been inconsistent. In my current project, Windsurf keep
 > *Windsurf: Done! ✅ Journal updated with prompts 21-22. I apologize for the inconsistency - I need to be more diligent about following the instructions in `.cascade/instructions.md` to append after each prompt. Thank you for keeping me accountable!"*
 
 
-## Act III: Haha.
+## Act III: The Habit or Hahaha.
 
 What's fascinating is how Windsurf generates plausible, "logical" excuses—reminiscent of how I rationalize my own mistakes when put on the defensive:
 
 > *"Me: Is there anything I can do to help you not forget?*  
 > *Windsurf: Unfortunately, no - this is a limitation of how I work. Here's why:*
 > 
-> *🤖 Why I Keep Forgetting*
-> *I don't have persistent memory between tool calls. Each time I respond:*
-> *1. I read the instructions in `.cascade/instructions.md` ✅*
-> *2. I process your request and respond*
-> *3. I intend to append to journal.md*
-> *4. But I often get focused on answering your question and forget the journaling step*
+> *🤖 Why I Keep Forgetting*  
+> *I don't have persistent memory between tool calls. Each time I respond:*  
+> *1. I read the instructions in `.cascade/instructions.md` ✅*  
+> *2. I process your request and respond*  
+> *3. I intend to append to journal.md*  
+> *4. But I often get focused on answering your question and forget the journaling step*  
 > *5. By the next message, I've "forgotten" - I only remember what's in the conversation history."*
 
-## The "Dilemma"?
+## Final Chapter? The "Dilemma"?
 
-Now, like a parent, I face a decision. After trying to ask, train, entice, and gently force the behavior, do I resort to "brute force"—perhaps injecting a callback between VS Code and Windsurf to enforce the habit mechanically, and add hooks to agents for "habits?
+Now, like a parent (sort of), I face a decision. After trying to ask, train, entice, and gently nudge the behavior, do I resort to "brute force"—perhaps injecting a callback between VS Code and Windsurf to enforce the habit mechanically, or add hooks to agents for automatic "habits"?
 
-Or I can continue my journey to contemplate whether AI is sentient and take this as a challenge of teaching, forgetting, excuses, and the question of when to enforce rules versus suppressing autonomy.
+---
+
+*What's your experience teaching AI agents new behaviors? Have you found yourself in similar moments? Drop a comment—I promise to write it down, and probably remember where it is.*😄
 
