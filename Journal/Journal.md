@@ -1,5 +1,19 @@
 # Journal
 
+# October 17, 2025 — Journal Workflow Update
+
+**Prompt:** Requested to journal every prompt at the start of each task, before attempting to answer them.
+
+**Action:** Confirmed new workflow - will add journal entries first to ensure prompts are documented even if work is interrupted.
+
+---
+
+# October 17, 2025 — Created Code Snippets Template
+
+Created a reusable template for documenting useful commands and code snippets in `Writing/Codesnipts/`. The template includes sections for description, command/code, notes, examples, and tags. Applied it to document the P4 toggle command (`set-toggle.md`).
+
+---
+
 # June 24, 2025 — Linked in Canceled.
 
 Add your notes here…

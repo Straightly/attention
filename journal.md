@@ -458,6 +458,51 @@ Did you check if the length fit?
 
 ---
 
+### Session: Code Snippets Documentation
+
+**Time:** ~12:13 PDT
+
+#### Prompt 31 (12:13)
+```
+I added Writing/Codesnipts/p4commands.md with the example. Can you please fill in the rests?
+```
+
+**Outcome:**
+- Filled in p4commands.md with comprehensive Perforce documentation
+- Added title: "Perforce (p4) Switch Command"
+- Documented switch command with `-Rn` flags
+- Added related commands: switch, clients, client -o
+- Included notes about workspace management
+- Added relevant tags: perforce, p4, version-control, workspace
+
+#### Prompt 32 (12:14)
+```
+Please also journal my prompt and remember to journal my prompts before you execute them.
+```
+
+**Outcome:**
+- Acknowledged request to journal prompts BEFORE executing tasks
+- Reading journal.md to understand format
+- Appending prompts 31-32 now
+- Will follow new workflow: journal first, then execute
+
+#### Prompt 33 (12:15)
+```
+This is testing to see if all prompts will be journaled before they are responded to.
+```
+
+**Outcome:**
+- Successfully journaled prompt before responding
+- Confirmed new workflow is working as expected
+- Test passed ✓
+
+#### Prompt 34 (12:16)
+```
+Next time when yo do the journal, do not journal the outcome as it is too lengthy.  Simply journal the prompts.
+```
+
+---
+
 ## How to Update This Journal
 
 ### Manual Method
