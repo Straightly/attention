@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attention - Todo Manager</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📝 Attention - Todo Manager</h1>
+            <p class="subtitle">Manage your todos and sync to GitHub</p>
+        </header>
+
+        <div id="setup-section" class="section">
+            <h2>⚙️ Setup Required</h2>
+            <p>Please configure your GitHub token in <code>config.js</code></p>
+            <ol>
+                <li>Go to <a href="https://github.com/settings/tokens?type=beta" target="_blank">GitHub Settings → Personal Access Tokens</a></li>
+                <li>Click "Generate new token" (Fine-grained)</li>
+                <li>Repository access: Select only <strong>Straightly/attention</strong></li>
+                <li>Permissions: <strong>Contents</strong> → Read and write</li>
+                <li>Copy the token and paste it in <code>config.js</code></li>
+            </ol>
+            <button id="test-connection" class="btn btn-primary">Test Connection</button>
+            <div id="connection-status"></div>
+        </div>
+
+        <div id="app-section" class="section" style="display: none;">
+            <div class="controls">
+                <div class="file-info">
+                    <span class="file-label">📄 Managing: <strong>ToDos/List.json</strong></span>
+                    <button id="refresh-file" class="btn btn-secondary">🔄 Refresh</button>
+                </div>
+                <div class="status" id="status"></div>
+            </div>
+
+            <div class="add-todo">
+                <input type="text" id="new-todo" placeholder="Add new todo item..." />
+                <button id="add-todo-btn" class="btn btn-primary">Add Todo</button>
+            </div>
+
+            <div id="todo-list" class="todo-list">
+                <!-- Todos will be loaded here -->
+            </div>
+
+            <div class="actions">
+                <button id="save-changes" class="btn btn-success" disabled>💾 Save & Commit to GitHub</button>
+                <span id="changes-indicator"></span>
+            </div>
+        </div>
+
+        <footer>
+            <p>Made with ❤️ for organizing your thoughts</p>
+        </footer>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
