@@ -42,6 +42,15 @@ This paper addresses the following questions:
 
 ## 2. Background and Related Work
 
+Client-side validation is useless for security since anyone with the token can bypass it entirely—they could just use the GitHub API directly or modify the browser code.
+
+Who are you protecting against?
+
+Random internet users? → Don't share your app URL publicly
+Malware on your computer? → If malware is running, your GitHub session is already compromised
+Someone using your computer? → They can access your GitHub directly anyway
+Yourself (accidental damage)? → Git history saves you
+
 ### 2.1 Traditional Authentication and Authorization
 
 **[TODO: Add literature review on OAuth 2.0, OpenID Connect, and traditional auth systems]**
