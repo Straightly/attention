@@ -511,6 +511,16 @@ What is wrong with this json? [FHIR Bundle with MedicationRequest resources]
 How to change my json view to show all white spaces
 ```
 
+#### Prompt 37 (19:27)
+```
+From security point of view, should an MCP service be any different than any other integration services?
+```
+
+#### Prompt 38 (19:27)
+```
+Please journal my prompt. And remember to journal my prompt next time.
+```
+
 ---
 
 ## How to Update This Journal
