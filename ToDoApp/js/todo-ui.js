@@ -1,7 +1,8 @@
 // UI Controller
 class TodoUI {
-    constructor(manager) {
+    constructor(manager, writingManager) {
         this.manager = manager;
+        this.writingManager = writingManager;
         this.setupElements();
         this.attachEventListeners();
         this.checkSetup();
@@ -22,6 +23,9 @@ class TodoUI {
         this.saveChangesBtn = document.getElementById('save-changes');
         this.changesIndicator = document.getElementById('changes-indicator');
         this.status = document.getElementById('status');
+        this.rawWritingText = document.getElementById('raw-writing-text');
+        this.saveWritingBtn = document.getElementById('save-writing-btn');
+        this.writingStatus = document.getElementById('writing-status');
     }
 
     attachEventListeners() {
@@ -37,6 +41,7 @@ class TodoUI {
             if (e.key === 'Enter') this.addTodo();
         });
         this.saveChangesBtn.addEventListener('click', () => this.saveChanges());
+        this.saveWritingBtn.addEventListener('click', () => this.saveRawWriting());
     }
 
     async checkSetup() {
@@ -229,6 +234,62 @@ class TodoUI {
                 this.status.textContent = '';
                 this.status.className = 'status';
             }, 3000);
+        }
+    }
+
+    showWritingStatus(message, type) {
+        this.writingStatus.textContent = message;
+        this.writingStatus.className = `status ${type}`;
+        
+        if (type === 'success') {
+            setTimeout(() => {
+                this.writingStatus.textContent = '';
+                this.writingStatus.className = 'status';
+            }, 5000);
+        }
+    }
+
+    async saveRawWriting() {
+        const content = this.rawWritingText.value.trim();
+        
+        if (!content) {
+            this.showWritingStatus('❌ Please enter some content', 'error');
+            return;
+        }
+
+        // Save any pending todo changes first
+        if (this.manager.hasChanges) {
+            try {
+                const timestamp = new Date().toLocaleString();
+                await this.manager.saveChanges(`Auto-save todos before capturing raw writing - ${timestamp}`);
+                this.renderTodos();
+            } catch (error) {
+                this.showWritingStatus(`⚠️ Warning: Could not save todos: ${error.message}`, 'error');
+                // Continue anyway
+            }
+        }
+
+        this.saveWritingBtn.disabled = true;
+        this.saveWritingBtn.textContent = '💾 Saving...';
+        this.showWritingStatus('Saving raw writing...', 'info');
+
+        try {
+            const timestamp = new Date().toLocaleString();
+            const result = await this.writingManager.saveWriting(
+                content,
+                `Add raw writing via web app - ${timestamp}`
+            );
+
+            this.showWritingStatus(
+                `✅ Saved as ${result.fileName} and committed to GitHub!`,
+                'success'
+            );
+            this.rawWritingText.value = ''; // Clear the textarea
+        } catch (error) {
+            this.showWritingStatus(`❌ ${error.message}`, 'error');
+        } finally {
+            this.saveWritingBtn.disabled = false;
+            this.saveWritingBtn.textContent = '💾 Save Raw Writing';
         }
     }
 }
