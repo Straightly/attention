@@ -541,6 +541,31 @@ Checking.  Do you remember that you should journal all my prompts?
 Can I put the instruction anywhere so this instruction will get checked every time this project is opened?
 ```
 
+#### Prompt 43 (03:28)
+```
+Did you remember to journal all my prompts?
+```
+
+#### Prompt 44 (03:30)
+```
+Are there more reliable way than .cascade/instructions.md to make this habit more consistent?
+```
+
+#### Prompt 45 (03:33)
+```
+For option A, can I make the hook pre-commit?
+```
+
+#### Prompt 46 (03:34)
+```
+Please do.
+```
+
+#### Prompt 47 (03:39)
+```
+I noticed that the pre-commit script is not in my version control change.  Can I add that to git so I do not loss it?
+```
+
 ---
 
 ## How to Update This Journal

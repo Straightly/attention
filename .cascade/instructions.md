@@ -1,3 +1,11 @@
+# ⚠️ FIRST ACTION REQUIRED ⚠️
+
+## 🔴 JOURNAL EVERY PROMPT IMMEDIATELY 🔴
+
+**BEFORE DOING ANYTHING ELSE:** Append the user's prompt to `/Users/zan/z/attention/journal.md`
+
+---
+
 # Project Instructions for Cascade AI
 
 ## Prompt Logging Requirement

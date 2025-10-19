@@ -1,0 +1,40 @@
+#!/bin/bash
+
+# Pre-commit hook to ensure journal.md is updated
+# This reminds you to log prompts before committing
+
+JOURNAL_FILE="journal.md"
+TODAY=$(date +%Y-%m-%d)
+
+# Check if journal.md is being committed
+if git diff --cached --name-only | grep -q "^${JOURNAL_FILE}$"; then
+    echo "✅ journal.md is being committed - proceeding..."
+    exit 0
+fi
+
+# Check if journal.md has today's date
+if grep -q "$TODAY" "$JOURNAL_FILE"; then
+    echo "✅ journal.md appears to have today's entries - proceeding..."
+    exit 0
+fi
+
+# Warn user that journal might not be updated
+echo ""
+echo "⚠️  WARNING: journal.md may not be updated for today ($TODAY)"
+echo ""
+echo "Have you logged all your prompts to journal.md?"
+echo ""
+echo "Options:"
+echo "  1. Add your prompts to journal.md and stage it: git add journal.md"
+echo "  2. Skip this check: git commit --no-verify"
+echo ""
+read -p "Continue with commit anyway? (y/N): " -n 1 -r
+echo ""
+
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    echo "✅ Proceeding with commit..."
+    exit 0
+else
+    echo "❌ Commit cancelled. Please update journal.md first."
+    exit 1
+fi
