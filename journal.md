@@ -573,6 +573,29 @@ Did you remember that you need to journal my pormpts?
 
 ---
 
+## 2025-10-19 (Saturday)
+
+### Session: ToDoApp Refactoring
+
+**Time:** ~03:47 - 03:52 PDT
+
+#### Prompt 49 (03:47)
+```
+No I would like to exapand my ToDoApp in ToDoApp/app.js.  Given that it is hosted as static pages in GitHub, do I have to keep everyting in one file, or I can split it into many files to make the app easier to maintain?  If I do that, do I have to go and change settings in GitHub?
+```
+
+#### Prompt 50 (03:48)
+```
+Please do.
+```
+
+#### Prompt 51 (03:52)
+```
+Please journal my prompts and remember to do so in the future.
+```
+
+---
+
 ## How to Update This Journal
 
 ### Manual Method
