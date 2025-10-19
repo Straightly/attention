@@ -566,6 +566,11 @@ Please do.
 I noticed that the pre-commit script is not in my version control change.  Can I add that to git so I do not loss it?
 ```
 
+#### Prompt 48 (03:42)
+```
+Did you remember that you need to journal my pormpts?
+```
+
 ---
 
 ## How to Update This Journal
