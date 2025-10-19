@@ -594,6 +594,11 @@ Please do.
 Please journal my prompts and remember to do so in the future.
 ```
 
+#### Prompt 52 (04:06)
+```
+I had create a file with a little content in Writing/RawWrittings/PrepareForVisitingNelsonAtkinsMuseumOfArt.  I want to keep my random writtings in this folder for stuffs like this.  Can you generate a tempate that is conductive so such writings can be scanned and used when I am writing paper?
+```
+
 ---
 
 ## How to Update This Journal
