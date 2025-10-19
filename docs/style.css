@@ -361,3 +361,56 @@ footer {
         gap: 15px;
     }
 }
+
+/* Raw Writing Section */
+.raw-writing-section {
+    margin-top: 40px;
+}
+
+.raw-writing-section h2 {
+    color: #667eea;
+    margin-bottom: 10px;
+}
+
+.raw-writing-section .subtitle {
+    color: #6c757d;
+    font-size: 0.95em;
+    margin-bottom: 20px;
+}
+
+.writing-input {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.writing-input label {
+    font-weight: 600;
+    color: #333;
+}
+
+.writing-input textarea {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 1em;
+    resize: vertical;
+    transition: border-color 0.3s;
+}
+
+.writing-input textarea:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.writing-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.writing-actions .status {
+    flex: 1;
+}

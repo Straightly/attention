@@ -64,6 +64,27 @@
                 <button id="save-changes" class="btn btn-success" disabled>💾 Save & Commit to GitHub</button>
                 <span id="changes-indicator"></span>
             </div>
+
+            <hr style="margin: 40px 0; border: none; border-top: 2px solid #e9ecef;">
+
+            <div class="raw-writing-section">
+                <h2>✍️ Capture Raw Writing</h2>
+                <p class="subtitle">Quick capture for spontaneous thoughts and ideas</p>
+                
+                <div class="writing-input">
+                    <label for="raw-writing-text">Your raw thought or idea:</label>
+                    <textarea 
+                        id="raw-writing-text" 
+                        placeholder="Type your raw thought here... It will be saved as a structured markdown file in Writing/RawWrittings/"
+                        rows="6"
+                    ></textarea>
+                    
+                    <div class="writing-actions">
+                        <button id="save-writing-btn" class="btn btn-primary">💾 Save Raw Writing</button>
+                        <span id="writing-status" class="status"></span>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <footer>
@@ -71,7 +92,13 @@
         </footer>
     </div>
 
+    <!-- Load scripts in order: config, utilities, then modules -->
     <script src="config.js"></script>
-    <script src="app.js"></script>
+    <script src="js/token-manager.js"></script>
+    <script src="js/github-api.js"></script>
+    <script src="js/todo-manager.js"></script>
+    <script src="js/writing-manager.js"></script>
+    <script src="js/todo-ui.js"></script>
+    <script src="js/app.js"></script>
 </body>
 </html>
