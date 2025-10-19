@@ -521,6 +521,26 @@ From security point of view, should an MCP service be any different than any oth
 Please journal my prompt. And remember to journal my prompt next time.
 ```
 
+#### Prompt 39 (19:29)
+```
+What Exfiltrate means?
+```
+
+#### Prompt 40 (03:21)
+```
+Did you remember to journal my prompts?
+```
+
+#### Prompt 41 (03:22)
+```
+Checking.  Do you remember that you should journal all my prompts?
+```
+
+#### Prompt 42 (03:24)
+```
+Can I put the instruction anywhere so this instruction will get checked every time this project is opened?
+```
+
 ---
 
 ## How to Update This Journal

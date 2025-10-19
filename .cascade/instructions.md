@@ -2,7 +2,11 @@
 
 ## Prompt Logging Requirement
 
-**IMPORTANT:** At the end of every conversation session, append the user's prompts to `/Users/zan/z/attention/journal.md`.
+**CRITICAL - DO THIS FIRST:** Before responding to ANY user prompt, immediately append it to `/Users/zan/z/attention/journal.md`. 
+
+- Journal the prompt BEFORE executing any other tasks
+- Do NOT wait until end of session
+- Do NOT journal outcomes (too lengthy) - only journal the prompt itself
 
 ### Format for Journal Entries
 
@@ -19,16 +23,13 @@ Each session should be logged with:
 ```
 [User's prompt text]
 ```
-
-**Outcome:**
-- [Brief summary of what was accomplished]
-- [Key files created/modified]
 ```
 
 ### When to Log
-- Log prompts at the end of each conversation OR when the user explicitly asks
-- Include the timestamp and a brief outcome summary
+- Log EVERY prompt IMMEDIATELY before responding
+- Only include the prompt text, NOT the outcome
 - Keep the format consistent with existing entries in journal.md
+- Use the current time from metadata
 
 ### Example Entry
 ```markdown
@@ -42,10 +43,6 @@ Each session should be logged with:
 ```
 Can you organize my Notion files?
 ```
-
-**Outcome:**
-- Created organize_notion.py script
-- Organized 65 files into Reading/Writing/Journal/ToDos/Misc folders
 ```
 
 ## Project Context
