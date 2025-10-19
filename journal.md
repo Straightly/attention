@@ -614,6 +614,11 @@ My code has been pushed to GitHub half an hour ago.  But accessing the page stil
 Please do option 1.
 ```
 
+#### Prompt 56 (04:52)
+```
+Can you add the going forward instructions in README.md?
+```
+
 ---
 
 ## How to Update This Journal

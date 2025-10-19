@@ -46,3 +46,36 @@ When expanding the app:
 - **New writing operations** → Add to `writing-manager.js`
 - **New UI elements** → Add to `todo-ui.js`
 - **New configuration** → Add to `../config.js`
+
+## Development & Deployment Workflow
+
+### Development
+- Work in the **`ToDoApp/`** directory (parent of this `js/` folder)
+- Make changes to any files in `ToDoApp/`
+- Test locally by opening `ToDoApp/index.html` in your browser
+
+### Deployment to GitHub Pages
+When ready to publish your changes:
+
+```bash
+# From the repository root
+cd /Users/zan/z/attention
+
+# Copy all updated files to the docs/ folder (GitHub Pages source)
+cp -r ToDoApp/* docs/
+
+# Commit and push
+git add docs/
+git commit -m "Deploy updates to GitHub Pages"
+git push
+```
+
+### Why Two Folders?
+- **`ToDoApp/`** - Development directory where you make changes
+- **`docs/`** - Deployment directory that GitHub Pages serves
+- This separation keeps your development work organized and allows you to test before deploying
+
+### After Pushing
+- GitHub Pages rebuilds in 1-5 minutes
+- Clear browser cache or hard refresh (Cmd+Shift+R) to see changes
+- Visit your GitHub Pages URL to verify deployment
