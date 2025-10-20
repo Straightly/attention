@@ -7,24 +7,6 @@
       "createdAt": "2025-10-16T20:52:00Z"
     },
     {
-      "id": 4,
-      "text": "Item 3",
-      "completed": true,
-      "createdAt": "2025-10-17T04:05:26.871Z"
-    },
-    {
-      "id": 5,
-      "text": "item 4",
-      "completed": true,
-      "createdAt": "2025-10-17T04:06:24.231Z"
-    },
-    {
-      "id": 6,
-      "text": "item 5",
-      "completed": true,
-      "createdAt": "2025-10-17T04:35:11.007Z"
-    },
-    {
       "id": 7,
       "text": "Research the museum in Kansas.",
       "completed": false,
@@ -47,6 +29,12 @@
       "text": "To enable a reference template",
       "completed": false,
       "createdAt": "2025-10-20T12:49:37.304Z"
+    },
+    {
+      "id": 11,
+      "text": "Implement soft delete",
+      "completed": false,
+      "createdAt": "2025-10-20T12:50:28.231Z"
     }
   ]
 }
