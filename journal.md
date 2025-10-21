@@ -621,6 +621,62 @@ Can you add the going forward instructions in README.md?
 
 ---
 
+## 2025-10-20 (Sunday)
+
+### Session: Raw Writing Feature Testing
+
+**Time:** ~05:45 PDT
+
+#### Prompt 57 (05:45)
+```
+Please remember to journal my prompts.
+```
+
+#### Prompt 58 (06:25)
+```
+I am preparing for an interview with an internal diffenrent division.  I have writiten down some materials for preparation in Writing/RawWrittings/Whatshouldprepareforthe_1760875006532.md.  May you suggest some questions and/or materials for my preparations?
+```
+
+#### Prompt 59 (06:32)
+```
+Can you please tag the addition you added so I know latter this is added by AI?
+```
+
+#### Prompt 60 (06:50)
+```
+In my writing, I used tag - and --.  They are not the right mark down format, right?  Please fix.
+```
+
+#### Prompt 61 (06:52)
+```
+Please pick the top three questions to ask her for me and highlight them.
+```
+
+#### Prompt 62 (06:56)
+```
+I do not even know if there is a position that is open.  Also, she is the senior architect on the team, not the hiring manager.  Please adjust accordingly.
+```
+
+---
+
+## 2025-10-21 (Monday)
+
+### Session: File System Check
+
+**Time:** ~06:19 PDT
+
+#### Prompt 63 (06:19)
+```
+ls -all
+```
+
+#### Prompt 64 (06:20)
+```
+How to list all my environment variables?
+```
+
+---
+
 ## How to Update This Journal
 
 ### Manual Method
