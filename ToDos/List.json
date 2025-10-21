@@ -35,6 +35,12 @@
       "text": "Implement soft delete",
       "completed": false,
       "createdAt": "2025-10-20T12:50:28.231Z"
+    },
+    {
+      "id": 12,
+      "text": "Chicago Marathon lottery",
+      "completed": false,
+      "createdAt": "2025-10-21T18:49:05.168Z"
     }
   ]
 }
