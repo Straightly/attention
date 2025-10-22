@@ -713,6 +713,11 @@ Please make a title bar above the to do list.  For now, only add a checkbox abov
 It worked wonderfully.  Can you please deploy the app?  I believe it is to copy the app to the docs folder.
 ```
 
+#### Prompt 71 (08:14)
+```
+I want to write a paper title "General Interface to AI".  Please create folder, and add a starter paper, list the sections you think I should include, and scan my folders and copy all relevant contents into the folder, and finally incorporate all the content you can from my writings into the paper.
+```
+
 ---
 
 ## How to Update This Journal
