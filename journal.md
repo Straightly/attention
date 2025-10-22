@@ -708,6 +708,11 @@ Now, I want to change my to-do app so that when I check off an item, the item wi
 Please make a title bar above the to do list.  For now, only add a checkbox above the column of the check-off boxes labeled with an icon appropriate for "HIde/Display Checked off items".
 ```
 
+#### Prompt 70 (06:47)
+```
+It worked wonderfully.  Can you please deploy the app?  I believe it is to copy the app to the docs folder.
+```
+
 ---
 
 ## How to Update This Journal

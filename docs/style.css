@@ -163,7 +163,34 @@ header h1 {
 .add-todo {
     display: flex;
     gap: 10px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
+}
+
+.todo-list-header {
+    background: #f8f9fa;
+    padding: 12px 15px;
+    border-radius: 8px 8px 0 0;
+    border-bottom: 2px solid #e0e0e0;
+    margin-bottom: 0;
+}
+
+.header-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-checkbox input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.header-checkbox label {
+    font-weight: 600;
+    color: #495057;
+    cursor: pointer;
+    user-select: none;
 }
 
 #new-todo {
@@ -228,6 +255,8 @@ header h1 {
 .todo-list {
     margin-bottom: 30px;
     min-height: 200px;
+    border-radius: 0 0 8px 8px;
+    padding-top: 10px;
 }
 
 .todo-item {
