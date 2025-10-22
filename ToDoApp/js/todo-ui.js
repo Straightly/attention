@@ -140,18 +140,21 @@ class TodoUI {
     renderTodos() {
         this.todoList.innerHTML = '';
         
-        if (this.manager.todos.length === 0) {
-            this.todoList.innerHTML = '<p style="text-align: center; color: #6c757d; padding: 40px;">No todos found. Add one below!</p>';
+        // Filter out completed todos
+        const activeTodos = this.manager.todos.filter(todo => !todo.completed);
+        
+        if (activeTodos.length === 0) {
+            this.todoList.innerHTML = '<p style="text-align: center; color: #6c757d; padding: 40px;">No active todos. Add one below!</p>';
             return;
         }
         
-        this.manager.todos.forEach((todo) => {
+        activeTodos.forEach((todo) => {
             const item = document.createElement('div');
-            item.className = `todo-item ${todo.completed ? 'completed' : ''}`;
+            item.className = 'todo-item';
             
             const checkbox = document.createElement('input');
             checkbox.type = 'checkbox';
-            checkbox.checked = todo.completed;
+            checkbox.checked = false;
             checkbox.addEventListener('change', () => this.toggleTodo(todo.id));
             
             const label = document.createElement('label');
