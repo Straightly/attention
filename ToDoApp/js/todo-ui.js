@@ -3,6 +3,7 @@ class TodoUI {
     constructor(manager, writingManager) {
         this.manager = manager;
         this.writingManager = writingManager;
+        this.showCompleted = false;
         this.setupElements();
         this.attachEventListeners();
         this.checkSetup();
@@ -26,6 +27,7 @@ class TodoUI {
         this.rawWritingText = document.getElementById('raw-writing-text');
         this.saveWritingBtn = document.getElementById('save-writing-btn');
         this.writingStatus = document.getElementById('writing-status');
+        this.showCompletedToggle = document.getElementById('show-completed-toggle');
     }
 
     attachEventListeners() {
@@ -42,6 +44,7 @@ class TodoUI {
         });
         this.saveChangesBtn.addEventListener('click', () => this.saveChanges());
         this.saveWritingBtn.addEventListener('click', () => this.saveRawWriting());
+        this.showCompletedToggle.addEventListener('change', () => this.toggleShowCompleted());
     }
 
     async checkSetup() {
@@ -137,24 +140,34 @@ class TodoUI {
         }
     }
 
+    toggleShowCompleted() {
+        this.showCompleted = this.showCompletedToggle.checked;
+        this.renderTodos();
+    }
+
     renderTodos() {
         this.todoList.innerHTML = '';
         
-        // Filter out completed todos
-        const activeTodos = this.manager.todos.filter(todo => !todo.completed);
+        // Filter todos based on showCompleted toggle
+        const displayTodos = this.showCompleted 
+            ? this.manager.todos 
+            : this.manager.todos.filter(todo => !todo.completed);
         
-        if (activeTodos.length === 0) {
-            this.todoList.innerHTML = '<p style="text-align: center; color: #6c757d; padding: 40px;">No active todos. Add one below!</p>';
+        if (displayTodos.length === 0) {
+            const message = this.showCompleted 
+                ? 'No todos found. Add one below!' 
+                : 'No active todos. Add one below!';
+            this.todoList.innerHTML = `<p style="text-align: center; color: #6c757d; padding: 40px;">${message}</p>`;
             return;
         }
         
-        activeTodos.forEach((todo) => {
+        displayTodos.forEach((todo) => {
             const item = document.createElement('div');
-            item.className = 'todo-item';
+            item.className = `todo-item ${todo.completed ? 'completed' : ''}`;
             
             const checkbox = document.createElement('input');
             checkbox.type = 'checkbox';
-            checkbox.checked = false;
+            checkbox.checked = todo.completed;
             checkbox.addEventListener('change', () => this.toggleTodo(todo.id));
             
             const label = document.createElement('label');

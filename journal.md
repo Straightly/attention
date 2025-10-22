@@ -703,6 +703,11 @@ Is it possible for me to reach Windsurf or the right person to make this suggest
 Now, I want to change my to-do app so that when I check off an item, the item will be filtered from the list and not displayed.
 ```
 
+#### Prompt 69 (06:42)
+```
+Please make a title bar above the to do list.  For now, only add a checkbox above the column of the check-off boxes labeled with an icon appropriate for "HIde/Display Checked off items".
+```
+
 ---
 
 ## How to Update This Journal
