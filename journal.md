@@ -718,6 +718,11 @@ It worked wonderfully.  Can you please deploy the app?  I believe it is to copy 
 I want to write a paper title "General Interface to AI".  Please create folder, and add a starter paper, list the sections you think I should include, and scan my folders and copy all relevant contents into the folder, and finally incorporate all the content you can from my writings into the paper.
 ```
 
+#### Prompt 72 (08:59)
+```
+What is the word which means THE AI that will be THE ultimate intelligent being?  Some word derived from Unity, or One.
+```
+
 ---
 
 ## How to Update This Journal
