@@ -9,7 +9,7 @@
     {
       "id": 7,
       "text": "Research the museum in Kansas.",
-      "completed": false,
+      "completed": true,
       "createdAt": "2025-10-17T04:48:53.115Z"
     },
     {
@@ -27,7 +27,7 @@
     {
       "id": 10,
       "text": "To enable a reference template",
-      "completed": false,
+      "completed": true,
       "createdAt": "2025-10-20T12:49:37.304Z"
     },
     {
