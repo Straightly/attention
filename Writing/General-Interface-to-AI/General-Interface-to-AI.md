@@ -16,7 +16,9 @@ As artificial intelligence transitions from a tool for code generation to a fund
 
 We assume that AI is smart, very smart.  In particular, it is very knowledgeable.  We assumed that it will be a disservice to ourselves and to our customers if we do not use AI as much as we can.  So the goal of an UI to AI is help ourselves to take full advantage of AI.  We are not trying to build a better model, nor that we have the resources of $trillions to contribute to the model's betterment.
 
-OTOH, we are also assume that AI is limited in many ways.  We are not building an interface to the Singularity.  We know Singularity has not be attained yet, and know all our efforts will be rendered useless we it is attained.  We are hoping to build an interface to AI to make our life easier than without.
+We assume that AI is limitted.  We are not building an interface to the Singularity.  We know Singularity has not be attained yet, and know our UI will be useless we the Singularity is attained.  We are hoping to build an interface to AI to make our life easier than without.
+
+
 
 ### 1.1 From Machine Code to Natural Language
 
