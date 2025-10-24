@@ -33,7 +33,7 @@
     {
       "id": 11,
       "text": "Implement soft delete",
-      "completed": false,
+      "completed": true,
       "createdAt": "2025-10-20T12:50:28.231Z"
     },
     {
