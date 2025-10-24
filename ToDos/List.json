@@ -15,7 +15,7 @@
     {
       "id": 8,
       "text": "Continue the time/duration investigation and ask LLM to draft me an app to run the test",
-      "completed": false,
+      "completed": true,
       "createdAt": "2025-10-19T10:16:48.000Z"
     },
     {
