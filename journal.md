@@ -746,6 +746,11 @@ Start a new article called "Broken Pencil"
 I want to write an article with this title.  So please create a folder, move this md file there.  Then scan through all my writings, copy any relevant contents there, and fill in the md file with these contents the best you can.
 ```
 
+#### Prompt 76 (06:54)
+```
+Great! Well done!  Now, in the folder create another article that will be suitable to post to LinkedIn as a follow up of my last posting.  Comparing to Writing/Broken-Pencil/BrokenPencil.md, Make two major changes:  1.  Make it NOT about the philosophy but about creating a memory saving and retrieving mechanism that can be used with LLM. 2. Add a section to describe an open source project I started on BitBucket to implementing called BrokenPencil.
+```
+
 ---
 
 ## How to Update This Journal
