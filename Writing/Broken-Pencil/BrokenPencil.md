@@ -1,6 +1,6 @@
 # A Broken Pencil Is Better Than the Most Sound Mind
 
-**Author:** [Your Name]  
+**Author:** Zhi An 
 **Date:** October 25, 2025  
 **Status:** Draft  
 **Tags:** #ai #memory #tools #human-computer-interaction #writing

@@ -6,6 +6,19 @@
 
 ---
 
+Breaking news:  Claude is releasing a memory system! Oh, no, it is only for paid users.
+Read somewhere also that, AI Agent, as new as it is, is already outdated.  The new buzz work is new clone.  A digital represenation of oneself.  Clones are also been claimed to be more you than you realize youself.  Is that even possible?  But I digress.
+
+What memory does is keeping a bunch of texts, facts or otherise, which, when attached to the prompt, will help the AI to generate a better response.  That is a good thing to do.
+
+But there are so many things I do not like this idea.  First of all, I do not like to pay.  It is the money.  I wonder how much will I have to pay to use all other models. Also, paing means I had made a choice asserting that this is better than the free ones, which I am not ready or am not knowledgable enough to make that choice.  
+
+Second, the little information I had about Claude's memory send chills down my spine.  I quote: "bio, tone, style, etc." .  My immediate reaction is:  Why do I wnat to that?  It is NOT I do not trust Claude nor that this kind of information will be abused by Claude to default me or anything like that.  It is just that I refuse to let anybody, Claude and AI included, to produce anything that is dictated by by bio, tone, style or any profiling.  I may want to add a humourous tone to my writings, I may even want to do that using a formal style, but that is what I, I mean this concious self that is I, want to do.  I want Claude to help me do things, achieve my goals for my entertainments, not to have the entertainments for me.
+
+At the practical level, the memory system is scary because how information or knowledge in the memory get used is not decided my me.  What to use and what not to be used in produce the response is not just about what is in the memory.  It is also a value assessment. What needs to be added to my prompts need to be a concious decision which should not be deligated to AI.
+
+And finally, this is against my understanding of AI.  My understanding is that the interface to LLM is just text.  A string in and another string out.  Why am I spending time and money learning how to use a system which hide that system from me? Being a programmer, I believe "Any problem can be solved by another layer of redirection" and I cannot see why the memory system cannot be just a bunch of strings I keep somewhere and can be conveniently added to my prompt to send a LLM at a free web site. 
+
 ## The Problem: AI That Forgets
 
 In my last post, I shared my experience teaching an AI coding assistant to journal my prompts. The results were... inconsistent. The AI kept forgetting, apologizing, and forgetting again.

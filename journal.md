@@ -766,6 +766,11 @@ Please create two scripts at the root level, one for linux and one for Windows, 
 Please add "git push" to the scripts too.
 ```
 
+#### Prompt 80 (11:26)
+```
+What was the famous computer scientist who said that Any problem can be solved by another layer of redirection?  What was the original pharses?
+```
+
 ---
 
 ## How to Update This Journal
