@@ -751,6 +751,11 @@ I want to write an article with this title.  So please create a folder, move thi
 Great! Well done!  Now, in the folder create another article that will be suitable to post to LinkedIn as a follow up of my last posting.  Comparing to Writing/Broken-Pencil/BrokenPencil.md, Make two major changes:  1.  Make it NOT about the philosophy but about creating a memory saving and retrieving mechanism that can be used with LLM. 2. Add a section to describe an open source project I started on BitBucket to implementing called BrokenPencil.
 ```
 
+#### Prompt 77 (07:01)
+```
+Add the to-dos into NEXT_STEPS.md
+```
+
 ---
 
 ## How to Update This Journal

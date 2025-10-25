@@ -167,5 +167,58 @@ Consider adding a `README.md` in each folder explaining:
 
 ---
 
-**Last Updated:** October 16, 2025  
+## 🔨 BrokenPencil Project - Memory System for LLMs
+
+**Status:** Planning & Early Development  
+**Location:** `Writing/Broken-Pencil/`
+
+### Phase 1: Core Memory System (Current Focus)
+- [ ] Set up Bitbucket repository
+- [ ] Design memory data schema (JSON/Markdown format)
+- [ ] Implement basic CLI tool
+  - [ ] `save` - Store memories with tags
+  - [ ] `retrieve` - Search and retrieve memories
+  - [ ] `list` - List all memories with filters
+  - [ ] `delete` - Remove specific memories
+- [ ] Integrate vector database (ChromaDB or similar)
+- [ ] Implement semantic search with embeddings
+- [ ] Create basic tagging system
+- [ ] Write unit tests
+- [ ] Create documentation and README
+
+### Phase 2: LLM Integration (Planned)
+- [ ] Design plugin architecture
+- [ ] Create API for custom integrations
+- [ ] Build plugins for AI tools (Cursor, Continue.dev, VSCode)
+- [ ] Implement automatic memory extraction from conversations
+- [ ] Build smart context injection
+- [ ] Add per-project configuration
+
+### Phase 3: Advanced Features (Future)
+- [ ] Multi-project memory isolation
+- [ ] Collaborative memories (team knowledge bases)
+- [ ] Memory analytics (usage stats, topic clustering)
+- [ ] Conflict resolution for contradictory memories
+- [ ] Memory lifecycle management (expiration, archiving)
+- [ ] Web UI for memory management
+
+### Immediate Next Steps
+1. [ ] Set up Bitbucket repository structure
+2. [ ] Choose tech stack (Python/TypeScript)
+3. [ ] Design memory data schema
+4. [ ] Implement basic file-based storage
+5. [ ] Create CLI for save/retrieve operations
+6. [ ] Post LinkedIn article announcing project
+
+### Technical Decisions Needed
+- [ ] Primary language (Python vs. TypeScript vs. Rust)
+- [ ] Vector database (ChromaDB, Pinecone, Weaviate, Qdrant)
+- [ ] Embedding model (OpenAI, local models, sentence-transformers)
+- [ ] Storage format (JSON, YAML, Markdown with frontmatter)
+
+**Documentation:** See `Writing/Broken-Pencil/` for full articles and references
+
+---
+
+**Last Updated:** October 25, 2025  
 **Script Location:** `/Users/zan/z/attention/organize_notion.py`
