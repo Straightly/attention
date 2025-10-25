@@ -736,6 +736,16 @@ What is the word which means THE AI that will be THE ultimate intelligent being?
 Please remember to journal all my prompts.
 ```
 
+#### Prompt 74 (06:37)
+```
+Start a new article called "Broken Pencil"
+```
+
+#### Prompt 75 (06:39)
+```
+I want to write an article with this title.  So please create a folder, move this md file there.  Then scan through all my writings, copy any relevant contents there, and fill in the md file with these contents the best you can.
+```
+
 ---
 
 ## How to Update This Journal
