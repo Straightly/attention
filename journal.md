@@ -771,6 +771,11 @@ Please add "git push" to the scripts too.
 What was the famous computer scientist who said that Any problem can be solved by another layer of redirection?  What was the original pharses?
 ```
 
+#### Prompt 81 (11:34)
+```
+I have added some writing at the top of Writing/Broken-Pencil/BrokenPencil-LinkedIn.md.  Would you please work these writings into the article below?
+```
+
 ---
 
 ## How to Update This Journal
