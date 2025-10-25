@@ -761,6 +761,11 @@ Add the to-dos into NEXT_STEPS.md
 Please create two scripts at the root level, one for linux and one for Windows, to do an "git add ." and an "git add -a -m <commitMessage" the commitMessage will be passed in as arguments to the scripts.
 ```
 
+#### Prompt 79 (07:09)
+```
+Please add "git push" to the scripts too.
+```
+
 ---
 
 ## How to Update This Journal

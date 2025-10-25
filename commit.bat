@@ -17,6 +17,11 @@ REM Commit with the provided message
 echo Committing with message: %~1
 git commit -a -m "%~1"
 
+REM Push to remote
+echo.
+echo Pushing to remote...
+git push
+
 REM Show status
 echo.
 echo Current status:

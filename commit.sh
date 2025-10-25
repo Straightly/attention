@@ -17,6 +17,11 @@ git add .
 echo "Committing with message: $1"
 git commit -a -m "$1"
 
+# Push to remote
+echo ""
+echo "Pushing to remote..."
+git push
+
 # Show status
 echo ""
 echo "Current status:"
