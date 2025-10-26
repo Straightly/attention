@@ -99,7 +99,7 @@
     {
       "id": 23,
       "text": "中文",
-      "completed": false,
+      "completed": true,
       "createdAt": "2025-10-26T16:46:22.815Z"
     }
   ]
