@@ -776,6 +776,56 @@ What was the famous computer scientist who said that Any problem can be solved b
 I have added some writing at the top of Writing/Broken-Pencil/BrokenPencil-LinkedIn.md.  Would you please work these writings into the article below?
 ```
 
+#### Prompt 82 (16:20)
+```
+What tool I can use on a Mac to capture all my network traffics?  Kind of like the Chrome in debug mode, but for traffict on ports I choose?
+```
+
+#### Prompt 83 (16:58)
+```
+Does WIndsurf use OPENAI_API_BASE?
+```
+
+#### Prompt 84 (17:27)
+```
+How to setup WIndsurf to use a proxy?
+```
+
+#### Prompt 85 (17:32)
+```
+Any other way to open Windsurf Settings?  Cmd+ increase my font size :-(.
+```
+
+#### Prompt 86 (17:34)
+```
+I opened my settings.  What to do next to set the proxy again?
+```
+
+#### Prompt 87 (17:35)
+```
+No.  I am setting it in Windsurf IDE.
+```
+
+#### Prompt 88 (17:39)
+```
+The proxy seemed to be working as I see traffic captureed in mitmproxy.
+```
+
+#### Prompt 89 (17:42)
+```
+this is strange.  I was seeing traffic when WIndsurf was first opened.  Now when I issue prompt, no traffic was showing in my proxy,
+```
+
+#### Prompt 90 (17:44)
+```
+Please create two scripts for me in my project root call start.  one for MacOs and one for windows.  In it, please set the proxyes and then launch Windsurf.
+```
+
+#### Prompt 91 (17:46)
+```
+Is there a way I can set the proxies but make them only affect Windsurf I am launching in the same script, but do not affect my other processes?
+```
+
 ---
 
 ## 2025-10-26 (Saturday)
