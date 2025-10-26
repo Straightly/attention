@@ -778,6 +778,29 @@ I have added some writing at the top of Writing/Broken-Pencil/BrokenPencil-Linke
 
 ---
 
+## 2025-10-26 (Saturday)
+
+### Session: Journal Maintenance Check
+
+**Time:** ~09:28 PDT
+
+#### Prompt 82 (09:28)
+```
+Did you remember to record my prompts in journal.md before you respond to it?
+```
+
+#### Prompt 83 (09:38)
+```
+I noticed that in my ToDoApp, After I entered a todo item in Chinese, it was displayed correctly.  However, later, when I load the todo list again, it was showing garbage.  Can you fix?
+```
+
+#### Prompt 84 (09:44)
+```
+I tried the page and the display of the item I had in Chinese is still jumbled.  Is the fix supposed to work for existing items or the existing is already bad and must be deleted and reentered?
+```
+
+---
+
 ## How to Update This Journal
 
 ### Manual Method

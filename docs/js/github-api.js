@@ -32,7 +32,8 @@ class GitHubAPI {
 
     async getFile() {
         const data = await this.request(`/contents/${this.filePath}?ref=${this.config.BRANCH}`);
-        const content = atob(data.content); // Decode base64
+        // Decode base64 and handle UTF-8 properly
+        const content = decodeURIComponent(escape(atob(data.content)));
         return { content, sha: data.sha };
     }
 
