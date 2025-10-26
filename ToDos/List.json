@@ -91,16 +91,16 @@
       "createdAt": "2025-10-26T12:43:52.068Z"
     },
     {
-      "id": 21,
-      "text": "å æ±½æ²¹",
-      "completed": false,
-      "createdAt": "2025-10-26T12:45:49.700Z"
-    },
-    {
       "id": 22,
       "text": "Fix heater to use plug for emergency.",
       "completed": false,
       "createdAt": "2025-10-26T16:04:35.000Z"
+    },
+    {
+      "id": 23,
+      "text": "中文",
+      "completed": true,
+      "createdAt": "2025-10-26T16:46:22.815Z"
     }
   ]
 }
