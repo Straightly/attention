@@ -44,25 +44,25 @@
     },
     {
       "id": 13,
-      "text": "USBank review",
+      "text": "USBank review, due 11/15, show after 10/31",
       "completed": false,
       "createdAt": "2025-10-24T23:07:02.866Z"
     },
     {
       "id": 14,
       "text": "Realtor research and email back.",
-      "completed": false,
+      "completed": true,
       "createdAt": "2025-10-24T23:07:26.486Z"
     },
     {
       "id": 15,
       "text": "Write about habit and memory",
-      "completed": false,
+      "completed": true,
       "createdAt": "2025-10-25T13:25:13.249Z"
     },
     {
       "id": 16,
-      "text": "Start a project about habit and memory",
+      "text": "Start a project about habit and memory in bitbucket.",
       "completed": false,
       "createdAt": "2025-10-25T13:25:49.350Z"
     },
