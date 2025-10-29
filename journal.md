@@ -900,6 +900,87 @@ This is a windows machine.
 
 ---
 
+## 2025-10-29 (Tuesday)
+
+### Session: ToDoApp Tag Feature Implementation
+
+**Time:** ~16:14 - 16:30 PDT
+
+#### Prompt 94 (16:14)
+```
+I would like to expand the ToDoApp.  In a todo item, I would like to, optionally, add tags like work, idea, apartment, family etc.  Then I would like to display the tags on top so the items below can be toggled to show items with or without these tags.  First of all, what would you suggest how I enter tags for an item?
+```
+
+**Outcome:**
+- Presented three tag input approaches: inline hashtags (recommended), separate tag input field, and tag picker dropdown
+- Recommended inline hashtag approach (#work #idea) for speed and simplicity
+- Explained implementation would parse hashtags, store separately, display as chips, and enable filtering
+
+#### Prompt 95 (16:16)
+```
+Please implement hashtag.
+```
+
+**Outcome:**
+- Updated `TodoManager` with `parseTags()` and `getAllTags()` methods
+- Modified `addTodo()` and `updateTodo()` to parse and store tags
+- Updated `TodoUI` with tag filtering functionality (`toggleTagFilter()`, `renderTagFilters()`)
+- Modified `renderTodos()` to filter by selected tags and display tag chips
+- Added tag filter UI section in HTML
+- Added comprehensive CSS for tag filters (pill buttons) and tag chips (gradient badges)
+- Tags are extracted from text using regex, stored in lowercase, duplicates removed
+- Filter buttons appear above todo list, clicking toggles filter on/off
+- Tag chips appear above each todo item text
+
+#### Prompt 96 (16:23)
+```
+That worked wonderfully.  Please deploy it by copying the changed files to the docs folder.  BTW, is the current structure where I change in ToDoApp and then copy to docs good one?  Or is it better to remove ToDoApp and change directly in the docs folder?  It is version controlled anyway.
+```
+
+**Outcome:**
+- Copied all updated files to `docs/` folder:
+  - `docs/js/todo-manager.js` - Added tag parsing functionality
+  - `docs/js/todo-ui.js` - Added tag filtering and display
+  - `docs/index.html` - Added tag filters section
+  - `docs/style.css` - Added tag chip and filter styles
+- Recommended keeping the current two-folder structure (ToDoApp for dev, docs for production)
+- Explained benefits: separation of concerns, GitHub Pages safety, rollback capability
+- Suggested creating copy scripts to automate deployment
+
+#### Prompt 97 (16:28)
+```
+Please create the copy scripts.
+```
+
+**Outcome:**
+- Created `copy-to-docs.bat` for Windows deployment
+- Created `copy-to-docs.sh` for Mac/Linux deployment
+- Made shell script executable
+- Created `DEPLOYMENT.md` documentation explaining:
+  - Two-folder structure
+  - How to use the scripts
+  - Deployment workflow
+  - What files get copied
+
+#### Prompt 98 (16:29)
+```
+Did you journalled all my prompts?
+```
+
+**Outcome:**
+- Acknowledged missing the journaling step at the start of interaction
+- Offered to add prompts retroactively
+
+#### Prompt 99 (16:30)
+```
+please add them all.
+```
+
+**Outcome:**
+- Added all prompts from this session to journal.md with timestamps and outcomes
+
+---
+
 ## How to Update This Journal
 
 ### Manual Method

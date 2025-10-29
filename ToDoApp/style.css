@@ -166,6 +166,58 @@ header h1 {
     margin-bottom: 20px;
 }
 
+/* Tag Filters */
+.tag-filters {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 2px solid #e9ecef;
+}
+
+.tag-filters-label {
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 10px;
+    font-size: 0.95em;
+}
+
+.tag-filter-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tag-filter {
+    padding: 6px 14px;
+    border: 2px solid #667eea;
+    background: white;
+    color: #667eea;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.tag-filter:hover {
+    background: #f0f3ff;
+    transform: translateY(-2px);
+}
+
+.tag-filter.active {
+    background: #667eea;
+    color: white;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+.no-tags {
+    color: #6c757d;
+    font-style: italic;
+    margin: 0;
+    font-size: 0.9em;
+}
+
 .todo-list-header {
     background: #f8f9fa;
     padding: 12px 15px;
@@ -289,6 +341,29 @@ header h1 {
 
 .todo-item .todo-text-container {
     flex: 1;
+}
+
+/* Tag Chips on Todo Items */
+.todo-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 8px;
+}
+
+.tag-chip {
+    display: inline-block;
+    padding: 3px 10px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 12px;
+    font-size: 0.75em;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+.todo-item.completed .tag-chip {
+    opacity: 0.5;
 }
 
 .todo-item .todo-label {

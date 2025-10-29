@@ -4,6 +4,7 @@ class TodoUI {
         this.manager = manager;
         this.writingManager = writingManager;
         this.showCompleted = false;
+        this.selectedTags = new Set(); // Track active tag filters
         this.setupElements();
         this.attachEventListeners();
         this.checkSetup();
@@ -28,6 +29,7 @@ class TodoUI {
         this.saveWritingBtn = document.getElementById('save-writing-btn');
         this.writingStatus = document.getElementById('writing-status');
         this.showCompletedToggle = document.getElementById('show-completed-toggle');
+        this.tagFilters = document.getElementById('tag-filters');
     }
 
     attachEventListeners() {
@@ -145,49 +147,106 @@ class TodoUI {
         this.renderTodos();
     }
 
+    toggleTagFilter(tag) {
+        if (this.selectedTags.has(tag)) {
+            this.selectedTags.delete(tag);
+        } else {
+            this.selectedTags.add(tag);
+        }
+        this.renderTodos();
+        this.renderTagFilters();
+    }
+
+    renderTagFilters() {
+        const allTags = this.manager.getAllTags();
+        
+        if (allTags.length === 0) {
+            this.tagFilters.innerHTML = '<p class="no-tags">No tags yet. Add hashtags to your todos like #work #idea</p>';
+            return;
+        }
+
+        this.tagFilters.innerHTML = '<div class="tag-filters-label">Filter by tags:</div>';
+        const container = document.createElement('div');
+        container.className = 'tag-filter-buttons';
+
+        allTags.forEach(tag => {
+            const button = document.createElement('button');
+            button.className = `tag-filter ${this.selectedTags.has(tag) ? 'active' : ''}`;
+            button.textContent = `#${tag}`;
+            button.addEventListener('click', () => this.toggleTagFilter(tag));
+            container.appendChild(button);
+        });
+
+        this.tagFilters.appendChild(container);
+    }
+
     renderTodos() {
         this.todoList.innerHTML = '';
         
         // Filter todos based on showCompleted toggle
-        const displayTodos = this.showCompleted 
+        let displayTodos = this.showCompleted 
             ? this.manager.todos 
             : this.manager.todos.filter(todo => !todo.completed);
         
+        // Filter by selected tags (if any)
+        if (this.selectedTags.size > 0) {
+            displayTodos = displayTodos.filter(todo => {
+                if (!todo.tags || todo.tags.length === 0) return false;
+                // Show todo if it has ANY of the selected tags
+                return todo.tags.some(tag => this.selectedTags.has(tag));
+            });
+        }
+        
         if (displayTodos.length === 0) {
-            const message = this.showCompleted 
-                ? 'No todos found. Add one below!' 
-                : 'No active todos. Add one below!';
+            const message = this.selectedTags.size > 0
+                ? 'No todos match the selected tags.'
+                : this.showCompleted 
+                    ? 'No todos found. Add one below!' 
+                    : 'No active todos. Add one below!';
             this.todoList.innerHTML = `<p style="text-align: center; color: #6c757d; padding: 40px;">${message}</p>`;
+            this.renderTagFilters();
             return;
         }
         
         displayTodos.forEach((todo) => {
             const item = document.createElement('div');
             item.className = `todo-item ${todo.completed ? 'completed' : ''}`;
+            item.dataset.todoId = todo.id;
             
             const checkbox = document.createElement('input');
             checkbox.type = 'checkbox';
             checkbox.checked = todo.completed;
             checkbox.addEventListener('change', () => this.toggleTodo(todo.id));
             
+            const textContainer = document.createElement('div');
+            textContainer.className = 'todo-text-container';
+            
+            // Add tags if they exist
+            if (todo.tags && todo.tags.length > 0) {
+                const tagsContainer = document.createElement('div');
+                tagsContainer.className = 'todo-tags';
+                todo.tags.forEach(tag => {
+                    const tagChip = document.createElement('span');
+                    tagChip.className = 'tag-chip';
+                    tagChip.textContent = `#${tag}`;
+                    tagsContainer.appendChild(tagChip);
+                });
+                textContainer.appendChild(tagsContainer);
+            }
+            
             const label = document.createElement('label');
             label.textContent = todo.text;
-            label.addEventListener('click', () => {
-                checkbox.checked = !checkbox.checked;
-                this.toggleTodo(todo.id);
-            });
+            label.className = 'todo-label';
+            label.addEventListener('dblclick', () => this.startEditing(todo.id, label, textContainer));
             
-            const deleteBtn = document.createElement('button');
-            deleteBtn.className = 'delete-btn';
-            deleteBtn.textContent = '🗑️ Delete';
-            deleteBtn.addEventListener('click', () => this.deleteTodo(todo.id));
+            textContainer.appendChild(label);
             
             item.appendChild(checkbox);
-            item.appendChild(label);
-            item.appendChild(deleteBtn);
+            item.appendChild(textContainer);
             this.todoList.appendChild(item);
         });
         
+        this.renderTagFilters();
         this.updateChangesIndicator();
     }
 
@@ -206,12 +265,44 @@ class TodoUI {
         this.showStatus('✅ Todo added (not saved yet)', 'info');
     }
 
-    deleteTodo(id) {
-        if (!confirm('Delete this todo?')) return;
+    startEditing(id, label, container) {
+        const currentText = label.textContent;
         
-        this.manager.deleteTodo(id);
-        this.renderTodos();
-        this.showStatus('✅ Todo deleted (not saved yet)', 'info');
+        // Create input field
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.className = 'todo-edit-input';
+        input.value = currentText;
+        
+        // Replace label with input
+        container.innerHTML = '';
+        container.appendChild(input);
+        input.focus();
+        input.select();
+        
+        // Save on Enter or blur
+        const saveEdit = () => {
+            const newText = input.value.trim();
+            if (newText && newText !== currentText) {
+                this.manager.updateTodo(id, newText);
+                this.showStatus('✅ Todo updated (not saved yet)', 'info');
+            }
+            this.renderTodos();
+        };
+        
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                saveEdit();
+            }
+        });
+        
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                this.renderTodos(); // Cancel editing
+            }
+        });
+        
+        input.addEventListener('blur', saveEdit);
     }
 
     updateChangesIndicator() {

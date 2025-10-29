@@ -8,6 +8,28 @@ class TodoManager {
         this.nextId = 1;
     }
 
+    parseTags(text) {
+        // Extract hashtags from text (e.g., #work #idea)
+        const tagRegex = /#(\w+)/g;
+        const tags = [];
+        let match;
+        while ((match = tagRegex.exec(text)) !== null) {
+            tags.push(match[1].toLowerCase());
+        }
+        return [...new Set(tags)]; // Remove duplicates
+    }
+
+    getAllTags() {
+        // Get all unique tags from all todos
+        const allTags = new Set();
+        this.todos.forEach(todo => {
+            if (todo.tags) {
+                todo.tags.forEach(tag => allTags.add(tag));
+            }
+        });
+        return Array.from(allTags).sort();
+    }
+
     async loadFile() {
         try {
             const { content, sha } = await this.api.getFile();
@@ -37,14 +59,25 @@ class TodoManager {
     }
 
     addTodo(text) {
+        const tags = this.parseTags(text);
         const newTodo = {
             id: this.nextId++,
             text: text,
+            tags: tags,
             completed: false,
             createdAt: new Date().toISOString()
         };
         this.todos.push(newTodo);
         this.hasChanges = true;
+    }
+
+    updateTodo(id, newText) {
+        const todo = this.todos.find(t => t.id === id);
+        if (todo) {
+            todo.text = newText;
+            todo.tags = this.parseTags(newText);
+            this.hasChanges = true;
+        }
     }
 
     deleteTodo(id) {

@@ -4,6 +4,7 @@ class TodoUI {
         this.manager = manager;
         this.writingManager = writingManager;
         this.showCompleted = false;
+        this.selectedTags = new Set(); // Track active tag filters
         this.setupElements();
         this.attachEventListeners();
         this.checkSetup();
@@ -28,6 +29,7 @@ class TodoUI {
         this.saveWritingBtn = document.getElementById('save-writing-btn');
         this.writingStatus = document.getElementById('writing-status');
         this.showCompletedToggle = document.getElementById('show-completed-toggle');
+        this.tagFilters = document.getElementById('tag-filters');
     }
 
     attachEventListeners() {
@@ -145,19 +147,64 @@ class TodoUI {
         this.renderTodos();
     }
 
+    toggleTagFilter(tag) {
+        if (this.selectedTags.has(tag)) {
+            this.selectedTags.delete(tag);
+        } else {
+            this.selectedTags.add(tag);
+        }
+        this.renderTodos();
+        this.renderTagFilters();
+    }
+
+    renderTagFilters() {
+        const allTags = this.manager.getAllTags();
+        
+        if (allTags.length === 0) {
+            this.tagFilters.innerHTML = '<p class="no-tags">No tags yet. Add hashtags to your todos like #work #idea</p>';
+            return;
+        }
+
+        this.tagFilters.innerHTML = '<div class="tag-filters-label">Filter by tags:</div>';
+        const container = document.createElement('div');
+        container.className = 'tag-filter-buttons';
+
+        allTags.forEach(tag => {
+            const button = document.createElement('button');
+            button.className = `tag-filter ${this.selectedTags.has(tag) ? 'active' : ''}`;
+            button.textContent = `#${tag}`;
+            button.addEventListener('click', () => this.toggleTagFilter(tag));
+            container.appendChild(button);
+        });
+
+        this.tagFilters.appendChild(container);
+    }
+
     renderTodos() {
         this.todoList.innerHTML = '';
         
         // Filter todos based on showCompleted toggle
-        const displayTodos = this.showCompleted 
+        let displayTodos = this.showCompleted 
             ? this.manager.todos 
             : this.manager.todos.filter(todo => !todo.completed);
         
+        // Filter by selected tags (if any)
+        if (this.selectedTags.size > 0) {
+            displayTodos = displayTodos.filter(todo => {
+                if (!todo.tags || todo.tags.length === 0) return false;
+                // Show todo if it has ANY of the selected tags
+                return todo.tags.some(tag => this.selectedTags.has(tag));
+            });
+        }
+        
         if (displayTodos.length === 0) {
-            const message = this.showCompleted 
-                ? 'No todos found. Add one below!' 
-                : 'No active todos. Add one below!';
+            const message = this.selectedTags.size > 0
+                ? 'No todos match the selected tags.'
+                : this.showCompleted 
+                    ? 'No todos found. Add one below!' 
+                    : 'No active todos. Add one below!';
             this.todoList.innerHTML = `<p style="text-align: center; color: #6c757d; padding: 40px;">${message}</p>`;
+            this.renderTagFilters();
             return;
         }
         
@@ -174,6 +221,19 @@ class TodoUI {
             const textContainer = document.createElement('div');
             textContainer.className = 'todo-text-container';
             
+            // Add tags if they exist
+            if (todo.tags && todo.tags.length > 0) {
+                const tagsContainer = document.createElement('div');
+                tagsContainer.className = 'todo-tags';
+                todo.tags.forEach(tag => {
+                    const tagChip = document.createElement('span');
+                    tagChip.className = 'tag-chip';
+                    tagChip.textContent = `#${tag}`;
+                    tagsContainer.appendChild(tagChip);
+                });
+                textContainer.appendChild(tagsContainer);
+            }
+            
             const label = document.createElement('label');
             label.textContent = todo.text;
             label.className = 'todo-label';
@@ -186,6 +246,7 @@ class TodoUI {
             this.todoList.appendChild(item);
         });
         
+        this.renderTagFilters();
         this.updateChangesIndicator();
     }
 
