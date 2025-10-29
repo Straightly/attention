@@ -1,0 +1,178 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'ECS Task Recycler - Periodically forces new ECS service deployment to recycle tasks'
+
+Parameters:
+  EcsClusterName:
+    Type: String
+    Description: Name of the ECS cluster
+  
+  EcsServiceName:
+    Type: String
+    Description: Name of the ECS service to recycle
+  
+  RecycleIntervalHours:
+    Type: Number
+    Default: 6
+    Description: How often to recycle tasks (in hours)
+    MinValue: 1
+    MaxValue: 24
+  
+  ServiceName:
+    Type: String
+    Default: my-service
+    Description: Name prefix for all resources
+
+Resources:
+  # Lambda Execution Role
+  LambdaExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub '${ServiceName}-task-recycler-lambda-role'
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: EcsUpdateServicePolicy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - ecs:UpdateService
+                  - ecs:DescribeServices
+                Resource: !Sub 'arn:aws:ecs:${AWS::Region}:${AWS::AccountId}:service/${EcsClusterName}/${EcsServiceName}'
+              - Effect: Allow
+                Action:
+                  - logs:CreateLogGroup
+                  - logs:CreateLogStream
+                  - logs:PutLogEvents
+                Resource: !Sub 'arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/${ServiceName}-task-recycler:*'
+
+  # CloudWatch Log Group
+  LambdaLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub '/aws/lambda/${ServiceName}-task-recycler'
+      RetentionInDays: 7
+
+  # Lambda Function
+  TaskRecyclerLambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Sub '${ServiceName}-task-recycler'
+      Runtime: python3.11
+      Handler: index.lambda_handler
+      Role: !GetAtt LambdaExecutionRole.Arn
+      Timeout: 60
+      Environment:
+        Variables:
+          ECS_CLUSTER_NAME: !Ref EcsClusterName
+          ECS_SERVICE_NAME: !Ref EcsServiceName
+      Code:
+        ZipFile: |
+          import json
+          import boto3
+          import os
+          from datetime import datetime
+
+          ecs_client = boto3.client('ecs')
+
+          def lambda_handler(event, context):
+              """
+              Lambda function to force a new deployment of an ECS service.
+              This causes ECS to gracefully replace all tasks with new ones.
+              """
+              
+              cluster_name = os.environ.get('ECS_CLUSTER_NAME')
+              service_name = os.environ.get('ECS_SERVICE_NAME')
+              
+              if not cluster_name or not service_name:
+                  error_msg = "Missing required environment variables: ECS_CLUSTER_NAME and/or ECS_SERVICE_NAME"
+                  print(error_msg)
+                  return {
+                      'statusCode': 400,
+                      'body': json.dumps({'error': error_msg})
+                  }
+              
+              try:
+                  print(f"Starting task recycle for service: {service_name} in cluster: {cluster_name}")
+                  
+                  # Force new deployment - ECS will gracefully replace tasks
+                  response = ecs_client.update_service(
+                      cluster=cluster_name,
+                      service=service_name,
+                      forceNewDeployment=True
+                  )
+                  
+                  deployment_id = response['service']['deployments'][0]['id']
+                  task_definition = response['service']['taskDefinition']
+                  
+                  result = {
+                      'timestamp': datetime.utcnow().isoformat(),
+                      'cluster': cluster_name,
+                      'service': service_name,
+                      'deploymentId': deployment_id,
+                      'taskDefinition': task_definition,
+                      'message': 'Successfully triggered task recycle'
+                  }
+                  
+                  print(f"Success: {json.dumps(result)}")
+                  
+                  return {
+                      'statusCode': 200,
+                      'body': json.dumps(result)
+                  }
+                  
+              except Exception as e:
+                  error_msg = f"Failed to recycle tasks: {str(e)}"
+                  print(error_msg)
+                  return {
+                      'statusCode': 500,
+                      'body': json.dumps({'error': error_msg})
+                  }
+
+  # EventBridge Rule
+  TaskRecycleScheduleRule:
+    Type: AWS::Events::Rule
+    Properties:
+      Name: !Sub '${ServiceName}-task-recycle-schedule'
+      Description: !Sub 'Trigger ECS task recycle every ${RecycleIntervalHours} hours'
+      ScheduleExpression: !Sub 'rate(${RecycleIntervalHours} hours)'
+      State: ENABLED
+      Targets:
+        - Arn: !GetAtt TaskRecyclerLambda.Arn
+          Id: TaskRecyclerLambdaTarget
+
+  # Lambda Permission for EventBridge
+  LambdaInvokePermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref TaskRecyclerLambda
+      Action: lambda:InvokeFunction
+      Principal: events.amazonaws.com
+      SourceArn: !GetAtt TaskRecycleScheduleRule.Arn
+
+Outputs:
+  LambdaFunctionName:
+    Description: Name of the Lambda function
+    Value: !Ref TaskRecyclerLambda
+  
+  LambdaFunctionArn:
+    Description: ARN of the Lambda function
+    Value: !GetAtt TaskRecyclerLambda.Arn
+  
+  EventBridgeRuleName:
+    Description: Name of the EventBridge rule
+    Value: !Ref TaskRecycleScheduleRule
+  
+  ScheduleExpression:
+    Description: Schedule expression for task recycling
+    Value: !Sub 'rate(${RecycleIntervalHours} hours)'
+  
+  CloudWatchLogGroup:
+    Description: CloudWatch Log Group for Lambda logs
+    Value: !Ref LambdaLogGroup

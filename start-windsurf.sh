@@ -1,30 +1,40 @@
 #!/bin/bash
-# Script to launch Windsurf with proxy settings on macOS/Linux
-# The proxy settings only affect Windsurf, not other processes
+# Script to set proxy environment variables and launch Windsurf on macOS/Linux
+# These settings will affect the current shell session
 
-echo "Launching Windsurf with proxy settings..."
+echo "Setting proxy environment variables..."
 echo "  HTTP_PROXY: http://localhost:8080"
 echo "  HTTPS_PROXY: http://localhost:8080"
 echo ""
 
-# Launch Windsurf with proxy environment variables
-# These variables only exist in the Windsurf process, not in parent shell
-env \
-  http_proxy="http://localhost:8080" \
-  https_proxy="http://localhost:8080" \
-  HTTP_PROXY="http://localhost:8080" \
-  HTTPS_PROXY="http://localhost:8080" \
-  no_proxy="localhost,127.0.0.1,::1" \
-  NO_PROXY="localhost,127.0.0.1,::1" \
-  open -a "Windsurf"
+# Export proxy environment variables
+export http_proxy=http://localhost:8080
+export https_proxy=http://localhost:8080
+export HTTP_PROXY=http://localhost:8080
+export HTTPS_PROXY=http://localhost:8080
+export no_proxy=localhost,127.0.0.1,::1
+export NO_PROXY=localhost,127.0.0.1,::1
 
-# Alternative method using direct executable path:
-# env \
-#   http_proxy="http://localhost:8080" \
-#   https_proxy="http://localhost:8080" \
-#   HTTP_PROXY="http://localhost:8080" \
-#   HTTPS_PROXY="http://localhost:8080" \
-#   /Applications/Windsurf.app/Contents/MacOS/Windsurf
+# Disable SSL certificate verification for mitmproxy
+export NODE_TLS_REJECT_UNAUTHORIZED=0
 
-echo "Windsurf launched with isolated proxy settings."
-echo "Your shell and other processes are not affected."
+echo "Environment variables set in current shell."
+echo "NOTE: SSL certificate validation is DISABLED for debugging."
+echo ""
+
+# First, quit any running Windsurf instances
+if pgrep -x "Windsurf" > /dev/null; then
+    echo "Closing existing Windsurf instance..."
+    osascript -e 'quit app "Windsurf"'
+    sleep 2
+fi
+
+# Launch Windsurf with additional Electron flags for proxy
+# Using open with --args to pass command-line arguments
+/Applications/Windsurf.app/Contents/MacOS/Electron \
+    --proxy-server="http://localhost:8080" \
+    --ignore-certificate-errors &
+
+echo ""
+echo "Windsurf launched with proxy settings and certificate errors ignored."
+echo "Run './unset-proxy.sh' after closing Windsurf to clear proxy settings."

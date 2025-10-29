@@ -826,6 +826,16 @@ Please create two scripts for me in my project root call start.  one for MacOs a
 Is there a way I can set the proxies but make them only affect Windsurf I am launching in the same script, but do not affect my other processes?
 ```
 
+#### Prompt 92 (17:48)
+```
+With this change, I do not have to set the proxies in the IDE anymore, right?
+```
+
+#### Prompt 93 (18:02)
+```
+Hmm...It does not work.  I am not seeing any triffic in mitmproxy.
+```
+
 ---
 
 ## 2025-10-26 (Saturday)
