@@ -47,9 +47,12 @@
     },
     {
       "id": 13,
-      "text": "USBank review, due 11/15, show after 10/31",
+      "text": "USBank review, due 11/15, show after 10/31  #apartment",
       "completed": false,
-      "createdAt": "2025-10-24T23:07:02.866Z"
+      "createdAt": "2025-10-24T23:07:02.866Z",
+      "tags": [
+        "apartment"
+      ]
     },
     {
       "id": 14,
