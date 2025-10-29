@@ -1,0 +1,7 @@
+# Copy this file to terraform.tfvars and fill in your values
+
+aws_region             = "us-east-1"
+service_name           = "my-llm-service"
+ecs_cluster_name       = "my-cluster"
+ecs_service_name       = "my-service"
+recycle_interval_hours = 6

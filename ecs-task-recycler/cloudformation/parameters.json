@@ -1,0 +1,18 @@
+[
+  {
+    "ParameterKey": "EcsClusterName",
+    "ParameterValue": "my-cluster"
+  },
+  {
+    "ParameterKey": "EcsServiceName",
+    "ParameterValue": "my-service"
+  },
+  {
+    "ParameterKey": "RecycleIntervalHours",
+    "ParameterValue": "6"
+  },
+  {
+    "ParameterKey": "ServiceName",
+    "ParameterValue": "my-llm-service"
+  }
+]
