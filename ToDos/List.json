@@ -69,14 +69,17 @@
     {
       "id": 16,
       "text": "Start a project about habit and memory in bitbucket.",
-      "completed": false,
+      "completed": true,
       "createdAt": "2025-10-25T13:25:49.350Z"
     },
     {
       "id": 17,
-      "text": "Apply to GE job",
+      "text": "Apply to GE job #work",
       "completed": false,
-      "createdAt": "2025-10-25T13:29:52.545Z"
+      "createdAt": "2025-10-25T13:29:52.545Z",
+      "tags": [
+        "work"
+      ]
     },
     {
       "id": 18,
@@ -86,21 +89,27 @@
     },
     {
       "id": 19,
-      "text": "Create a VM for my dev of attention.",
+      "text": "Create a VM for my dev of attention. #work",
       "completed": false,
-      "createdAt": "2025-10-26T11:36:20.995Z"
+      "createdAt": "2025-10-26T11:36:20.995Z",
+      "tags": [
+        "work"
+      ]
     },
     {
       "id": 20,
       "text": "Create the bitbucket project",
-      "completed": false,
+      "completed": true,
       "createdAt": "2025-10-26T12:43:52.068Z"
     },
     {
       "id": 22,
-      "text": "Fix heater to use plug for emergency.",
+      "text": "Fix heater to use plug for emergency.  #house",
       "completed": false,
-      "createdAt": "2025-10-26T16:04:35.000Z"
+      "createdAt": "2025-10-26T16:04:35.000Z",
+      "tags": [
+        "house"
+      ]
     },
     {
       "id": 23,
