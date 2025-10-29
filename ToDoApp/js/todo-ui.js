@@ -164,27 +164,25 @@ class TodoUI {
         displayTodos.forEach((todo) => {
             const item = document.createElement('div');
             item.className = `todo-item ${todo.completed ? 'completed' : ''}`;
+            item.dataset.todoId = todo.id;
             
             const checkbox = document.createElement('input');
             checkbox.type = 'checkbox';
             checkbox.checked = todo.completed;
             checkbox.addEventListener('change', () => this.toggleTodo(todo.id));
             
+            const textContainer = document.createElement('div');
+            textContainer.className = 'todo-text-container';
+            
             const label = document.createElement('label');
             label.textContent = todo.text;
-            label.addEventListener('click', () => {
-                checkbox.checked = !checkbox.checked;
-                this.toggleTodo(todo.id);
-            });
+            label.className = 'todo-label';
+            label.addEventListener('dblclick', () => this.startEditing(todo.id, label, textContainer));
             
-            const deleteBtn = document.createElement('button');
-            deleteBtn.className = 'delete-btn';
-            deleteBtn.textContent = '🗑️ Delete';
-            deleteBtn.addEventListener('click', () => this.deleteTodo(todo.id));
+            textContainer.appendChild(label);
             
             item.appendChild(checkbox);
-            item.appendChild(label);
-            item.appendChild(deleteBtn);
+            item.appendChild(textContainer);
             this.todoList.appendChild(item);
         });
         
@@ -206,12 +204,44 @@ class TodoUI {
         this.showStatus('✅ Todo added (not saved yet)', 'info');
     }
 
-    deleteTodo(id) {
-        if (!confirm('Delete this todo?')) return;
+    startEditing(id, label, container) {
+        const currentText = label.textContent;
         
-        this.manager.deleteTodo(id);
-        this.renderTodos();
-        this.showStatus('✅ Todo deleted (not saved yet)', 'info');
+        // Create input field
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.className = 'todo-edit-input';
+        input.value = currentText;
+        
+        // Replace label with input
+        container.innerHTML = '';
+        container.appendChild(input);
+        input.focus();
+        input.select();
+        
+        // Save on Enter or blur
+        const saveEdit = () => {
+            const newText = input.value.trim();
+            if (newText && newText !== currentText) {
+                this.manager.updateTodo(id, newText);
+                this.showStatus('✅ Todo updated (not saved yet)', 'info');
+            }
+            this.renderTodos();
+        };
+        
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                saveEdit();
+            }
+        });
+        
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                this.renderTodos(); // Cancel editing
+            }
+        });
+        
+        input.addEventListener('blur', saveEdit);
     }
 
     updateChangesIndicator() {

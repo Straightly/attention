@@ -47,6 +47,14 @@ class TodoManager {
         this.hasChanges = true;
     }
 
+    updateTodo(id, newText) {
+        const todo = this.todos.find(t => t.id === id);
+        if (todo) {
+            todo.text = newText;
+            this.hasChanges = true;
+        }
+    }
+
     deleteTodo(id) {
         const index = this.todos.findIndex(t => t.id === id);
         if (index !== -1) {

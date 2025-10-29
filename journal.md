@@ -799,6 +799,45 @@ I noticed that in my ToDoApp, After I entered a todo item in Chinese, it was dis
 I tried the page and the display of the item I had in Chinese is still jumbled.  Is the fix supposed to work for existing items or the existing is already bad and must be deleted and reentered?
 ```
 
+#### Prompt 85 (20:43)
+```
+Please remember to journal my prompts before responding to them.
+```
+
+**Outcome:**
+- Created memory to journal prompts before responding
+
+#### Prompt 86 (20:45)
+```
+Did you journal my prompts in my journal.md file?
+```
+
+**Outcome:**
+- Journaled both previous prompts to journal.md
+- Confirmed will journal prompts before responding going forward
+
+#### Prompt 87 (20:48)
+```
+Now I would like to expand my ToDoApp.  I would like to be able to edit it in line.  Also, I do not see me deleting it in the UX.  So plesae remove the delete button.
+```
+
+**Outcome:**
+- Added inline editing: double-click any todo item to edit it
+- Removed delete button from UI
+- Added `updateTodo()` method to TodoManager
+- Added `startEditing()` method to TodoUI with Enter to save, Escape to cancel, blur to save
+- Updated CSS with styles for edit input and hover effects on todo labels
+
+#### Prompt 88 (22:31)
+```
+After I created a bitbucket repository and tried to clone it, I got error saying fatal: Could not read from remote repository.
+```
+
+#### Prompt 89 (22:32)
+```
+This is a windows machine.
+```
+
 ---
 
 ## How to Update This Journal

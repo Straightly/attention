@@ -287,35 +287,42 @@ header h1 {
     cursor: pointer;
 }
 
-.todo-item label {
+.todo-item .todo-text-container {
     flex: 1;
-    cursor: pointer;
-    font-size: 1.05em;
 }
 
-.todo-item.completed label {
+.todo-item .todo-label {
+    cursor: pointer;
+    font-size: 1.05em;
+    display: block;
+    padding: 5px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.todo-item .todo-label:hover {
+    background-color: rgba(102, 126, 234, 0.1);
+}
+
+.todo-item.completed .todo-label {
     text-decoration: line-through;
     color: #6c757d;
 }
 
-.todo-item .delete-btn {
-    background: #dc3545;
-    color: white;
-    border: none;
-    padding: 6px 12px;
+.todo-item .todo-edit-input {
+    width: 100%;
+    padding: 8px;
+    border: 2px solid #667eea;
     border-radius: 6px;
-    cursor: pointer;
-    font-size: 0.9em;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+    font-size: 1.05em;
+    font-family: inherit;
+    background: white;
 }
 
-.todo-item:hover .delete-btn {
-    opacity: 1;
-}
-
-.todo-item .delete-btn:hover {
-    background: #c82333;
+.todo-item .todo-edit-input:focus {
+    outline: none;
+    border-color: #5568d3;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
 .actions {
