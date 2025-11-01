@@ -173,7 +173,7 @@ The goal: Build a memory mechanism that's simple,reliable, transparent, convenie
 BrokenPencil is part of a shift in how we interact with AI:
 
 • Stateless → Stateful 
-• One-off queries → Ongoing conversations (explicit context)
+• One-off queries → Ongoing conversations
 • Generic → Specific
 • Paid → Free & open
 
