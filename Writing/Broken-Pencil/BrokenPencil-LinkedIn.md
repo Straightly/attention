@@ -91,12 +91,12 @@ The key insight:
 **3. Memory Management: The Indirection**
 - Review and edit what's stored
 - Refactor and reorganize memories as needed
-- Question: Are there better tools than LLMs for this?
+- We will, of course, use LLMs to help us with this. I was surprised that CLaude would even suggest there can be a "System" that is better than LLM for this.
 
 ### Why This Approach Works
 
 ✅ **Free to use** - Works with any LLM, including free ones  
-✅ **LLM-agnostic** - No vendor lock-in. You could send prompts to any expert, human or AI  
+✅ **LLM-agnostic** - No vendor lock-in. You could send prompts to any expert, anh AI expert, or even a human.  
 ✅ **You stay in control** - Explicitly choose what memories to attach  
 ✅ **Transparent** - See and edit what's remembered and what's sent to the LLM. Open source means you can change not just the memory, but how you keep it  
 ✅ **Privacy-first** - Your data stays local or in your control  
@@ -107,53 +107,43 @@ The key insight:
 
 ## Introducing BrokenPencil: An Open Source Project
 
-I'm building **BrokenPencil** as an open source project on Bitbucket. You enter prompts, get enhanced prompts with selected memories attached, then copy-paste to any LLM website you choose (preferably free).
+I'm building **BrokenPencil** as an open source project on Bitbucket. You enter prompts, get enhanced prompts with selected memories attached, then send to any LLM website you choose (preferably free).  (footnote:  I just found out that Windsurf's none enterprise version has added a memory feature.  The feature was not available in the enterprise version.  It is also my experiences that the free version of LLMs are better than the paid API versions.  IMHO.)
 
 ### Project Goals
 
 **Phase 1: Core Memory System**
 - Simple web app to create enhanced prompts
 - Basic tagging and organization
-- Markdown-based storage for human readability
+- Markdown-based for human readability
+- Versioned storage.
 
 **Phase 2: Browser Integration**
-- Chrome plugin to inject enhanced prompts into LLM websites
+- Injecttion of memory into prompts.
+- Browser plug in to inject memory into prompts.    
+-- local storage / self-hosted cloud storage you trust.
 
 **Phase 3: LLM Integration**
+- LLM-assisted organization, refactoring and reorganization of memories
 - Automatic memory extraction from conversations
-- Meta prompts to extract and organize memories
-- LLM-assisted refactoring and reorganization
 
-**Phase 4: Advanced Features**
-- Scaling intelligence using Agile approach
-- Component/service specifications where implementation is hidden from consumers
 
 ### Technical Architecture
 
-Windsurf suggested an "impressive" architecture that would probably get budget approval but is way too complex and irrelevant. 
+Windsurf suggested an "impressive" architecture that would probably get budget approval but is way too complex and too irrelevant. 
 
-My vetting question for programmers: **"Design the permanent storage mechanism for memories and estimate implementation costs."** 
+Vetting Question: **"Design the permanent storage mechanism for memories and estimate implementation costs."** 
 
-IMHO, the mechanism is so obvious a qualified programmer should have it at the top of their mind.
-
-### Why Open Source?
-
-1. **No subscription fees** - Free to use, forever
-2. **Privacy matters** - You control your memories, not a corporation
-3. **Transparency builds trust** - No black boxes
-4. **Community innovation** - Better solutions through collaboration
-5. **Portability** - No vendor lock-in
-6. **Conscious control** - You decide what to use, not an algorithm
+Hint: the mechanism is so obvious any qualified programmer should have it on the top of their mind.
 
 ---
 
 ## Real-World Use Cases
 
 **Primary Use Case:**
-- Stop repeating yourself—attach relevant context to prompts automatically
+- Stop repeating yourself yourself—attach relevant context to prompts automatically so you can repeat to LLMs as needed.
 
 **Stretch Goal:**
-- Craft prompts that solicit better responses from LLMs
+- Organize your memories better.
 - Challenge: "Better" is relative, especially when free LLM websites add implicit memory that often produces hallucinated responses  
 
 ## Current Status & Next Steps
@@ -161,14 +151,12 @@ IMHO, the mechanism is so obvious a qualified programmer should have it at the t
 **Current Status:**
 - ✅ Project repository created on Bitbucket
 - ✅ Architecture design done
-- ✅ MVP target: one week
+- 📋 MVP target: in a week or two.
 - 📋 Make it available to public users
 
 **Immediate Next Steps:**
-1. Implement basic CLI for manual memory save/retrieve
-2. Create simple tagging system
-3. Build proof-of-concept web interface
-4. Test with real workflows
+1. Build proof-of-concept web interface
+2. Test with real workflows
 
 **Looking for:**
 - **Contributors** - Especially those interested in LLM tooling or UX design
@@ -182,14 +170,14 @@ IMHO, the mechanism is so obvious a qualified programmer should have it at the t
 If you're interested in building better memory systems for AI:
 
 🔗 **Repository:** [Bitbucket - BrokenPencil](https://bitbucket.org/[your-username]/brokenpencil)  
-📧 **Contact:** [Your Email]  
+📧 **Contact:** zhian.job@gmail.com  
 💬 **Discussion:** Open an issue or start a discussion on the repo
 
 The goal isn't to build the perfect memory system—it's to build a *good enough* system that's:
 - **Reliable** (like a broken pencil that still writes)
 - **Transparent** (you can see what's remembered)
-- **Controllable** (you decide what matters)
-- **Portable** (works with any LLM)
+- **Convenient** Attach what you want to add to prompt very easily so it can be repeated to LLMs
+- **Flexible** You cna figure out how to organize your memories as you go. 
 
 ---
 
@@ -197,13 +185,12 @@ The goal isn't to build the perfect memory system—it's to build a *good enough
 
 This project is part of a larger shift in how we interact with AI. Unlike proprietary memory systems, BrokenPencil keeps you in the driver's seat:
 
-- **Stateless interactions** → **Stateful relationships** (you control the state)  
+- **Stateless interactions** → **Stateful relationships** (but you control the state)  
 - **One-off queries** → **Ongoing conversations** (with explicit context)  
-- **Generic responses** → **Personalized assistance** (through your chosen memories, not AI profiling)  
-- **Black box AI** → **Transparent augmentation** (you see what's added)  
+- **Generic responses** → **Contexted assistance** 
 - **Paid subscriptions** → **Free, open tools** (works with any LLM)
 
-The broken pencil principle: **External memory you control is better than AI that "knows" you.**
+The broken pencil principle: **External memory you control is better than AI that "betters" you.**
 
 ---
 
