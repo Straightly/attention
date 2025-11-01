@@ -8,21 +8,24 @@
 
 ## Breaking News: Claude's Memory System (And Why I'm Building My Own)
 
-Claude just announced a memory system! Exciting, right? Except... it's only for paid users.
+Claude just announced a memory system! Exciting, right? Except... It wants to keep your memory and you have to pay for it.
 
 I also read somewhere that AI agents, as new as they are, are already outdated. The new buzzword is "AI clones"—digital representations of yourself that are supposedly "more you than you realize yourself." Is that even possible? But I digress.
 
 ### What Memory Systems Do (And Why That's Good)
 
-At its core, a memory system keeps a bunch of texts and facts which, when attached to your prompt, help the AI generate better responses. That's genuinely useful.
+At its core, a memory system keeps a bunch of texts and facts which, when attached to your prompt, help AI generate better responses. That's genuinely useful.
 
 ### But Here's What Bothers Me
 
-**First: The Cost Problem**
+**First: Its my memory.  How should I use it is me.  I trust Claude, but it is not me.**
+AI is great and AI, trust me, has become way smarter than I am. It is also not that I do not trust Claude that it will use my memory to build an AI army to ensclave humanity as Elon Musk tried to sacre people with for his huge paypackage.  None of that.  It simply that It is my memory.  How and when to use it is really what makes me who I am.  "I think therefore I am".  AI and Claude are smarter than I am, but I would like to think for myself, thank you.
 
-I don't like to pay. It's not just the money—it's the mental overhead of wondering how much I'll have to pay to use all the different models and systems. Also, paying means I've made a choice asserting that this is better than the free alternatives, which I'm not ready or knowledgeable enough to make.  Of course, pay wall create a two tiered system of knowledge and is biased against the haven'ts, where I am.
+**Second: The Cost Problem**
 
-**Second: The Autonomy Problem**
+I don't like to pay. It's not just the money—It is not I simply do not want to be forced into a way of thinking.  I do not want to make a commitment to think in a way prescribed to me by making a commitment to a service.  Indeed, I am committed to not to be pigeon holded into anything, Memory System from Claude included.
+
+**Third: The Autonomy Problem**
 
 The little information I have about Claude's memory sends chills down my spine. I quote: "bio, tone, style, etc." My immediate reaction: Why would I want that?
 
@@ -40,7 +43,7 @@ This goes against my understanding of AI. My understanding is that the interface
 
 Being a programmer, I believe in David Wheeler's principle: "Any problem can be solved by another layer of indirection." I cannot see why a memory system can't be just a bunch of strings I keep somewhere and can conveniently add to my prompt before sending it to an LLM at a free website.
 
-**So I'm building exactly that: BrokenPencil.**
+**So I'm starting an open source project: BrokenPencil.**
 
 ---
 
@@ -48,14 +51,14 @@ Being a programmer, I believe in David Wheeler's principle: "Any problem can be 
 
 In my last post, I shared my experience teaching an AI coding assistant to journal my prompts. The results were... inconsistent. The AI kept forgetting, apologizing, and forgetting again.
 
-But here's what I realized: **This isn't a bug in the AI. It's a fundamental architectural challenge.**
+But here's what I realized: **This isn't a bug. It's a feature.**
 
 Modern AI systems operate with:
 - **Limited context windows** (like human short-term memory)
 - **Stateless processing** (each conversation starts fresh)
 - **No persistent memory** across sessions
 
-They have vast knowledge but no memory of *you*—your preferences, your projects, your history—unless it's explicitly written down and retrieved.
+But that is not a bug.  It is a feature because LLM is supposed to be a smart with vast knowledge and acute reasoning capabilities.
 
 The ancient proverb holds true: **"A broken pencil is better than the most sound mind."** Even AI needs to write things down.
 
@@ -65,8 +68,8 @@ The ancient proverb holds true: **"A broken pencil is better than the most sound
 
 Instead of fighting AI's forgetfulness or paying for proprietary memory systems, we can build a **memory layer** that:
 - Works with any LLM (free or paid)
-- Keeps you in control of what's remembered
-- Makes memory retrieval explicit and transparent
+- Keeps you in control of what's remembered.
+-- It helps you to organize what's remembered, but it is open sourced so you are free to organize your memory any way yo like
 
 The key insight:
 
@@ -76,20 +79,19 @@ The key insight:
 
 **1. Memory Storage**
 - Store conversations, preferences, and context as structured data
-- Windsurf suggested that one should use "Use vector embeddings for semantic search".  I am sure we do not need this for now and for a long while.  Convince me with any concrete use case if you may.
+- Windsurf suggested that one should use "Use vector embeddings for semantic search".  I am sure we do not want this, for now or forever.  Convince me with any concrete use case if you may.
 - Tag memories by project, topic, and any tags of your own choice.
-- When on embarks on a new project, or issue prompts repeatedly against certain topics, areas etc. info, facts, and knowledge in the prompts are extracted properly tagged and stored.  
 - Version control everything (it's just text files!)
 
-**2. Smart Retrieval**
-- When you start a conversation, automatically inject relevant memories into context
-- Windsurf suggested that one should use "Use semantic similarity to find related past interactions".  I am sure we do not need this for now and for a long while.  Convince me with any concrete use case if you may. 
-- Should we prioritize recent and frequently accessed memories? Or rather old/obsolete memories will be conciously removed?  
-- Filter by project scope
+**2. Conscious Retrieval**
+- When you build a prompt, you can consciously select what memories to include.  
+- When on embarks on a new project, the memory selection can be tagged by project for convenience.  
+- Windsurf suggested that one should use "Use semantic similarity to find related past interactions".  I am sure we do not want this, for now or forever.  Convince me with any concrete use case if you may. 
+- Windsurf suggested that one should " prioritize recent and frequently accessed memories?  Or remove old/obsolete memories."  Sounds like something we should try to avoid, right?  
 
 **3. Memory Management**
-- Let users review and edit what's stored
-- Refactor and Reorganize memories as needed.
+- Let users review and edit what's stored but help them organize it
+- Refactor and Reorganize memories as needed.  Are there better tools thank LLM in doing this?
 
 ### Why This Approach Solves My Concerns
 
@@ -98,10 +100,10 @@ This addresses all the problems I mentioned:
 ✅ **Free to use** - Works with any LLM, including free ones  
 ✅ **LLM-agnostic** - No vendor lock-in.  In fact, it's agnostic to the LLM.  You could very well be sending the prompt to any expert, made by human biologically or artificially, conducting a reverse Turing test.  
 ✅ **You stay in control** - Explicitly choose what memories to attach to prompts  
-✅ **Transparent** - You can see and edit what's remembered, and more importantly, you can see and edit what's sent to the LLM.  
-✅ **Privacy-first** - Your data stays local or in your control.  "First funding plea:  I will like to host the storage in the cloud for some users with the funding." 
+✅ **Transparent** - You can see and edit what's remembered, and more importantly, you can see and edit what's sent to the LLM.  Furthere and more important, it is open sourced so you can not only change the memory you keep, but also how you want to keep it.  If a broken pencil and a napkin is not good enough for you, get a pen and a notebook.  
+✅ **Privacy-first** - Your data stays local or in your control.  
 ✅ **Portable** - Memories are just text md files displayed in a web interface. 
-✅ **No profiling** - AI doesn't "learn" your style; you consciously add context  
+✅ **No profiling** - AI doesn't "learn" your style; you consciously add context.
 
 ---
 
