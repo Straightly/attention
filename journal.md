@@ -1104,6 +1104,23 @@ I made a few changes to Writing\Broken-Pencil\BrokenPencil-LinkedIn.md.  would p
   - Changed hashtag from #MachineLearning to #Memory
 - Both files now in sync and ready for LinkedIn posting
 
+#### Prompt 107 (12:03)
+```
+I made more changes in Writing\Broken-Pencil\BrokenPencil-LinkedIn-Formatted.txt.  Still seeing a lot of repeating.  For example, "Your Thoughts" and "Looking for" sections seem to be duplicated.
+```
+
+**Outcome:**
+- Removed duplication between "JOIN THE PROJECT" and "YOUR THOUGHTS?" sections:
+  - Merged both sections into single "JOIN THE PROJECT" section
+  - Consolidated "Looking for" and "I'd love to hear" (were asking same questions)
+  - Combined "Feedback on features" with "What memory features would be most valuable"
+  - Combined "Real-world use cases" with "What use cases am I missing"
+  - Combined "Contributors" with "Would you use or contribute"
+  - Moved "THE BIGGER PICTURE" section before "JOIN THE PROJECT" for better flow
+  - Removed duplicate "Bitbucket - BrokenPencil" text from URL (kept just the URL)
+  - Fixed spacing in "simple, reliable" (was "simple,reliable")
+- Article now has single consolidated call-to-action section instead of two overlapping ones
+
 ---
 
 ## How to Update This Journal

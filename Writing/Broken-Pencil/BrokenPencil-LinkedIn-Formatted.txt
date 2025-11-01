@@ -151,23 +151,6 @@ Hint: the mechanism is so obvious that any qualified programmer should have it o
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-🤝 JOIN THE PROJECT
-
-If you're interested in writing down your thoughts so it can be attached to AI prompts:
-
-🔗 Repository: Bitbucket - BrokenPencil (https://straightly@bitbucket.org/broken_pencil/brokenpencil.git)
-📧 Contact: zhian.job@gmail.com
-💬 Discussion: Open an issue or start a discussion on the repo
-
-*Looking for:*
-• Contributors (Programmers know how to build the moving parts and put them together, English is the language of choice)
-• Feedback on features that matter most
-• Real-world use cases
-
-The goal: Build a memory mechanism that's simple,reliable, transparent, convenient, and flexible.
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
 🌍 THE BIGGER PICTURE
 
 BrokenPencil is part of a shift in how we interact with AI:
@@ -181,13 +164,21 @@ BrokenPencil is part of a shift in how we interact with AI:
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-💭 YOUR THOUGHTS?
+🤝 JOIN THE PROJECT
 
-I'd love to hear:
+If you're interested in writing down your thoughts so it can be attached to AI prompts:
+
+🔗 Repository: https://straightly@bitbucket.org/broken_pencil/brokenpencil.git
+📧 Contact: zhian.job@gmail.com
+💬 Discussion: Open an issue or start a discussion on the repo
+
+*I'd love to hear:*
 • What memory features would be most valuable to you?
 • What concerns do you have about AI memory systems?
 • What use cases am I missing?
-• Would you use or contribute to something like this?
+• Would you contribute? (Programmers know how to build the moving parts, English is the language of choice)
+
+The goal: Build a memory mechanism that's simple, reliable, transparent, convenient, and flexible.
 
 Drop a comment or reach out directly. Let's build better tools for working with AI.
 
