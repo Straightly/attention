@@ -1,0 +1,202 @@
+🚀 BUILDING A MEMORY SYSTEM FOR AI: THE BROKENPENCIL PROJECT
+
+Follow-up to: "Can AI Agents Form Habits?"
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📰 BREAKING NEWS: CLAUDE'S MEMORY SYSTEM (AND WHY I'M BUILDING MY OWN)
+
+Claude just announced a memory system! Exciting, right? Except... it wants your memory and you have to pay for it.
+
+I also read somewhere that AI agents, as new as they are, are already outdated. The new buzzword is "AI clones"—digital representations of yourself that are supposedly "more you than you realize yourself." Is that even possible? But I digress.
+
+💡 What Memory Systems Do (And Why That's Good)
+
+At its core, a memory system keeps texts and facts which, when attached to your prompt, help AI generate better responses. That's genuinely useful.
+
+⚠️ But Here's What Bothers Me
+
+*First: It's My Memory—I Should Control It*
+
+AI is great. AI has become way smarter than I am. But it's my memory. How and when to use it is what makes me who I am. "I think therefore I am." AI and Claude are smarter than I am, but I would like to think for myself, thank you, but no.
+
+*Second: The Cost and Commitment Problem*
+
+I don't like to pay—not just because of the money, but the cost of conforming to a way of thinking. Making a commitment to a service means committing to conform to how that service want you to think. I refuse to be pigeonholed into anything, Memory System from Claude included.
+
+*Third: The Autonomy Problem*
+
+Claude's memory stores "bio, tone, style, etc." My immediate reaction: Whose's the judge?
+
+I refuse to let anybody—Claude and AI included—produce anything dictated by profiling. I may want a humorous tone with formal style, but that's what *I* choose to do. I want Claude to help me achieve my goals and enhance my experiences, not have the experiences for me.
+
+What to use in producing a response is a value assessment. What gets added to my prompts should be my conscious decision, not delegated to AI.
+
+*Finally: The none Philosophical Problem*
+
+This goes against my understanding of LLM. The interface to LLMs is just text: a string in and another string out. Why spend time and money learning a system that hides the LLM from me?
+
+I am a programmer. I believe in "Any problem can be solved by another layer of indirection." A memory system can just be a bunch of strings I keep somewhere and conveniently add to my prompt before sending it to an LLM. If the LLM is free? Icing!.
+
+*So I'm starting an open source project: BrokenPencil.*
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🤔 THE PROBLEM: AI THAT FORGETS (AND WHY THAT'S ACTUALLY A FEATURE)
+
+In my last post, I shared my experience teaching an Windsuef, a wonderfully and amazing IDE to journal my prompts. The results were inconsistent. Windsurf kept forgetting, apologizing, and forgetting again.
+
+But here's what I realized: *That is a problme for Windsurf.  For LLM, this is not a bug. It's a feature.*
+
+Modern AI systems operate with:
+• Limited context windows (like human short-term memory)
+• Stateless processing (each conversation starts fresh)
+• No persistent memory across sessions
+
+This is actually good design. LLMs are supposed to be smart with vast knowledge and acute reasoning capabilities. It has to be free of our biases and limitiations so it can be powerful. It has also be free of the details of our cases (and our lives?) so it would not get borgged down by them. It is NOT some kind of clone of you which somebody by their wisdom think is "better than you" or "more you than you realize yourself".
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💡 THE SOLUTION: EXTERNAL MEMORY READILY RECALLED
+
+The ancient proverb holds true: *"A broken pencil is better than the most sound mind."* Even AI needs to write things down.
+
+Instead of fighting AI's forgetfulness or paying for proprietary memory systems, we can build a *memory layer* that:
+• Works with any LLM (free or paid)
+• Keeps you in control of what's remembered
+• Helps you organize memories, but is open source so you're free to organize your memory in your way
+• We will be asking LLM to help in organizing our memory too, but not for it to have it or use it for us
+
+The key insight:
+
+*Memory is about reliable externalization and readily retrieval.*
+
+🔧 Core Components
+
+*1. Reliable Externalization*
+• Store texture data as memories
+• Organize memories by tags. Tag memories by project, topic, and any tags of your choice
+• Version control everything (it's just text files!)
+• Note: Windsurf suggested vector embeddings for semantic search. I'm skeptical—convince me with a concrete use case.
+
+*2. Readily Retrieval*
+• When you build a prompt, consciously select what memories to include
+• Use Project/Thread Tag memory for organization andconvenience
+• Note: Windsurf suggested semantic similarity and prioritizing recent memories. Sounds like something to avoid—we want conscious control, not algorithmic filtering.
+
+*3. Memory Management: The Indirection*
+• Review and edit what's stored
+• Refactor and reorganize memories as needed
+• We will, of course, ask LLMs to help us doing this. I was surprised that CLaude even suggested that there is a "System" better than LLM itself for doingthis.
+
+✅ Why This Approach Works
+
+✅ *Free & LLM-agnostic* - Works with any LLM, no vendor lock-in
+✅ *Use LLM to help* - Not helping LLM.
+✅ *Transparent & open source* - See what's sent, change how it works
+✅ *Privacy-first* - Your data stays local or in your control
+✅ *Simple & portable* - Just markdown files
+✅ *You are in control* - You consciously add memory and choose the inputs for LLM.  Aking LLM to help you the way you want to be helped, no less, and no more.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🚀 INTRODUCING BROKENPENCIL: AN OPEN SOURCE PROJECT
+
+I'm building *BrokenPencil* as an open source project on Bitbucket. You enter prompts, get enhanced prompts with selected memories attached, then send to any LLM website.
+
+(footnote: I just found out that Windsurf's none enterprise version has added a memory feature. The feature was not available in the enterprise version. It is my experiences that the free version of the LLMs are better than the paid API versions. Yet another reason to stay free!)
+
+📋 Project Goals
+
+*Phase 1: MVP*
+• Simple web app to add memories with tagging for organization
+• Simple web app to apply memories to prompts
+• Markdown-based for human readability
+• Versioned local or self-hosted cloud storage
+
+*Phase2: Brower Plugin*
+• Chrome plug in to inject memories into prompts automatically, restore the string in/string out interface to LLM
+
+*Phase 3: LLM Integration*
+• LLM-assisted organization, refactoring and reorganization of memories
+• Automatic memory extraction from conversations
+
+🏗️ Technical Architecture
+
+Windsurf suggested architecture that is impressive and would probably get budget approval. It is way too complex and too irrelevant.
+
+Vetting Question: *"Design the permanent storage mechanism for memories and estimate implementation costs."*
+
+Hint: the mechanism is so obvious that any qualified programmer should have it on the top of their mind.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💼 REAL-WORLD USE CASES
+
+*Primary:* Attaching selected memory to prompts
+
+*Stretch Goal:* Organize your memories better (though "better" is relative, especially when free LLM websites add implicit memory)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📊 CURRENT STATUS & NEXT STEPS
+
+*Current Status:*
+✅ Project repository created on Bitbucket
+✅ Architecture design done
+
+*Immediate Next Steps:*
+📋 MVP target: Build proof-of-concept web interfaces in a couple of weeks.
+📋 Make it available to public users
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🤝 JOIN THE PROJECT
+
+If you're interested in writing down your thoughts so it can be attached to AI prompts:
+
+🔗 Repository: Bitbucket - BrokenPencil (https://straightly@bitbucket.org/broken_pencil/brokenpencil.git)
+📧 Contact: zhian.job@gmail.com
+💬 Discussion: Open an issue or start a discussion on the repo
+
+*Looking for:*
+• Contributors (Programmers know how to build the moving parts and put them together, English is the language of choice)
+• Feedback on features that matter most
+• Real-world use cases
+
+The goal: Build a memory mechanism that's simple,reliable, transparent, convenient, and flexible.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🌍 THE BIGGER PICTURE
+
+BrokenPencil is part of a shift in how we interact with AI:
+
+• Stateless → Stateful 
+• One-off queries → Ongoing conversations (explicit context)
+• Generic → Specific
+• Paid → Free & open
+
+*The broken pencil principle:* External memory you control is better than AI that "betters" you.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💭 YOUR THOUGHTS?
+
+I'd love to hear:
+• What memory features would be most valuable to you?
+• What concerns do you have about AI memory systems?
+• What use cases am I missing?
+• Would you use or contribute to something like this?
+
+Drop a comment or reach out directly. Let's build better tools for working with AI.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📝 TL;DR: AI systems forget because they're stateless. I'm building BrokenPencil, an open source mechanism that stores and retrieves memories and attach them to prompts. Free, LLM-agnostic, plexible. Looking for contributors.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+*"A broken pencil still writes. A sound mind still forgets."*
+
+#AI #OpenSource #LLM #Memory #SoftwareDevelopment #ProductivityTools

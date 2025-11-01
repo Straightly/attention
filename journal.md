@@ -1054,6 +1054,56 @@ Please change this file to the LinkedIn format.
   - Formatted links as plain URLs with descriptive text
 - File is ready to copy-paste directly into LinkedIn post editor
 
+#### Prompt 104 (10:52)
+```
+In bitbucket, can one delete a repository?
+```
+
+**Outcome:**
+- Explained how to delete a Bitbucket repository
+- Warned about permanent/irreversible nature
+- Suggested alternatives (archive, make private, backup)
+- Noted need for admin/owner permissions
+
+#### Prompt 105 (11:13)
+```
+At the bottom, tehre some thing after a three ---.  What are they?  Should I post them into LinkedIn?
+```
+
+**Outcome:**
+- Explained the three elements after the --- separator:
+  - TL;DR: Brief summary for skimmers (recommended to include)
+  - Quote: Memorable closing line (recommended to include)
+  - Hashtags: For discoverability on LinkedIn (essential to include)
+- Confirmed all three should be posted to LinkedIn
+- Noted that --- separators won't appear on LinkedIn (just line breaks)
+
+#### Prompt 106 (11:21)
+```
+I made a few changes to Writing\Broken-Pencil\BrokenPencil-LinkedIn.md.  would please replicate that to Writing\Broken-Pencil\BrokenPencil-LinkedIn-Formatted.txt?
+```
+
+**Outcome:**
+- Synced all changes from markdown to formatted LinkedIn version:
+  - Changed "understanding of AI" to "understanding of LLM"
+  - Updated "If the LLM is freely accessible, so much for the better" to "If the LLM is free? Icing!."
+  - Expanded explanation about LLMs being free of biases and details
+  - Fixed "externalize and conveniently retrieval" to "externalization and convenient retrieval"
+  - Changed "Conveniently Retrieval" to "Convenient Retrieval"
+  - Updated tag organization text
+  - Changed Claude reference from "suggest there can be" to "come up with and claim"
+  - Removed "(preferably free)" from project description
+  - Updated Phase 1 from "Core Memory System" to "MVP" with revised bullet points
+  - Changed "Phase 2: Browser Integration" to "Phase2: Brower Plugin"
+  - Updated architecture description
+  - Removed "that produces hallucinations" from stretch goal
+  - Restructured Current Status section
+  - Updated repository URL to actual Bitbucket link
+  - Changed "good enough system" to "memory mechanism"
+  - Updated TL;DR with new wording
+  - Changed hashtag from #MachineLearning to #Memory
+- Both files now in sync and ready for LinkedIn posting
+
 ---
 
 ## How to Update This Journal
