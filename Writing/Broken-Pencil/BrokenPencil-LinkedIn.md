@@ -36,7 +36,7 @@ What to use in producing a response is a value assessment. What gets added to my
 
 **Finally: The Philosophical Problem**
 
-This goes against my understanding of AI. The interface to LLMs is just text: a string in and another string out. Why spend time and money learning a system that hides the LLM from me?
+This goes against my understanding of LLM. The interface to LLMs is just text: a string in and another string out. Why spend time and money learning a system that hides the LLM from me?
 
 As a programmer, I believe in David Wheeler's principle: "Any problem can be solved by another layer of indirection." A memory system can just be a bunch of strings I keep somewhere and conveniently add to my prompt before sending it to an LLM.  If the LLM is freely accessble, so much for the better.
 
