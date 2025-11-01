@@ -30,11 +30,9 @@ I don't like to pay—not just because of the money, but because I don't want to
 
 Claude's memory stores "bio, tone, style, etc." My immediate reaction: Why would I want that?
 
-It's not that I don't trust Claude. It's that I refuse to let anybody—Claude and AI included—produce anything dictated by profiling of my bio, tone, or style.
+I refuse to let anybody—Claude and AI included—produce anything dictated by profiling. I may want a humorous tone with formal style, but that's what **I** want to do. I want Claude to help me achieve my goals and enhance my experiences, not have the experiences for me.
 
-I may want to add a humorous tone to my writings using a formal style. But that's what **I**—this conscious self—want to do. I want Claude to help me achieve my goals and to enhance my experiences, not to have the experiences for me.
-
-At the practical level, what to use and what not to use in producing a response is a value assessment. What needs to be added to my prompts should be a conscious decision that I make, not delegated to AI.
+What to use in producing a response is a value assessment. What gets added to my prompts should be my conscious decision, not delegated to AI.
 
 **Finally: The Philosophical Problem**
 
@@ -95,13 +93,12 @@ The key insight:
 
 ### Why This Approach Works
 
-✅ **Free to use** - Works with any LLM, including free ones  
-✅ **LLM-agnostic** - No vendor lock-in. You could send prompts to any expert, anh AI expert, or even a human.  
-✅ **You stay in control** - Explicitly choose what memories to attach  
-✅ **Transparent** - See and edit what's remembered and what's sent to the LLM. Open source means you can change not just the memory, but how you keep it  
+✅ **Free & LLM-agnostic** - Works with any LLM, no vendor lock-in  
+✅ **You control everything** - Choose what memories to attach, when, and how  
+✅ **Transparent & open source** - See what's sent, change how it works  
 ✅ **Privacy-first** - Your data stays local or in your control  
-✅ **Portable** - Memories are just markdown files  
-✅ **No profiling** - AI doesn't "learn" your style; you consciously add context
+✅ **Simple & portable** - Just markdown files  
+✅ **No profiling** - You consciously add context, not AI learning your "style"
 
 ---
 
@@ -118,9 +115,8 @@ I'm building **BrokenPencil** as an open source project on Bitbucket. You enter 
 - Versioned storage.
 
 **Phase 2: Browser Integration**
-- Injecttion of memory into prompts.
-- Browser plug in to inject memory into prompts.    
--- local storage / self-hosted cloud storage you trust.
+- Browser plugin to inject memories into prompts
+- Local storage / self-hosted cloud storage you trust
 
 **Phase 3: LLM Integration**
 - LLM-assisted organization, refactoring and reorganization of memories
@@ -139,12 +135,9 @@ Hint: the mechanism is so obvious any qualified programmer should have it on the
 
 ## Real-World Use Cases
 
-**Primary Use Case:**
-- Stop repeating yourself yourself—attach relevant context to prompts automatically so you can repeat to LLMs as needed.
+**Primary:** Stop repeating yourself—attach relevant context to prompts
 
-**Stretch Goal:**
-- Organize your memories better.
-- Challenge: "Better" is relative, especially when free LLM websites add implicit memory that often produces hallucinated responses  
+**Stretch Goal:** Organize your memories better (though "better" is relative, especially when free LLM websites add implicit memory that produces hallucinations)  
 
 ## Current Status & Next Steps
 
@@ -158,11 +151,6 @@ Hint: the mechanism is so obvious any qualified programmer should have it on the
 1. Build proof-of-concept web interface
 2. Test with real workflows
 
-**Looking for:**
-- **Contributors** - Especially those interested in LLM tooling or UX design
-- **Feedback** - What features matter most to you?
-- **Use cases** - How would you use this in your workflow?
-
 ---
 
 ## Join the Project
@@ -173,24 +161,25 @@ If you're interested in building better memory systems for AI:
 📧 **Contact:** zhian.job@gmail.com  
 💬 **Discussion:** Open an issue or start a discussion on the repo
 
-The goal isn't to build the perfect memory system—it's to build a *good enough* system that's:
-- **Reliable** (like a broken pencil that still writes)
-- **Transparent** (you can see what's remembered)
-- **Convenient** Attach what you want to add to prompt very easily so it can be repeated to LLMs
-- **Flexible** You cna figure out how to organize your memories as you go. 
+**Looking for:**
+- Contributors (especially LLM tooling or UX design)
+- Feedback on features that matter most
+- Real-world use cases
+
+The goal: Build a *good enough* system that's reliable, transparent, convenient, and flexible. 
 
 ---
 
 ## The Bigger Picture
 
-This project is part of a larger shift in how we interact with AI. Unlike proprietary memory systems, BrokenPencil keeps you in the driver's seat:
+BrokenPencil is part of a shift in how we interact with AI:
 
-- **Stateless interactions** → **Stateful relationships** (but you control the state)  
-- **One-off queries** → **Ongoing conversations** (with explicit context)  
-- **Generic responses** → **Contexted assistance** 
-- **Paid subscriptions** → **Free, open tools** (works with any LLM)
+- **Stateless** → **Stateful** (you control the state)  
+- **One-off queries** → **Ongoing conversations** (explicit context)  
+- **Generic** → **Contexted**  
+- **Paid** → **Free & open**
 
-The broken pencil principle: **External memory you control is better than AI that "betters" you.**
+**The broken pencil principle:** External memory you control is better than AI that "betters" you.
 
 ---
 
@@ -206,10 +195,10 @@ Drop a comment or reach out directly. Let's build better tools for working with 
 
 ---
 
-**TL;DR:** AI systems forget because they're stateless. I'm building BrokenPencil, an open source memory layer for LLMs that stores and retrieves context across conversations. It's LLM-agnostic, privacy-first, and transparent. Looking for contributors and feedback.
+**TL;DR:** AI systems forget because they're stateless. I'm building BrokenPencil, an open source memory layer that stores and retrieves context across conversations. Free, LLM-agnostic, privacy-first, transparent. Looking for contributors.
 
 ---
 
-*"A broken pencil still writes. A sound mind still forgets. AI needs to write things down too."*
+*"A broken pencil still writes. A sound mind still forgets."*
 
 **#AI #OpenSource #LLM #MachineLearning #SoftwareDevelopment #ProductivityTools**

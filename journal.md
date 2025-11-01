@@ -1008,6 +1008,23 @@ Rememeber to journal my prompts.  I worked on Writing\Broken-Pencil\BrokenPencil
 - Article now flows better with clear, non-repetitive structure
 - Maintained all key points while reducing verbosity and duplication
 
+#### Prompt 101 (10:09)
+```
+I made more changes.  I notice there are still a lot of duplications.  Please revise.
+```
+
+**Outcome:**
+- Removed remaining duplications in BrokenPencil-LinkedIn.md:
+  - Consolidated "Third: Autonomy Problem" section (removed repetitive explanations about profiling and control)
+  - Merged "Why This Approach Works" benefits (combined Free/LLM-agnostic, Transparent/Open source into single items)
+  - Fixed Phase 2 duplicate "inject memory into prompts" lines
+  - Simplified "Real-World Use Cases" (removed verbose explanations)
+  - Merged "Looking for" and "Join the Project" sections (was duplicated content)
+  - Condensed "The Bigger Picture" section (removed redundant explanations, tightened arrows)
+  - Shortened TL;DR (removed redundant descriptors already in body)
+  - Removed duplicate "broken pencil" quote at end (principle already stated above)
+- Article is now much tighter with minimal repetition while maintaining all key points
+
 ---
 
 ## How to Update This Journal
