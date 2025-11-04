@@ -128,10 +128,26 @@
     },
     {
       "id": 25,
-      "text": "Add Security considerations for ai and mcp",
-      "tags": [],
+      "text": "#work Add Security considerations for ai and mcp",
+      "tags": [
+        "work"
+      ],
       "completed": false,
       "createdAt": "2025-11-04T23:16:10.433Z"
+    },
+    {
+      "id": 26,
+      "text": "Practice Dance",
+      "tags": [],
+      "completed": false,
+      "createdAt": "2025-11-04T23:17:17.902Z"
+    },
+    {
+      "id": 27,
+      "text": "Plan Running",
+      "tags": [],
+      "completed": false,
+      "createdAt": "2025-11-04T23:17:31.731Z"
     }
   ]
 }
