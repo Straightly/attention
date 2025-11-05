@@ -170,6 +170,15 @@
       ],
       "completed": false,
       "createdAt": "2025-11-04T23:26:12.103Z"
+    },
+    {
+      "id": 30,
+      "text": "#money 12/10/2025, Adobe quarterly number, looking for ARR > $600m and guidelines",
+      "tags": [
+        "money"
+      ],
+      "completed": false,
+      "createdAt": "2025-11-05T00:32:11.572Z"
     }
   ]
 }
