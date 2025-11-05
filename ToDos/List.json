@@ -137,18 +137,18 @@
     },
     {
       "id": 26,
-      "text": "#restore Practice Dance",
+      "text": "#running Practice Dance",
       "tags": [
-        "restore"
+        "running"
       ],
       "completed": false,
       "createdAt": "2025-11-04T23:17:17.902Z"
     },
     {
       "id": 27,
-      "text": "#restore Plan Running",
+      "text": "#running Plan Running",
       "tags": [
-        "restore"
+        "running"
       ],
       "completed": false,
       "createdAt": "2025-11-04T23:17:31.731Z"
@@ -179,6 +179,15 @@
       ],
       "completed": false,
       "createdAt": "2025-11-05T00:32:11.572Z"
+    },
+    {
+      "id": 31,
+      "text": "Test blood sugar #running",
+      "tags": [
+        "running"
+      ],
+      "completed": false,
+      "createdAt": "2025-11-05T00:42:51.080Z"
     }
   ]
 }
