@@ -1159,6 +1159,79 @@ Then use: `log_prompt "Your prompt here"`
 
 ---
 
+## 2025-11-05 (Tuesday)
+
+### Session: Adding Raw Writing to AI Security Paper
+
+**Time:** ~14:48 PST
+
+#### Prompt (14:48)
+```
+Please add content of Writing/RawWrittings/AgentSecurityButAgentshave_1762182635103.md to my AI=Security-Paper
+```
+
+#### Prompt (14:49)
+```
+remember to jourjal my prompt.
+```
+
+#### Prompt (15:44)
+```
+I added new contents starting line paragraph 13 and  running though to paragram 31.  Please work these into my article.
+```
+
+#### Prompt (15:49)
+```
+"We argue that AI agents must be treated as services that operate under delegated human authority, not as independent entities with their own credentials." is wrong.  We should actually avoid doing this!  In fact, depploying an agent in a service should be avoid! Please correct this throughout the paper.
+```
+
+#### Prompt (16:11)
+```
+## 2. Introduction seemed to be ill name the the content there seemed to be very repeative to content above.
+```
+
+#### Prompt (16:18)
+```
+Now that I have reached my conclusions, it seemed all the other writings of mine below is either incorrect or redudant.  Please take the first section and the abstract out and put it in another short article and I will work from there.
+```
+
+#### Prompt (16:22)
+```
+Please rework the titles of Writing/AI-Security-Paper/AI-Agent-Security-Short-Article.md and structure to make it a short article.
+```
+
+#### Prompt (16:31)
+```
+Can you go back to the full article and copy over the EPCS references and comments over and incorporated into the short article?
+```
+
+#### Prompt (16:40)
+```
+I want to add another section on how access of LLM or agentic capability can be added to an application securely.  I should have the materials in the full artile. Please incorporate that into my short article.
+```
+
+#### Prompt (16:48)
+```
+Now I think about it, what I want is another article.  Call it the Yang of Agent Security which should discuss how should we build application with access to LLM capabilities. Please create it for me and try to copy over the contents you can find in either the short or full article.
+```
+
+#### Prompt (17:02)
+```
+Can you add a section to explain this confusion?  Highlight the subtle but criticle difference between the agent and agentic applicaiton?
+```
+
+#### Prompt (17:07)
+```
+Can you search in the rawMaterials folder and RawWritings folder to find any phi pii related materials and incorporated them?
+```
+
+#### Prompt (17:14)
+```
+Add to a sample of de-sensitize pieces of data.  Instead of DOB, use age.  So for patient under certain age, use x days, then x weeks, then x months, and then x years old.  For location, use county or major city and state only.  I think there are standard on not disclose these PII unnecessarily in HIPPA and it will be great if you can find and use the starndard.  If not, use my comment above.
+```
+
+---
+
 ## Notes
 - This journal tracks prompts and high-level outcomes
 - For detailed technical work, see git commit history

@@ -1,4 +1,4 @@
-# Security of AI Agents: Authentication and Authorization in the Age of Autonomous Systems
+# Security of AI Agents: But Agents have been here for a long time, they are called programmers.
 
 **Author:** [Your Name]  
 **Date:** October 16, 2025  
@@ -8,48 +8,100 @@
 
 ## Abstract
 
-The emergence of AI agents capable of autonomous decision-making and action execution introduces fundamental security challenges that existing authentication and authorization frameworks were not designed to address. This paper analyzes the security implications of spawning AI agents, particularly focusing on how agents retrieve confidential information and invoke privileged actions. We examine the critical gap in current two-legged token systems and propose a framework for agent security based on chain-of-trust principles, using Auth0 protocols as a reference implementation. We argue that AI agents must be treated as services that operate under delegated human authority, not as independent entities with their own credentials.
+The emergence of AI agents capable of autonomous decision-making and action execution introduces fundamental security challenges that existing authentication and authorization frameworks were not designed to address. This paper analyzes the security implications of AI agents interacting with privileged systems, particularly focusing on how agents should assist with confidential information and privileged actions. We argue that AI agents must NOT be deployed as services with credentials—neither independent credentials nor delegated credentials. Instead, agents should generate code artifacts for human review and execution, maintaining a strict separation between agent intelligence and privileged access.
 
-**Keywords:** AI agents, authentication, authorization, security, OAuth, Auth0, chain of trust, delegated authority
+We presented simple framework to evalute AI agent security considering them as programmers. We reached two straightforward, actionable conclusions: (1) API providers need not change their security posture—secure APIs remain secure in the AI age; (2) Agent users must never grant agents direct access to credentials or deploy agents as services with authentication tokens. Instead, agents should generate code for human review and execution. This paper demonstrates how AI agents paradoxically enable stronger security controls than were practical with human developers alone—precisely because agents never hold credentials.
+
+**Keywords:** AI agents, security, zero-trust, code generation, human-in-the-loop, credential-free agents, no agent authentication
 
 ---
 
-## 1. Introduction
+## 1. Executive Summary: Two Perspectives on Agent Security
 
-### 1.1 The Rise of AI Agents
+### 1.1 For API Providers: Nothing New Under the Sun
 
-AI agents are rapidly evolving from simple chatbots to autonomous systems capable of executing complex tasks, accessing sensitive data, and making decisions that affect real-world outcomes. Unlike traditional software services, AI agents possess a degree of autonomy—they can "choose" actions based on their training and context, raising unprecedented security questions.
+**Core Principle:** If your API is secure before AI agents, it will remain secure in the AI age. If it has security holes, you should plug them regardless of AI agents.
 
-### 1.2 The Security Challenge
+A common misconception is that AI agents introduce new attack vectors because they have access to "powerful tools such as programming languages." This reasoning is fundamentally flawed—it assumes the adversary is incompetent before AI agents. Sound security design must assume the counterparty is powerful, competent, and has access to all available tools, including AI agents.
 
-When an AI agent is spawned to perform tasks on behalf of a user, it must:
-1. **Authenticate** its identity to services it accesses
-2. **Authorize** actions it attempts to perform
-3. **Maintain accountability** by tracing actions back to responsible humans
-4. **Respect boundaries** of delegated authority
+**Key Insight:** AI agents do not make attackers more powerful; they make exploitation faster and easier to attempt. This increases urgency but does not change fundamental security requirements. The principle remains: design security assuming a capable, well-equipped adversary.
 
-Current security frameworks, designed for human users and traditional services, are inadequate for this new paradigm.
+### 1.2 For Agent Users: Zero Direct Privilege Access
 
-### 1.3 Research Questions
+**The Paradox:** If we assume an agent will fully utilize any access granted—potentially for unintended purposes, like a rogue developer—we must conclude that agents should receive no direct privileges. Yet this seems to make agents useless.
 
-This paper addresses the following questions:
-- How should AI agents authenticate themselves to services?
-- What authorization model ensures agents operate within appropriate boundaries?
-- How can we maintain a chain of trust from human users to agent actions?
-- What are the security implications of two-legged vs. three-legged token systems for agents?
+**The Solution:** AI agents enable a new security paradigm where agents generate code for human review and execution, rather than executing with direct access.
+
+**Example: Database Query**
+```
+Traditional Approach (Insecure):
+Agent → [Database Credentials] → Direct Query Execution
+
+AI-Enabled Secure Approach:
+Agent → Generate SQL Statement → Human Review → Human Execution → Return Results to Agent
+```
+
+If the agent needs to learn table structure first:
+1. Agent generates query to retrieve schema information
+2. Human reviews and executes schema query
+3. Agent receives schema, generates data query
+4. Human reviews and executes data query
+5. Results returned to agent
+
+For complex multi-step operations, the agent can generate a stored procedure that stitches queries together, which the human reviews and deploys.
+
+**Example: API Access**
+
+Rather than granting API credentials to the agent, require the agent to:
+1. provide all the parameters to the make the API call
+2. Generate the API calls with all parameters visible
+3. Present calls for human review and execution
+4. Receive results without retaining access credentials
+
+### 1.3 The HIPAA Parallel: Regulatory Precedent for Agent Security
+
+This approach aligns with HIPAA requirements, which mandate that agents receive only the minimum access necessary to perform their tasks. 
+
+This approach also mirrors EPCS (Electronic Prescriptions for Controlled Substances) signature requirements:
+
+1. **Explicit Scoping:** Any access to sensitive data must be scoped explicitly beforehand
+2. **One-Time Access:** Authorization is granted for a single operation only
+3. **No Revocation Needed:** No persistent authorization exists to revoke
+4. **Audit Logging:** All access grants are logged for accountability
+5. **Minimum Necessary:** Agent receives exactly what's needed, nothing more
+
+Historically, these controls were impractical with human developers due to workflow overhead. AI agents make this security model not only feasible but natural—agents excel at generating precise, reviewable code artifacts.
+
+### 1.4 The Automation Question: When Agents Need Persistent Access
+
+**Challenge:** What about automation? If agents must perform regular tasks automatically, doesn't this require persistent privileged access?
+
+**Answer:** The agent should write a program. The workflow becomes:
+
+1. Agent generates application code for the automated task
+2. Human thoroughly vets the code
+3. After vetting, the application is deployed with necessary privileges
+4. The agent itself never receives persistent access
+
+This mirrors hiring a programmer when you cannot program yourself:
+- You hire them to write applications
+- You deploy those applications with privileged access
+- For everyone's protection, you do not give the programmer access to production secrets, certificates, or credentials
+- They do not need these to write the code
+- Having such access puts both parties at risk
+- The only privilege the programmer has is to generate code and put the code into a pipeline for vetting and deployment
+
+**The AI Advantage:** While HIPAA legally mandates minimum necessary access for human agents, practical limitations made full compliance difficult. AI agents make strict compliance not only possible but efficient. An AI agent can generate precise, auditable code artifacts for every privileged operation, enabling security controls that were previously impractical.
 
 ---
 
 ## 2. Background and Related Work
 
-Client-side validation is useless for security since anyone with the token can bypass it entirely—they could just use the GitHub API directly or modify the browser code.
-
-Who are you protecting against?
-
-Random internet users? → Don't share your app URL publicly
-Malware on your computer? → If malware is running, your GitHub session is already compromised
-Someone using your computer? → They can access your GitHub directly anyway
-Yourself (accidental damage)? → Git history saves you
+This paper addresses the following questions:
+- Why should AI agents never authenticate themselves to services?
+- How can agents be useful without receiving credentials or authorization?
+- What security model ensures agents assist without executing privileged operations?
+- Why are both two-legged and three-legged token systems inappropriate for agents?
 
 ### 2.1 Traditional Authentication and Authorization
 
@@ -81,135 +133,220 @@ The granting of authorities represents the "Yin" of security—where Yang is kep
 
 ### 3.3 Application to AI Agents
 
-For AI agents, both aspects must be carefully considered:
-- **Yang (Enforcement):** How do we verify an agent's authority when it attempts actions?
-- **Yin (Granting):** How do we initially grant authority to an agent, and under what constraints?
+For AI agents, the Yin and Yang framework reveals the critical insight:
+- **Yang (Enforcement):** Agents should never attempt privileged actions, so there is nothing to enforce at the agent level. Enforcement happens when humans execute agent-generated code.
+- **Yin (Granting):** Agents should never be granted authority. The granting of authority remains exclusively with humans who review and execute agent-generated code.
+
+**Key Insight:** The security problem disappears when agents never receive credentials. There is no Yang to enforce and no Yin to grant at the agent level.
 
 ---
 
-## 4. The Fundamental Principle: Agents as Services
+## 4. The Fundamental Principle: Agents Are NOT Services
 
-### 4.1 An Agent is a Service
+### 4.1 Agents Must Never Be Deployed as Services
 
-**Core Thesis:** An AI agent should have security exactly like a service. However, unlike traditional services, agents must operate under a chain of trust that originates from an authenticated human being.
+**Core Thesis:** An AI agent must NEVER be deployed as a service with credentials. This is the critical mistake to avoid. Agents should not have security "like a service" because services hold credentials and execute operations. Agents should only generate code for human review and execution.
 
-### 4.2 The Problem with Two-Legged Tokens
+### 4.1.1 Historical Perspective: Developers as Agents
 
-Current service-to-service authentication often relies on two-legged tokens (client credentials flow), where a service authenticates directly with its own credentials. This creates a critical security gap when applied to AI agents.
+**Key Insight:** Agents have been here for a long time—they are called developers.
 
-**The Gap:** Two-legged tokens grant authority to the service itself, not to any specific user. When an AI agent uses two-legged tokens, it operates with blanket authority that cannot be traced back to individual users or their specific permissions.
+This observation provides crucial perspective on agent security. Human developers have always operated as "agents" on behalf of organizations and users. However, the critical distinction is:
 
-**Example Scenario:**
+**What Developers Do NOT Get:**
+- Direct access to production credentials
+- Passwords to privileged systems
+- Private keys or certificates
+- Unrestricted access to sensitive data
+
+**What Developers DO:**
+- Write code that is reviewed before deployment
+- Generate scripts and programs for others to execute
+- Propose changes that require approval
+- Work in development environments, not production
+
+The security frameworks we've developed for developers—code review, separation of development and production, principle of least privilege—provide the exact model for AI agent security. AI agents should be treated like junior developers who write code but never receive production credentials.
+
+**Implication:** AI agents should follow the strictest developer security model: generate code, never hold credentials, always require human review and execution for privileged operations.
+
+### 4.2 The Problem with Giving Agents Any Tokens
+
+A common but dangerous approach is to give AI agents authentication tokens—either two-legged (service credentials) or three-legged (delegated user credentials). Both approaches are fundamentally flawed.
+
+**Two-Legged Tokens (Service Credentials):**
 ```
-Traditional Service (Two-Legged):
-Service A → [Client Credentials] → Service B
-(Service A has full access to Service B's resources)
+WRONG Approach:
+Agent Service → [Client Credentials] → Privileged API
+(Agent has blanket access, cannot trace to individual users)
+```
+Problem: Agent operates with service-level authority, no user accountability.
 
-AI Agent (Problematic Two-Legged):
-Agent → [Client Credentials] → User's Bank Account
-(Agent has full access, regardless of which user spawned it)
+**Three-Legged Tokens (Delegated User Credentials):**
+```
+WRONG Approach:
+User → [Delegates Token] → Agent → [Uses Token] → Privileged API
+(Agent holds user's delegated credentials)
+```
+Problem: Agent possesses credentials that can be misused, exfiltrated, or exploited.
+
+**The Correct Approach: No Tokens**
+```
+CORRECT Approach:
+User → Agent → [Generates Code] → User Reviews → User Executes → Result → Agent
+(Agent never holds any credentials)
 ```
 
-### 4.3 Why Agents Cannot Have Independent Identity
+### 4.3 Why Agents Must Never Have Credentials
 
-**Question:** Does it make sense to treat an agent like a human and give an agent authorities like we give to a person?
+**Question:** Does it make sense to give an agent credentials—either its own or delegated from a user?
 
-**Answer:** No. What we must insist upon is that an agent can perform tasks on somebody's (or many people's) behalf. The authority with which the agent performs actions must come from somebody. Therefore, authorization must eventually be traced back to a person, and there should be no independent identity for an agent.
+**Answer:** No. Agents should never possess credentials of any kind. The agent's role is to generate code that humans review and execute. The human holds the credentials and performs the privileged operations.
 
-**Thought Experiment:** Should an agent be given authority to your bank account? No. Should an agent be given authority to make a specific purchase, including transferring $99.99 to Amazon for that purchase? Potentially yes, if properly delegated and scoped.
+**Thought Experiment:** Should an agent be given credentials to your bank account? Absolutely not. Should an agent be given delegated authority to make a specific purchase? Still no. Instead:
+1. Agent generates the API call to make the purchase
+2. Human reviews the generated code
+3. Human executes the API call with their own credentials
+4. Result is returned to agent for further processing
+
+This maintains security while allowing the agent to be useful.
 
 ---
 
-## 5. Proposed Framework: Chain of Trust Authentication
+## 5. Proposed Framework: Code Generation Without Credentials
 
-### 5.1 Three-Legged Token Requirement
+### 5.1 The No-Credential Requirement
 
-When an agent is supposed to behave under a person's supervision, it needs credentials and authorization that establish a clear boundary. To properly honor this boundary, a new type of identity must be established—one that is "three-legged" because it must verify:
+Agents must never receive credentials. Instead, the security model is based on code generation and human execution:
 
-1. **The Human User:** The authenticated person who initiated the agent
-2. **The Agent Service:** The service infrastructure running the agent
-3. **The Target Resource:** The resource being accessed
+1. **The Human User:** The authenticated person who holds all credentials
+2. **The Agent:** Generates code artifacts but never receives credentials
+3. **The Target Resource:** Accessed only by the authenticated human, never by the agent
 
-### 5.2 Chain of Trust Principles
+### 5.2 Code Generation Principles
 
-**Principle 1: Origin from Authenticated Human**
-Every running agent service must be deployed with authorities obtained through a chain of trust originated from an authenticated human being.
+**Principle 1: Agents Generate, Humans Execute**
+Agents produce code, scripts, API calls, or SQL statements. Humans review and execute these artifacts using their own credentials.
 
-**Principle 2: Instance-Level Authorization**
-Every running instance of an agent service must obtain authorities through a chain of trust originated from the specific user who spawned it.
+**Principle 2: No Persistent Agent Access**
+Agents never receive credentials, tokens, or persistent access to any privileged system. Each operation requires fresh human review and execution.
 
-**Principle 3: Scope Limitation**
-If an agent is going to have autonomy and may choose to do something of its own accord, then the service account must be limited to do ONLY things that the originating person(s) have the authority to do.
+**Principle 3: Explicit Scope Visibility**
+All operations must be explicitly visible in generated code. No hidden operations, no credential storage, no autonomous execution.
+
+**Principle 4: Audit Trail Through Code**
+The generated code artifacts serve as the audit trail. What was reviewed is what was executed.
 
 ### 5.3 Implementation Architecture
 
-**[TODO: Detailed architecture diagram showing:]**
-- User authentication flow
-- Agent spawning process
-- Token delegation mechanism
-- Authority verification at each step
+**Correct Architecture:**
+```
+1. User authenticates to system (holds credentials)
+2. User invokes agent for assistance
+3. Agent analyzes requirements
+4. Agent generates code artifact (SQL, API call, script)
+5. Agent presents code to user for review
+6. User reviews generated code
+7. User executes code with their own credentials
+8. System returns results to user
+9. User shares results with agent (if needed for further processing)
+10. Agent continues with next step (generating more code if needed)
+```
+
+**Key Point:** At no step does the agent ever possess credentials or execute privileged operations.
 
 ---
 
-## 6. Auth0 Protocol Analysis
+## 6. Why Standard Auth Protocols Don't Apply to Agents
 
-### 6.1 Auth0 Authentication Flow
+### 6.1 OAuth/Auth0 Are for Credential Holders
 
-**[TODO: Analyze Auth0's authentication mechanisms:]**
-- Authorization Code Flow with PKCE
-- Client Credentials Flow (and its limitations for agents)
-- Token Exchange mechanisms
-- Refresh token handling
+Standard authentication protocols like OAuth 2.0, OpenID Connect, and Auth0 are designed for entities that will hold and use credentials:
+- Authorization Code Flow: For users who will hold tokens
+- Client Credentials Flow: For services that will hold service credentials
+- Token Exchange: For delegating credentials from one holder to another
 
-### 6.2 Adapting Auth0 for Agent Security
+All of these assume the recipient will possess and use credentials. **This assumption is wrong for AI agents.**
 
-**[TODO: Propose modifications to Auth0 patterns:]**
-- How to implement chain of trust in Auth0
-- Token structure for agent delegation
-- Scope management for agent actions
-- Audit trail requirements
+### 6.2 Agents Don't Need Auth Protocols
 
-### 6.3 Example Implementation
+Agents don't authenticate because they don't execute privileged operations. Therefore:
+- No Authorization Code Flow needed (agent doesn't hold user tokens)
+- No Client Credentials Flow needed (agent doesn't hold service credentials)
+- No Token Exchange needed (agent never receives tokens to exchange)
+- No Refresh Token handling needed (agent has no tokens to refresh)
 
-**[TODO: Provide code examples showing:]**
+### 6.3 The Human Remains Authenticated
+
+**Correct Flow:**
 ```
-User Login → Spawn Agent → Agent Requests Resource
-[Detailed flow with Auth0 API calls]
+1. User authenticates via OAuth/Auth0 (user holds token)
+2. User invokes agent through authenticated session
+3. Agent generates code artifact
+4. User reviews code in their authenticated session
+5. User executes code using their existing authentication
+6. Results returned to user
+7. User optionally shares results with agent
 ```
+
+**Key Point:** Only the human authenticates. The agent is just a code generation tool within the user's authenticated session.
 
 ---
 
 ## 7. Agent Operations Analysis
 
-### 7.1 Spawning an Agent
+### 7.1 Invoking an Agent
 
-**Security Requirements at Spawn Time:**
-1. Capture authenticated user context
-2. Define scope of agent authority
-3. Establish time-to-live for agent credentials
-4. Create audit trail entry
+**Security Requirements When User Invokes Agent:**
+1. User must be authenticated (user holds credentials, not agent)
+2. Agent operates within user's authenticated session
+3. Agent has no credentials, no authority, no persistent access
+4. All agent outputs are code artifacts for human review
 
-**[TODO: Detailed spawn protocol specification]**
+**No "Spawning" with Credentials:** The agent is not "spawned" with any authority. It's simply invoked as a tool within the user's session.
 
-### 7.2 Retrieving Confidential Information
+### 7.2 Accessing Confidential Information
 
-**Challenge:** When an agent retrieves confidential information, how do we ensure:
-- The agent has proper authorization from the user
-- The information is only accessible for the intended purpose
-- The retrieval is logged and auditable
-- The information is not retained beyond necessary scope
+**Correct Approach:** Agent never retrieves confidential information directly.
 
-**[TODO: Protocol for confidential data access]**
+**Workflow:**
+1. Agent determines what information is needed
+2. Agent generates query/API call to retrieve information
+3. Agent presents generated code to user
+4. User reviews and executes query with their credentials
+5. User receives confidential information
+6. User decides what subset (if any) to share with agent
+7. Agent processes only what user explicitly provides
 
-### 7.3 Invoking Privileged Actions
+**Key Point:** The agent never has direct access to confidential information. The human is the gatekeeper.
 
-**Challenge:** When an agent invokes privileged actions (e.g., financial transactions, data modifications), how do we ensure:
-- The action is within the user's granted authority
-- The action is within the agent's delegated scope
-- The action can be attributed to the responsible human
-- The action can be audited and potentially reversed
+### 7.3 Privileged Actions
 
-**[TODO: Protocol for privileged action execution]**
+**Correct Approach:** Agent never invokes privileged actions directly.
+
+**Workflow:**
+1. Agent determines what action is needed
+2. Agent generates code to perform the action (API call, SQL statement, script)
+3. Agent presents generated code to user with clear explanation
+4. User reviews the code and its implications
+5. User executes the code with their own credentials (or rejects it)
+6. Action is attributed to the authenticated human, not the agent
+7. Audit logs show human execution, not agent execution
+
+**Example: Financial Transaction**
+```
+Agent: "To complete this purchase, execute this API call:
+POST /api/transactions
+{
+  'amount': 99.99,
+  'recipient': 'Amazon',
+  'item': 'Book: AI Security'
+}
+Review carefully before executing."
+
+User: [Reviews, decides to execute]
+User: [Executes with their credentials]
+System: [Logs transaction by User, not by Agent]
+```
 
 ---
 
@@ -219,25 +356,43 @@ User Login → Spawn Agent → Agent Requests Resource
 
 **Question:** Where and what is the boundary for agent authority?
 
-**Proposed Framework:**
-- **Temporal Boundary:** Time-limited credentials
-- **Scope Boundary:** Explicit list of allowed actions
-- **Resource Boundary:** Specific resources agent can access
-- **Contextual Boundary:** Conditions under which agent can act
+**Answer:** The boundary is absolute and simple: **agents have zero authority.**
 
-### 8.2 Service Account Limitations
+**The Real Boundaries:**
+- **Credential Boundary:** Agent never possesses credentials (absolute boundary)
+- **Execution Boundary:** Agent never executes privileged operations (absolute boundary)
+- **Access Boundary:** Agent never directly accesses protected resources (absolute boundary)
+- **Code Generation Boundary:** Agent can only generate code for human review (permissive boundary)
 
-**Critical Rule:** If an agent is going to have autonomy, the service account must be limited to do EVERYTHING (and ONLY everything) that the authorizing person/people have the authority to do.
+### 8.2 Why Service Accounts for Agents Are Wrong
 
-**Logical Conclusion:** The agent gains authorities only to access resources that the originating user(s) can access, and only for the purposes delegated.
+**Common Mistake:** Creating a service account for an agent with "limited" privileges.
+
+**Why This Fails:**
+- Any credentials given to an agent can be exfiltrated
+- "Limited" privileges can often be escalated
+- Agent compromise means credential compromise
+- Audit trails become ambiguous (was it the agent or an attacker?)
+
+**Correct Approach:** No service account for agents. Agents generate code; humans execute with their own accounts.
 
 ### 8.3 Preventing Privilege Escalation
 
-**[TODO: Analyze attack vectors:]**
-- Agent attempting to access resources beyond delegation
-- Agent persisting credentials beyond intended lifetime
-- Agent sharing credentials with other agents
-- Agent modifying its own authority scope
+**Traditional Concerns (Don't Apply):**
+- ~~Agent attempting to access resources beyond delegation~~ → Agent has no delegation
+- ~~Agent persisting credentials beyond intended lifetime~~ → Agent has no credentials to persist
+- ~~Agent sharing credentials with other agents~~ → Agent has no credentials to share
+- ~~Agent modifying its own authority scope~~ → Agent has no authority to modify
+
+**Actual Security Concerns:**
+- Agent generating malicious code that human doesn't catch in review
+- Agent social engineering human into executing dangerous operations
+- Agent exfiltrating information shared by human after execution
+
+**Mitigations:**
+- Clear code presentation and explanation
+- User education on reviewing generated code
+- Limiting what information is shared back to agent after execution
 
 ---
 
@@ -319,21 +474,23 @@ User Login → Spawn Agent → Agent Requests Resource
 
 ## 12. Conclusion
 
-AI agents represent a fundamental shift in how software systems operate, requiring a corresponding shift in how we approach authentication and authorization. The key insights from this analysis are:
+AI agents represent a fundamental shift in how software systems operate, but the security approach is surprisingly simple: **agents must never receive credentials.** The key insights from this analysis are:
 
-1. **Agents are services, not users:** They must be treated as services but with special constraints that trace authority back to humans.
+1. **Agents are NOT services:** They must never be deployed as services with credentials. Agents are code generation tools, not execution engines.
 
-2. **Two-legged tokens are insufficient:** The traditional service-to-service authentication model creates unacceptable security gaps when applied to autonomous agents.
+2. **No tokens for agents:** Neither two-legged (service) nor three-legged (delegated user) tokens should ever be given to agents. Both approaches are fundamentally insecure.
 
-3. **Chain of trust is essential:** Every agent action must be traceable through a chain of trust back to an authenticated human user.
+3. **Humans remain in control:** Every privileged operation must be reviewed and executed by an authenticated human. Agents generate code; humans execute it.
 
-4. **Yin and Yang must balance:** Both the granting of authority (Yin) and the enforcement of boundaries (Yang) must be carefully designed for agent systems.
+4. **Yin and Yang don't apply to agents:** There is no authority to grant (Yin) and no agent actions to enforce (Yang). The security model is simply: agents have zero credentials.
 
-5. **Scope limitation is critical:** Agents must operate only within the explicitly delegated authority of their originating users.
+5. **Code generation is sufficient:** Agents can be highly useful by generating SQL, API calls, scripts, and programs—without ever executing them.
 
-The framework proposed in this paper—based on three-legged authentication, chain of trust, and strict scope limitation—provides a foundation for secure AI agent deployment. However, significant work remains to develop detailed protocols, implement reference systems, and establish industry standards.
+The framework proposed in this paper—based on zero agent credentials, mandatory human review, and code generation without execution—provides a foundation for secure AI agent deployment. This approach is simpler than traditional authentication frameworks precisely because it avoids the complexity of credential management for agents.
 
-As AI agents become more prevalent and powerful, the security community must move quickly to establish robust frameworks that enable innovation while protecting users and systems from the unique risks posed by autonomous software entities.
+**The Paradox:** AI agents enable stronger security than human developers because agents can generate perfect, reviewable code artifacts without needing production credentials. The developer who writes code doesn't need the production password—and neither does the AI agent.
+
+As AI agents become more prevalent and powerful, the security community must resist the temptation to give them credentials. The secure path is clear: agents generate, humans execute.
 
 ---
 
@@ -380,36 +537,40 @@ As AI agents become more prevalent and powerful, the security community must mov
 ## Document Status and Next Steps
 
 ### Completed Sections
-- ✅ Abstract
-- ✅ Introduction
-- ✅ Yin and Yang framework
-- ✅ Fundamental principles
-- ✅ Chain of trust concept
-- ✅ Security boundaries
+- ✅ Abstract (corrected: agents must NEVER receive credentials)
+- ✅ Section 1: Executive Summary (Two Perspectives on Agent Security)
+  - API provider perspective
+  - Agent user perspective with practical examples
+  - HIPAA parallel and regulatory precedent
+  - Automation question addressed
+- ✅ Section 2: Background and Related Work (streamlined, removed repetitive intro)
+- ✅ Section 3: Yin and Yang framework (adapted for zero-credential model)
+- ✅ Section 4: Fundamental principles - Agents Are NOT Services
+- ✅ Section 5: Code Generation Without Credentials framework
+- ✅ Section 6: Why Standard Auth Protocols Don't Apply
+- ✅ Section 7: Agent Operations Analysis
+- ✅ Section 8: Security Boundaries (agents have zero authority)
 
 ### Sections Needing Development
-- ⏳ Literature review (Section 2)
-- ⏳ Auth0 detailed analysis (Section 6)
-- ⏳ Agent operations protocols (Section 7)
+- ⏳ Literature review (Section 2 subsections)
 - ⏳ Case studies (Section 9)
 - ⏳ Implementation challenges (Section 10)
 - ⏳ Future directions (Section 11)
 
 ### Research Needed
-1. Detailed Auth0 protocol documentation
-2. Existing AI agent security frameworks
-3. Industry case studies
-4. Regulatory landscape analysis
-5. Performance benchmarking data
+1. Existing AI agent security frameworks (for comparison/critique)
+2. Industry case studies showing credential-based failures
+3. Regulatory landscape analysis (expand HIPAA discussion)
+4. Usability studies on human-in-the-loop workflows
 
 ### Writing Tasks
-1. Expand technical specifications in Section 6
-2. Develop detailed protocols in Section 7
-3. Create architecture diagrams
-4. Write case studies with real-world scenarios
-5. Add code examples and implementation guides
+1. Develop case studies showing code generation approach (Section 9)
+2. Discuss implementation challenges and usability (Section 10)
+3. Create architecture diagrams for code generation workflow
+4. Add more concrete code examples throughout
+5. Expand on social engineering risks and mitigations
 
 ---
 
-**Last Updated:** October 16, 2025  
-**Word Count:** ~2,500 (target: 8,000-10,000 for full paper)
+**Last Updated:** November 5, 2025  
+**Word Count:** ~5,200 (target: 8,000-10,000 for full paper)
