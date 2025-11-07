@@ -90,7 +90,7 @@
     {
       "id": 19,
       "text": "Create a VM for my dev of attention. #work",
-      "completed": false,
+      "completed": true,
       "createdAt": "2025-10-26T11:36:20.995Z",
       "tags": [
         "work"
@@ -105,7 +105,7 @@
     {
       "id": 22,
       "text": "Fix heater to use plug for emergency.  #house",
-      "completed": false,
+      "completed": true,
       "createdAt": "2025-10-26T16:04:35.000Z",
       "tags": [
         "house"
@@ -123,7 +123,7 @@
       "tags": [
         "house"
       ],
-      "completed": false,
+      "completed": true,
       "createdAt": "2025-10-29T23:21:38.138Z"
     },
     {
@@ -132,7 +132,7 @@
       "tags": [
         "work"
       ],
-      "completed": false,
+      "completed": true,
       "createdAt": "2025-11-04T23:16:10.433Z"
     },
     {
@@ -177,7 +177,7 @@
       "tags": [
         "money"
       ],
-      "completed": false,
+      "completed": true,
       "createdAt": "2025-11-05T00:32:11.572Z"
     },
     {
