@@ -1263,6 +1263,11 @@ I want to make a change to my app so that, when I add a todo item, if there are 
 Did you remember to journal all my prompts?
 ```
 
+#### Prompt (19:58)
+```
+I like the changes.  Please deploy the app to  the docs folder.
+```
+
 ---
 
 ## Notes

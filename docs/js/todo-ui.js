@@ -259,7 +259,9 @@ class TodoUI {
         const text = this.newTodoInput.value.trim();
         if (!text) return;
         
-        this.manager.addTodo(text);
+        // Pass selected tags to automatically tag the new todo
+        const selectedTagsArray = Array.from(this.selectedTags);
+        this.manager.addTodo(text, selectedTagsArray);
         this.newTodoInput.value = '';
         this.renderTodos();
         this.showStatus('✅ Todo added (not saved yet)', 'info');

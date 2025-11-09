@@ -58,12 +58,14 @@ class TodoManager {
         }
     }
 
-    addTodo(text) {
-        const tags = this.parseTags(text);
+    addTodo(text, selectedTags = []) {
+        const textTags = this.parseTags(text);
+        // Merge tags from text with selected tags, removing duplicates
+        const allTags = [...new Set([...textTags, ...selectedTags])];
         const newTodo = {
             id: this.nextId++,
             text: text,
-            tags: tags,
+            tags: allTags,
             completed: false,
             createdAt: new Date().toISOString()
         };
