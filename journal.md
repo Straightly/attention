@@ -1232,6 +1232,39 @@ Add to a sample of de-sensitize pieces of data.  Instead of DOB, use age.  So fo
 
 ---
 
+## 2025-11-08 (Friday)
+
+### Session: Memory System and ToDoApp Tag Feature
+
+**Time:** ~19:38 - 19:44 PST
+
+#### Prompt (19:38)
+```
+please remember to journal my prompts.
+```
+
+#### Prompt (19:38)
+```
+You said "Memory created".  Does this mean I no longer need to ask you to do this again ?
+```
+
+#### Prompt (19:41)
+```
+Can I examine what is my my "Memory"?
+```
+
+#### Prompt (19:43)
+```
+I want to make a change to my app so that, when I add a todo item, if there are tags selected, automatically tag the item with selected tags.
+```
+
+#### Prompt (19:44)
+```
+Did you remember to journal all my prompts?
+```
+
+---
+
 ## Notes
 - This journal tracks prompts and high-level outcomes
 - For detailed technical work, see git commit history
