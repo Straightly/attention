@@ -218,6 +218,16 @@
       ],
       "completed": false,
       "createdAt": "2025-11-09T03:51:52.312Z"
+    },
+    {
+      "id": 35,
+      "text": "Allow tagging and displaying of writings based on tag.",
+      "tags": [
+        "work",
+        "money"
+      ],
+      "completed": false,
+      "createdAt": "2025-11-09T15:45:35.462Z"
     }
   ]
 }
