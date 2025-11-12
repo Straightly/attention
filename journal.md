@@ -1281,6 +1281,77 @@ I like the changes.  Please deploy the app to  the docs folder.
 Please remember to journal my prompts.  I have been programming using English in this project a lot.  I was now ask to give a presentation on vibe programming.  Please review my journal.md and summarize my usage as a presentation as a paper in a folder under Writing.  Please also search my folders for relevant materials and include noticable references from the internet on vibe programming.
 ```
 
+**Outcome:**
+- Created comprehensive vibe programming presentation paper in `Writing/Vibe-Programming/`
+- 4-part paper (~8,500 words): Introduction, Case Studies, Patterns & Insights, Meta-Lessons
+- Analyzed 107 prompts from journal.md over 25-day period
+- Included references from Wikipedia, arXiv, Andrej Karpathy, industry reports
+- Created presentation summary, README, index, and references folder
+- Copied relevant materials: Habit.md, BrokenPencil.md, Karpathy notes
+
+#### Prompt (16:43)
+```
+Please use the template under Codesnipts to create a file so I can capture some code snipts.
+```
+
+**Outcome:**
+- Created `Writing/Codesnipts/new-snippet.md` using template
+- Renamed to `getChartIds.md` per user request
+- User filled in with Perl code for patient consent checking and chart ID retrieval
+
+#### Prompt (17:04)
+```
+Please create a journal.md to record the prompt and your answer.
+```
+
+**Outcome:**
+- Updated journal.md with today's prompts and outcomes
+
+---
+
+## 2025-11-12 (Tuesday)
+
+### Session: Team Presentation Preparation
+
+**Time:** ~09:53 PST
+
+#### Prompt (09:53)
+```
+I got this invite from a manager who I do not report to directly. Here is the invite. "Hi Zan, I hope you're doing well. Our team in the Clinicals specialties zone has recently started experimenting with LLM-accelerated coding to explore how we can best leverage these tools to improve our dev experience and the software development lifecycle. We've heard that you have some experience in this area (your to-do list!), and we'd really appreciate the opportunity to learn from what you've done and what you've discovered so far — both the successes and the challenges. We're particularly interested in understanding which approaches or tools have had the biggest impact and how we might apply similar ideas to our own use cases. Hopefully, this time works for quick chat to share your insights. I think it would be incredibly valuable for our team as we continue to experiment. Thanks in advance and looking forward to connecting! Best,". Can you check my journal.md and give me three key points I can share?
+```
+
+**Outcome:**
+- Reviewed journal.md (107 prompts over 25 days)
+- Identified three key points for team presentation:
+  1. Start small with real problems, iterate rapidly (ToDoApp case study, 5-10 min verification loops)
+  2. Cross-domain capability is the superpower (web dev, papers, scripts without domain expertise)
+  3. Challenges: verification bottleneck, context limits, ambiguity (~10-15% clarification rate)
+- Included tools & ROI metrics: 4-5x productivity improvement, 20-25 hours → 100+ hours of output
+
+#### Prompt (09:56)
+```
+Can you put this as a reference in my write on Vibe-Programming?
+```
+
+**Outcome:**
+- Created `Writing/Vibe-Programming/references/Three-Key-Points-For-Teams.md`
+- Comprehensive reference document with:
+  - Three key points expanded with supporting evidence from journal
+  - Practical tips and examples
+  - Tools & ROI metrics
+  - Best practices summary
+  - Recommendations for team experimentation
+  - Discussion questions for meeting
+- Ready for Clinicals team presentation
+
+#### Prompt (09:57)
+```
+Did you journal my prompts?
+```
+
+**Outcome:**
+- Acknowledged oversight and updating journal.md now with all recent prompts
+
 ---
 
 ## Notes
