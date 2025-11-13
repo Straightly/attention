@@ -14,3 +14,12 @@
 
 ---
 
+"Can you trace down the call BusCall::PatientDemographics::IsPatientConsenting($dbh, {
+                INTERFACEVENDORID => 'RXHUB',
+                SETTING => 'VERIFYMEDICATIONHISTORY',
+                PATIENTID => $patientid,
+                CHARTID => $chartid,
+            }), in perl, and reproduce the function in Java, assuming all tables in Oracle has their repository layer already defined?"
+
+The result is a huge java implementation of the function.
+
