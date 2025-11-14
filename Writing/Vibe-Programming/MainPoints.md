@@ -1,0 +1,9 @@
+- Just try it.  
+- Do not assume what it can do or cannot do.  I was suprised on both ends.
+- One thing at a time, the more concrete, the better.
+- When it does not work, try to 
+  - break it down into smaller steps.
+  - see if it is because your prompt is not clear.
+  -- ask it why it does not do it
+  -- ask it to offer alternatives.
+- You are now the product owner or business analyst, Windsurf is the coder

@@ -174,3 +174,79 @@ Add your notes here…
 Today, ran to the turning point of the 5k race SU is organizing.  It was about 10 min per mile to and 9 min per mile back.  I wore the Xtep regular and it felt rather sitting back.
 
 Joy returned home.  She immediately got quite allergic to cat hairs.  Had to vacuum her room.
+
+---
+
+# November 13, 2025 — Markdown Syntax Overview
+
+**Prompt (10:20):** Can you give me a very quick overview of mark down file tag usage?
+
+**Action:** Provided comprehensive Markdown syntax reference covering headers, text formatting, lists, links/images, code blocks, quotes, tables, and task lists.
+
+---
+
+# November 13, 2025 — Prompt Journaling Clarification
+
+**Prompt (10:24):** did you journal my prompts?
+
+**Action:** Explained that prompts are not automatically journaled. Described memory system capabilities and offered to create journal entries if requested.
+
+---
+
+# November 13, 2025 — Journal Location Correction
+
+**Prompt (10:25):** I have been journal all my prompts in this project. Please check and continue the practice.
+
+**Action:** Initially found `Writing/Vibe-Programming/ToDoAppPrompts.md` and added entries there. User corrected that all journaling should be in `Journal/Journal.md` at project root.
+
+**Prompt (10:27):** No. I have been journal everything in this project rooted at root of this Windsurf project at Journal/Journal.md
+
+**Action:** Corrected to use the proper journal file at `/Users/zan/z/attention/Journal/Journal.md`. Will continue documenting all prompts here going forward.
+
+---
+
+# November 13, 2025 — iPhone App Development Time Estimate
+
+**Prompt (16:41):** Please remember to journal my prompts. Now, if I want to wrap my ToDoApp as an iPhone app, for a very experience developer with no iPhone app nor XCode experiences, how long will it take in man hours including learning curve?
+
+**Action:** Provided detailed time estimate for wrapping ToDoApp as iPhone app for experienced developer new to iOS/Xcode. Broke down learning curve and implementation phases with hour estimates.
+
+**Prompt (16:46):** Will using Windsurf to write all my code help? I have been using Windsurf for 98% for my coding.
+
+**Action:** Analyzed how Windsurf/AI coding assistants impact iOS development timeline for first-time iOS developers. Estimated 15-25 hours with Windsurf, or 12-18 hours using Capacitor + Windsurf approach.
+
+**Prompt (16:50):** Sounds great. Lets start. Please take this approach and give me step by step instructions, maybe start by creating a folder called iPhoneApp and create a projectPlan.md there so I can keep track of progress.
+
+**Action:** Created iPhoneApp folder with comprehensive projectPlan.md containing step-by-step instructions for wrapping ToDoApp as iPhone app using Capacitor approach.
+
+**Prompt (16:53):** Give me detailed instruction to install XCode. I use brew but that may not be relevant.
+
+**Action:** Provided detailed Xcode installation instructions including both Mac App Store and Homebrew Cask methods, with verification steps and troubleshooting.
+
+**Prompt (16:54):** Before I start, can you add the time estimates to my project plan? I will add the real time spent when I finish them so I can track.
+
+**Action:** Updated projectPlan.md to add time estimates for each step and a time tracking section for actual vs estimated comparison.
+
+**Prompt (16:59):** When I search for Xcode, I notice there is an Apple Developer. I assume, for my purpose, I will not need that, right?
+
+**Action:** Clarified that "Apple Developer" app is different from Xcode. User needs Xcode (blue hammer icon), not Apple Developer app (red icon for managing App Store submissions).
+
+**Prompt (17:03):** To make the app run on my own phone, I do not need App Developer, right?
+
+**Action:** Confirmed that Apple Developer app is NOT needed to run on own phone. Only need: Xcode + free Apple ID account (add in Xcode preferences). No paid developer account or Apple Developer app required for personal device testing.
+
+**Prompt (17:05):** Will the app continue to run after I un-tetherd my phone from my dev XCode?
+
+**Action:** Explained that yes, app runs independently after deployment. With free Apple ID, app works for 7 days untethered, then needs re-deployment. With paid developer account ($99/year), app works for 1 year between re-deployments.
+
+**Prompt (17:08):** I do not plan to ever do new development in XCode. My plan is to make change in my ToDoApp hosted in github, and port the change, as automatically as possible to the iPhone app. Will this setup you recommended work well for my intention?
+
+**Action:** Confirmed Capacitor approach is perfect for this workflow. Changes to HTML/CSS/JS are automatically picked up. Workflow: 1) Edit ToDoApp code, 2) Run `npx cap sync`, 3) Deploy from Xcode (no Xcode editing needed). Can create script to automate sync step.
+
+**Prompt (17:10):** No. That was my local deployed copy I made for demo purpose. My real version is in ToDoApp which is hosted on GitHub and docs folder in my project. Please correct your memory.
+
+**Action:** Corrected understanding: Real ToDoApp is in `/Users/zan/z/attention/docs/` folder (GitHub Pages deployment), NOT the localhost:3000 server version. The iPhone app should wrap the GitHub-hosted web version that uses GitHub API with token authentication, not the local Bitbucket server version.
+
+**Prompt (17:11):** Please update my project plan accordingly.
+
+**Action:** Updated projectPlan.md to reflect correct ToDoApp structure: development in ToDoApp/, production in docs/, uses GitHub API (not localhost server), simplified Phase 3 since no server adaptation needed.

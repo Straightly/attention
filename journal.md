@@ -1565,6 +1565,24 @@ Please remove the wrong file and directories.
   - ✅ `packages/just-an-assistant/ToDoApp/Writing/RawWrittings/`
 - Clean structure: all todo and writing data now exclusively under ToDoApp
 
+#### Prompt (20:09)
+```
+Can you read my journal.md file and extract all prompts related to the ToDoApp and save it into a file under Vibe-Programming as ToDoAppPrompts.md?
+```
+
+**Outcome:**
+- Read entire journal.md file (1,574 lines)
+- Extracted 42 prompts related to ToDoApp development
+- Created `Writing/Vibe-Programming/ToDoAppPrompts.md` with:
+  - Chronological organization by development phase
+  - All prompts with full text and outcomes
+  - Summary statistics (27 days, 42 prompts, ~1,900 lines of code)
+  - Architecture evolution (3 phases)
+  - Complete feature list
+  - Technology stack details
+- Document spans: October 16 - November 12, 2025
+- Covers: Initial creation, authentication redesign, modular refactoring, raw writing feature, tag system, inline editing, migration to Bitbucket with local server
+
 ---
 
 ## Notes
