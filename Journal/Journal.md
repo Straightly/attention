@@ -290,3 +290,11 @@ Joy returned home.  She immediately got quite allergic to cat hairs.  Had to vac
 **Prompt (19:51):** Can you add an .gitignore in folder iPhoneApp to ignore the node_modules?
 
 **Action:** Creating .gitignore in iPhoneApp folder to ignore node_modules, iOS build artifacts, and other generated files that shouldn't be committed to git.
+
+**Prompt (19:56):** Please update iPhoneApp/projectPlan.md
+
+**Action:** Updating projectPlan.md to mark Phases 1-4 as complete, add completion notes, and document the successful deployment to iPhone.
+
+**Prompt (20:19):** I want to replace the default icon of the iPhone app. I have the image at iPhoneApp/icon.png
+
+**Action:** Helping user replace default app icon. Need to generate multiple icon sizes (1024x1024 for App Store, plus various sizes for iOS) and update Xcode asset catalog.
