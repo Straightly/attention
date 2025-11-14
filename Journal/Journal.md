@@ -250,3 +250,43 @@ Joy returned home.  She immediately got quite allergic to cat hairs.  Had to vac
 **Prompt (17:11):** Please update my project plan accordingly.
 
 **Action:** Updated projectPlan.md to reflect correct ToDoApp structure: development in ToDoApp/, production in docs/, uses GitHub API (not localhost server), simplified Phase 3 since no server adaptation needed.
+
+**Prompt (17:55):** Xcode is downloaded and installed.
+
+**Action:** Confirmed Step 1.1 complete. Guiding user to verify installation and proceed to Step 1.2 (CocoaPods) and Step 1.3 (Capacitor CLI).
+
+**Prompt (18:43):** Was having trouble install ERROR: Error installing cocoapods: The last version of activesupport (>= 5.0, < 8) to support your Ruby & RubyGems was 6.1.7.10. Try installing it with `gem install activesupport -v 6.1.7.10` and then running the current command again activesupport requires Ruby version >= 3.1.0. The current ruby version is 2.6.10.210. It has run into similar errors three times already with each time it ask me to install something else after a long time.
+
+**Action:** Identified Ruby version issue (2.6.10 too old, needs >= 3.1.0). Recommended using Homebrew to install modern Ruby, then install CocoaPods. Alternative: skip CocoaPods for now since Capacitor can handle iOS dependencies.
+
+**Prompt (18:50):** That was successful. What's next?
+
+**Action:** Ruby 3.4.7 installed successfully via Homebrew. Now updating PATH, verifying Ruby version, and installing CocoaPods to complete Phase 1.
+
+**Prompt (18:53):** It is done.
+
+**Action:** Phase 1 complete (Xcode, Ruby, CocoaPods, Capacitor all installed). Starting Phase 2: initializing Capacitor project, creating config, and copying ToDoApp files.
+
+**Prompt (19:02):** Got Communication with Apple failed. Your team has no devices from which to generate a provisioning profile. Connect a device to use or manually add device IDs in Certificates, Identifiers & Profiles. https://developer.apple.com/account/
+
+**Action:** Provisioning profile error - need to either connect physical iPhone or switch to simulator-only testing. Guiding user to change signing settings to allow simulator testing without device registration.
+
+**Prompt (19:04):** My iPhone is connected. I also see another error No profiles for 'com.attention.todoapp' were found. Xcode couldn't find any iOS App Development provisioning profiles matching 'com.attention.todoapp'.
+
+**Action:** iPhone connected but provisioning profile not auto-generated. Guiding user to: 1) Verify Apple ID is added in Xcode, 2) Ensure "Automatically manage signing" is checked, 3) Trust device on iPhone, 4) Let Xcode regenerate profile.
+
+**Prompt (19:33):** That did not work. I have to search on the internet. It turned out one has to enable Developer mode on the iPhone and then register the device in XCode. and Then select the device in a field on top of the XCode. Now it a profile is provisioned saying "Apple Development: zhian.job@gmail.com (...)". What to do next?
+
+**Action:** User successfully enabled Developer Mode on iPhone and provisioning profile is now working. Ready to build and run app on physical device. Guiding to click Play button to deploy.
+
+**Prompt (19:43):** Has to trust my developer's cert on my device. Now the app is working.
+
+**Action:** SUCCESS! iPhone app is running on physical device. User completed Phases 1-4: environment setup, project creation, iOS platform initialization, and deployment. App successfully wraps GitHub Pages ToDoApp with GitHub API integration. Ready for Phase 5 (polish) or can start using immediately.
+
+**Prompt (19:45):** Can you please add the "Updating Your App" instructions to README.md?
+
+**Action:** Creating comprehensive README.md in iPhoneApp folder with setup summary, update workflow, troubleshooting, and important notes about 7-day expiration.
+
+**Prompt (19:51):** Can you add an .gitignore in folder iPhoneApp to ignore the node_modules?
+
+**Action:** Creating .gitignore in iPhoneApp folder to ignore node_modules, iOS build artifacts, and other generated files that shouldn't be committed to git.
