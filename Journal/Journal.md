@@ -297,4 +297,12 @@ Joy returned home.  She immediately got quite allergic to cat hairs.  Had to vac
 
 **Prompt (20:19):** I want to replace the default icon of the iPhone app. I have the image at iPhoneApp/icon.png
 
-**Action:** Helping user replace default app icon. Need to generate multiple icon sizes (1024x1024 for App Store, plus various sizes for iOS) and update Xcode asset catalog.
+**Action:** Helping user replace default app icon. Need to generate multiple icon sizes (1024x1024 for App Store, plus various sizes for iOS) and update Xcode asset catalog. Created generate-icons.sh script using sips to create all required iOS icon sizes from source image, updated Contents.json, and synced with Capacitor.
+
+**Prompt (07:52, Nov 14):** Please edit this so I can send it to my colleagues. A follow up update: Yesterday evening, I was able to make my todo App an iPhone app. I had no experiences writing iPhone apps and do not know any of iPhone dev languages or envs. Windsurf estimated 50-60 hrs originally. After back and forth with options, we end up with a plan with about 20hrs. In the end, we did in about 3 hrs. In the middle, I found something Windsurf was not able to do: I had to ask ChatGPT and then google some errors trying to hook up my phone to XCode, enable my phone for dev mode, and allow my phone to accept application from my iPhone developer account. If it were not for that, it would have been done in less than 2hrs. If Windsurf is sentient, it would be surprised itself.
+
+**Action:** Created professional colleague update message documenting the iPhone app development experience: no prior iOS experience, 50-60hr initial estimate → 20hr revised → 3hr actual completion. Highlighted AI's strengths (code/config) and limitations (platform-specific device setup). Message emphasizes the gap where manual intervention was needed for Xcode/iPhone connection.
+
+**Prompt (07:54):** Please journal my prompts. Please also add this to my Vibe Programming articles.
+
+**Action:** Journaling prompts and creating comprehensive Vibe Programming article about iPhone app development experience with AI assistance.
