@@ -318,3 +318,55 @@ Joy returned home.  She immediately got quite allergic to cat hairs.  Had to vac
 **Prompt (11:29):** Please log my prompts.
 
 **Action:** Added journal entry for the spelling clarification prompt.
+
+---
+
+# November 14, 2025 — Email Editing for Steve
+
+**Prompt (14:19):** Please edit: "Hi, Steve, Noticing so many activities with AI advances around, I asked Ahmer to find out if I can be moved into a position I can contribute. He have given your name. Would love to find out the opportunities you may have in your org and also a chance to show you my background and experiences. Thanks. Z"
+
+**Action:** Edited message to be more professional and clear. Fixed grammar, simplified opening, and improved structure.
+
+---
+
+# November 14, 2025 — Time Zone Conversions
+
+**Prompt (14:19):** What time is 20:00 PST time on Monday 11/24/2025 in India?
+
+**Action:** Calculated 20:00 PST = 09:30 IST (Tuesday, Nov 25). India is 13.5 hours ahead of PST.
+
+**Prompt (14:40):** What time is 21:00 PST time on Monday 11/24/2025 in India?
+
+**Action:** Calculated 21:00 PST = 10:30 IST (Tuesday, Nov 25).
+
+---
+
+# November 14, 2025 — Email Editing for Bela
+
+**Prompt (15:22):** Please edit "Hi Bela, With the rapid advances in AI, I've been exploring opportunities where I can contribute more directly to this space. I started my career with a Ph.D. in artificial intelligence and have become a very experienced full software developer. Both Heather Lane and Ahmer Khan (my boss) suggested I reach out to you, as you might be looking for helps with my background. I'd love to learn about any opportunities in your organization and share my background and experience with you. I wanted to schedule a short meeting with you but could not find any empty slot in your schedule. Do you mind finding some time to chat? Thanks, Z"
+
+**Action:** Edited message for professionalism: changed "full software developer" to "full-stack", "my boss" to "my manager", "looking for helps" to "have opportunities that align", improved phrasing throughout.
+
+---
+
+# November 15, 2025 — ToDoApp Security Discussion
+
+**Prompt (20:05):** I have a question of security of my ToAoApp. I understand that I need to enter and save that token in my browser. I wonder what if I want to add another layer of security where the user must be authentication to Google and the username (google email adress) must match a list of usernames? Is that possible with my app hosted in github? How does that work?
+
+**Action:** Explained two approaches: (1) Client-side Google OAuth with allowlist (simpler, less secure), (2) Backend service with private allowlist (more secure). Discussed implementation options.
+
+**Prompt (20:11):** Time wise, how long will it take me to create, deploy an authenticate service as AWS lambda, what kind of free access one can have on it?
+
+**Action:** Provided AWS Lambda timeline (2-3 hours) and free tier details (1M requests/month, 400K GB-seconds). Recommended Cloudflare Workers as easier alternative (1-1.5 hours, 100K requests/day free).
+
+**Prompt (20:15):** WIll it make sense to host my whole app in Cloudflare, then, as using the github token was kind of hack to start with.
+
+**Action:** Recommended migrating entire ToDoApp to Cloudflare Pages + Workers for better security (no exposed tokens), proper authentication, and real database. Estimated 4-6 hours (3-4 with Windsurf).
+
+**Prompt (20:18):** No. I have a new app in mind. Please create a folder under the project root called PaceLeader. And create an WebApp under it with Google authentication. Right now it does nothing other than provide a login page which I will deploy to Cloudflare to verify the setup.
+
+**Action:** Created PaceLeader web app with Google OAuth authentication: index.html (login UI), app.js (OAuth logic), README.md (setup guide), and .gitignore. Ready for Cloudflare Pages deployment.
+
+**Prompt (20:22):** Please add all the prompts to my journal. After you done with that, create a project plan for PaceLeader and save it under PaceLeader with time estimate.
+
+**Action:** Adding all session prompts to journal and creating PaceLeader project plan with time estimates.
