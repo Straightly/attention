@@ -369,4 +369,56 @@ Joy returned home.  She immediately got quite allergic to cat hairs.  Had to vac
 
 **Prompt (20:22):** Please add all the prompts to my journal. After you done with that, create a project plan for PaceLeader and save it under PaceLeader with time estimate.
 
-**Action:** Adding all session prompts to journal and creating PaceLeader project plan with time estimates.
+**Action:** Added all session prompts to journal and created comprehensive PaceLeader project plan (PROJECT_PLAN.md) with 6 phases, time estimates (13-18 hours total), technology stack, risk assessment, and time tracking table.
+
+**Prompt (20:29):** For a hosted app on Cloudflare, one one have some storage for free? Just some text file seemed to be sufficent.
+
+**Action:** Explained Cloudflare's free storage options: KV (1GB, 100K reads/day, 1K writes/day), D1 (5GB, 5M reads/day), and R2 (10GB). Recommended KV for simple text storage.
+
+**Prompt (20:31):** WOW, that is a lot of space for free forever. Hope Cloudflare will never go bankrupt.
+
+**Action:** Explained Cloudflare's financial strength ($1.6B revenue, $30B market cap, profitable, powers 20% of websites). Discussed why generous free tiers are sustainable business model and suggested backup strategies.
+
+**Prompt (20:33):** Give me detail direction on obtain Google OAuth id.
+
+**Action:** Provided comprehensive step-by-step guide for obtaining Google OAuth Client ID: creating Google Cloud project, enabling Google+ API, configuring OAuth consent screen, creating credentials, and testing locally.
+
+**Prompt (20:36):** This is free from Google, right?
+
+**Action:** Confirmed Google OAuth is 100% free forever with no rate limits, no per-user charges, and no credit card required. Explained why Google offers it free (ecosystem lock-in, competition with other identity providers).
+
+**Prompt (20:37):** Did you logged all my prompts?
+
+**Action:** Logged all recent prompts to journal.
+
+---
+
+# November 15, 2025 — PaceLeader Google OAuth Setup & Troubleshooting
+
+**Prompt (21:02):** In step 8 test locally, got a dialog from google saying sign in to localhost with google.com, Can't continue with google.com. Someting went wrong. It has only one button says "Got it"
+
+**Action:** Diagnosed OAuth consent screen issue. Provided instructions to add test users to OAuth consent screen or publish the app to allow any Google user to sign in.
+
+**Prompt (21:11):** I publish the app, but got the same error.
+
+**Action:** Identified likely issue with Authorized JavaScript origins not configured correctly. Provided steps to verify and add `http://localhost:8000` to authorized origins in Google Cloud Console. Suggested checking browser console for specific error messages.
+
+**Prompt (21:14):** how to clear cache or use incognito mode?
+
+**Action:** Provided instructions for clearing browser cache (Cmd+Shift+Delete) and using incognito/private mode across different browsers (Chrome: Cmd+Shift+N, Safari: Cmd+Shift+N, Firefox: Cmd+Shift+P, Edge: Cmd+Shift+N).
+
+**Prompt (21:26):** In ignito window, click on "Sign in with Google" deos notthing. Clear cache etc leads to exact same error. Also, when I try to login, a dialog will come up and say "google will share name etc with this site and a continue button. The error happen when I client on the continue button. It almost seemed that google was expecting a forwarding page but was missing that. Can you check our app to see if Google web api now expected a forward url or something like that and it is missing?
+
+**Action:** Identified root cause: code was using `google.accounts.id.prompt()` (One Tap flow) which requires redirect URIs. Fixed by changing to `google.accounts.id.renderButton()` which uses popup flow without redirect URIs. Updated app.js to render Google's official sign-in button and handle sign-in/sign-out properly.
+
+**Prompt (21:27):** Please add all my prompts!
+
+**Action:** Added all OAuth troubleshooting prompts to journal.
+
+**Prompt (21:28):** Please remember to add my prompts from now on.
+
+**Action:** Confirmed will journal all prompts going forward automatically.
+
+**Prompt (21:29):** Now it worked. I will resume working on this later.
+
+**Action:** Confirmed Google OAuth sign-in is now working locally. PaceLeader Phase 1 local testing complete. User will continue deployment to Cloudflare Pages later.

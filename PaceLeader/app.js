@@ -1,7 +1,7 @@
 // Google OAuth Configuration
 // IMPORTANT: Replace this with your actual Google Client ID
 // Get it from: https://console.cloud.google.com/apis/credentials
-const GOOGLE_CLIENT_ID = 'YOUR_GOOGLE_CLIENT_ID_HERE.apps.googleusercontent.com';
+const GOOGLE_CLIENT_ID = '74586552920-cajcodmord3rikun6n1a30gi2uoj4p5t.apps.googleusercontent.com';
 
 // Initialize Google Sign-In
 function initializeGoogleSignIn() {
@@ -17,11 +17,27 @@ function initializeGoogleSignIn() {
         cancel_on_tap_outside: true
     });
 
-    // Render the sign-in button
+    // Render Google's sign-in button directly (replaces custom button)
     const signInButton = document.getElementById('googleSignIn');
-    signInButton.addEventListener('click', () => {
-        google.accounts.id.prompt();
-    });
+    
+    // Hide custom button and render Google's button
+    signInButton.style.display = 'none';
+    
+    // Create container for Google button
+    const googleButtonContainer = document.createElement('div');
+    googleButtonContainer.id = 'googleButtonContainer';
+    signInButton.parentNode.insertBefore(googleButtonContainer, signInButton);
+    
+    google.accounts.id.renderButton(
+        googleButtonContainer,
+        {
+            theme: 'outline',
+            size: 'large',
+            width: 350,
+            text: 'signin_with',
+            shape: 'rectangular'
+        }
+    );
 
     // Check if user is already signed in
     checkExistingSession();
@@ -69,14 +85,16 @@ function displayUserInfo(userInfo) {
     const userInfoDiv = document.getElementById('userInfo');
     const userName = document.getElementById('userName');
     const userEmail = document.getElementById('userEmail');
-    const signInButton = document.getElementById('googleSignIn');
+    const googleButtonContainer = document.getElementById('googleButtonContainer');
     const errorMessage = document.getElementById('errorMessage');
     
     userName.textContent = userInfo.name || 'N/A';
     userEmail.textContent = userInfo.email || 'N/A';
     
     userInfoDiv.classList.add('visible');
-    signInButton.style.display = 'none';
+    if (googleButtonContainer) {
+        googleButtonContainer.style.display = 'none';
+    }
     errorMessage.classList.remove('visible');
 }
 
@@ -104,10 +122,12 @@ function handleSignOut() {
     
     // Reset UI
     const userInfoDiv = document.getElementById('userInfo');
-    const signInButton = document.getElementById('googleSignIn');
+    const googleButtonContainer = document.getElementById('googleButtonContainer');
     
     userInfoDiv.classList.remove('visible');
-    signInButton.style.display = 'flex';
+    if (googleButtonContainer) {
+        googleButtonContainer.style.display = 'block';
+    }
     
     // Revoke Google session
     google.accounts.id.disableAutoSelect();
