@@ -15,9 +15,9 @@ PaceLeader is a web application with Google OAuth authentication, deployed on Cl
 - [x] Implement Google OAuth authentication UI
 - [x] Add session persistence (localStorage)
 - [x] Create deployment documentation
-- [ ] Obtain Google OAuth Client ID
-- [ ] Configure Google Cloud Console credentials
-- [ ] Test locally (http://localhost:8000)
+- [x] Obtain Google OAuth Client ID
+- [x] Configure Google Cloud Console credentials
+- [x] Test locally (http://localhost:8000)
 - [ ] Deploy to Cloudflare Pages
 - [ ] Update Google OAuth with production URL
 - [ ] Verify authentication works in production
@@ -36,14 +36,13 @@ PaceLeader is a web application with Google OAuth authentication, deployed on Cl
 **Actual Time**: _[To be filled]_
 
 ### Tasks
-- [ ] Set up Cloudflare Workers project
-- [ ] Configure Wrangler CLI
-- [ ] Create authentication API endpoint
+### Tasks
+- [ ] Create `functions/` directory for Pages Functions
+- [ ] Create authentication API endpoint (`functions/api/auth/verify.js`)
 - [ ] Implement user allowlist (hardcoded initially)
 - [ ] Add JWT token generation for sessions
-- [ ] Create API middleware for auth verification
-- [ ] Test backend locally with Miniflare
-- [ ] Deploy Workers to Cloudflare
+- [ ] Create middleware for auth verification
+- [ ] Test locally with `wrangler pages dev`
 - [ ] Connect frontend to backend API
 
 ### Deliverables
@@ -84,14 +83,8 @@ API Endpoints:
 - Test data
 
 ### Database Options
-**Option A: Cloudflare D1 (SQLite)**
-- Pros: Relational, SQL queries, better for complex data
-- Cons: Still in beta, query limits
-- Free tier: 5GB storage, 5M reads/day, 100K writes/day
-
-**Option B: Cloudflare KV**
-- Pros: Simple key-value, very fast reads, stable
-- Cons: No complex queries, eventual consistency
+**Selected: Cloudflare KV**
+- Pros: Simple key-value, very fast reads, stable, perfect for session tokens and simple lists
 - Free tier: 100K reads/day, 1K writes/day
 
 ---
@@ -193,12 +186,14 @@ Potential features might include:
 - **TBD**: Cloudflare D1 (SQLite) or KV Store
 
 ### Hosting
-- **Cloudflare Pages** (Frontend)
-- **Cloudflare Workers** (Backend API)
+- **Cloudflare Pages** (Frontend + Backend via Functions)
 
 ### Authentication
 - **Google OAuth 2.0**
 - **JWT tokens** (session management)
+
+### Database
+- **Cloudflare KV** (Session storage & simple data)
 
 ---
 
@@ -253,9 +248,9 @@ Potential features might include:
 ## Next Immediate Steps
 
 1. **Complete Phase 1 deployment**:
-   - [ ] Get Google OAuth Client ID
-   - [ ] Update app.js with Client ID
-   - [ ] Test locally
+   - [x] Get Google OAuth Client ID
+   - [x] Update app.js with Client ID
+   - [x] Test locally
    - [ ] Deploy to Cloudflare Pages
 
 2. **Plan Phase 2**:
