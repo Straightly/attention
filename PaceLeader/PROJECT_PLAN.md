@@ -1,20 +1,19 @@
 # PaceLeader Project Plan
 
 ## Project Overview
-PaceLeader is a web application with Google OAuth authentication, deployed on Cloudflare Pages. This plan outlines the development phases from initial setup through feature implementation.
+PaceLeader is a web application with Google OAuth authentication and role-based access control, deployed on Cloudflare Pages.
 
 ---
 
 ## Phase 1: Setup & Deployment ✅ COMPLETED
 **Status**: ✅ Complete  
 **Estimated Time**: 2-3 hours  
-**Actual Time**: _[To be filled]_
+**Actual Time**: ~2 hours
 
 ### Tasks
 - [x] Create project structure (index.html, app.js, README.md)
 - [x] Implement Google OAuth authentication UI
 - [x] Add session persistence (localStorage)
-- [x] Create deployment documentation
 - [x] Obtain Google OAuth Client ID
 - [x] Configure Google Cloud Console credentials
 - [x] Test locally (http://localhost:8000)
@@ -24,69 +23,98 @@ PaceLeader is a web application with Google OAuth authentication, deployed on Cl
 
 ### Deliverables
 - ✅ Login page with Google sign-in
-2. API verifies token & extracts email/username.
-3. API checks 3 lists (Admins, Pacers, Runners).
-4. Response:
-   - No match: Return 403 "Not Admitted".
-   - 1 match: Return 200 with Role.
-   - >1 match: Return 200 with List of Roles (Frontend shows selector).
-```
+- ✅ User info display after authentication
+- ✅ Sign out functionality
+- ✅ Deployed to production
 
 ---
 
-## Phase 3: User List Management with Cloudflare KV
-**Status**: 🔲 Not Started  
-**Estimated Time**: 2-3 hours  
-**Actual Time**: _[To be filled]_
+## Phase 2: Backend Infrastructure & Authorization ✅ COMPLETED
+**Status**: ✅ Complete  
+**Estimated Time**: 3-4 hours  
+**Actual Time**: ~1.5 hours (with AI assistance)
 
 ### Tasks
-- [ ] Create Cloudflare KV namespace for PaceLeader
-- [ ] Create initialization script to populate KV with user lists:
-    - [ ] `admins` list (array of emails)
-    - [ ] `pacers` list (array of emails)
-    - [ ] `runners` list (array of emails)
-- [ ] Update `functions/api/auth/verify.js` to read from KV with hardcoded fallback:
-    - [ ] Try reading from KV first
-    - [ ] Fall back to hardcoded arrays if KV read fails
-    - [ ] Keep existing hardcoded lists as backup
-- [ ] Bind KV namespace to Pages Functions
-- [ ] Test locally with `wrangler pages dev` using KV
-- [ ] Test fallback mechanism (simulate KV failure)
-- [ ] Deploy KV data to production
-- [ ] Create admin API endpoints (optional future enhancement):
-    - [ ] `POST /api/admin/users/add` - Add user to a list
-    - [ ] `DELETE /api/admin/users/remove` - Remove user from a list
-    - [ ] `GET /api/admin/users/list` - View all lists
+- [x] Create `functions/` directory for Pages Functions
+- [x] Create authentication API endpoint (`functions/api/auth/verify.js`)
+- [x] Implement Role-Based Access Control (RBAC) logic
+- [x] Define user lists (Admins, Pacers, Runners)
+- [x] Implement role checking logic
+- [x] Handle multi-role users (Role Selection UI)
+- [x] Create Frontend UI (Not Admitted, Role Selection, Dashboard)
+- [x] Test locally with `wrangler pages dev`
+- [x] Deploy to production
+
+### Deliverables
+- ✅ Backend API with role verification
+- ✅ Role selection flow for multi-role users
+- ✅ Access denial page for unauthorized users
+- ✅ Hardcoded user lists
+
+---
+
+## Phase 3: User List Management with Cloudflare KV ✅ COMPLETED
+**Status**: ✅ Complete  
+**Estimated Time**: 2-3 hours  
+**Actual Time**: ~1 hour (with AI assistance)
+
+### Tasks
+- [x] Create Cloudflare KV namespace
+- [x] Create `wrangler.toml` configuration
+- [x] Update `verify.js` to read from KV with auto-initialization
+- [x] Implement hardcoded fallback mechanism
+- [x] Bind KV namespace to Pages Functions
+- [x] Test locally with KV
+- [x] Deploy to production
 
 ### Deliverables
 - ✅ KV namespace created and bound
+- ✅ Auto-initialization on first request
+- ✅ Fallback to hardcoded lists for reliability
 - ✅ User lists stored in KV (admins, pacers, runners)
-- ✅ Backend updated to read from KV
-- ✅ Initialization script for seeding data
-
-### Technical Details
-**KV Structure:**
-```
-Key: "admins"
-Value: ["zhian.job@gmail.com"]
-
-Key: "pacers"  
-**Actual Time**: _[To be filled]_
-
-### Placeholder for Feature Development
-_Features to be defined based on PaceLeader's purpose_
-
-Potential features might include:
-- User profile management
-- Data visualization
-- Real-time updates
-- Mobile responsiveness
-- Notifications
-- Settings/preferences
 
 ---
 
-## Phase 5: Polish & Optimization
+## Phase 4: Admin Dashboard
+**Status**: 🔲 Not Started  
+**Estimated Time**: _[To be determined]_  
+**Actual Time**: _[To be filled]_
+
+### Tasks
+_To be defined_
+
+### Deliverables
+_To be defined_
+
+---
+
+## Phase 5: Pacer Dashboard
+**Status**: 🔲 Not Started  
+**Estimated Time**: _[To be determined]_  
+**Actual Time**: _[To be filled]_
+
+### Tasks
+_To be defined_
+
+### Deliverables
+_To be defined_
+
+---
+
+## Phase 6: Runner Dashboard
+**Status**: 🔲 Not Started  
+**Estimated Time**: _[To be determined]_  
+**Actual Time**: _[To be filled]_
+
+### Tasks
+_To be defined_
+
+### Deliverables
+_To be defined_
+
+---
+
+## Phase 7: Polish & Optimization
 **Status**: 🔲 Not Started  
 **Estimated Time**: 2-3 hours  
 **Actual Time**: _[To be filled]_
@@ -96,7 +124,6 @@ Potential features might include:
 - [ ] Implement error handling UI
 - [ ] Add responsive design improvements
 - [ ] Optimize performance (lazy loading, caching)
-- [ ] Add analytics (optional)
 - [ ] Create user documentation
 - [ ] Implement accessibility improvements (ARIA labels)
 - [ ] Browser compatibility testing
@@ -110,7 +137,7 @@ Potential features might include:
 
 ---
 
-## Phase 6: Security Hardening
+## Phase 8: Security Hardening
 **Status**: 🔲 Not Started  
 **Estimated Time**: 2-3 hours  
 **Actual Time**: _[To be filled]_
@@ -123,7 +150,6 @@ Potential features might include:
 - [ ] Implement secure headers
 - [ ] Add audit logging
 - [ ] Security testing (OWASP top 10)
-- [ ] Penetration testing (basic)
 
 ### Deliverables
 - Security audit report
@@ -133,141 +159,48 @@ Potential features might include:
 
 ---
 
-## Total Time Estimates
-
-### Completed
-- **Phase 1**: 2-3 hours (Setup & Deployment)
-
-### Remaining
-- **Phase 2**: 3-4 hours (Backend Infrastructure)
-- **Phase 3**: 2-3 hours (Database Setup)
-- **Phase 4**: TBD (Core Features)
-- **Phase 5**: 2-3 hours (Polish & Optimization)
-- **Phase 6**: 2-3 hours (Security Hardening)
-
-**Total (excluding Phase 4)**: 13-18 hours  
-**With Windsurf assistance**: ~10-14 hours
-
----
-
 ## Technology Stack
 
 ### Frontend
-- **HTML5/CSS3/JavaScript** (Vanilla JS, no framework initially)
+- **HTML5/CSS3/JavaScript** (Vanilla JS)
 - **Google Sign-In Library** (OAuth 2.0)
-- **Responsive Design** (Mobile-first)
+- **Responsive Design**
 
 ### Backend
-- **Cloudflare Workers** (Serverless API)
+- **Cloudflare Pages Functions** (Serverless API)
 - **Wrangler CLI** (Deployment tool)
 
 ### Database
-- **TBD**: Cloudflare D1 (SQLite) or KV Store
+- **Cloudflare KV** (User list storage)
 
 ### Hosting
-- **Cloudflare Pages** (Frontend + Backend via Functions)
+- **Cloudflare Pages** (Frontend + Backend)
 
 ### Authentication
 - **Google OAuth 2.0**
-- **JWT tokens** (session management)
-
-### Database
-- **Cloudflare KV** (Session storage & simple data)
+- **Role-Based Access Control** (Admins, Pacers, Runners)
 
 ---
 
-## Success Criteria
+## Progress Summary
 
-### Phase 1 (Current)
-- ✅ User can sign in with Google
-- ✅ User info displays correctly
-- ✅ Session persists across page refreshes
-- ⏳ App deployed to Cloudflare Pages
-- ⏳ Authentication works in production
+### Completed Phases
+- ✅ **Phase 1**: Setup & Deployment (~2 hours)
+- ✅ **Phase 2**: Backend Infrastructure & Authorization (~1.5 hours)
+- ✅ **Phase 3**: User List Management with KV (~1 hour)
 
-### Phase 2
-- Backend API responds to auth requests
-- Allowlist correctly filters users
-- Unauthorized users are blocked
-- Session tokens work correctly
+### Remaining Phases
+- 🔲 **Phase 4**: Admin Dashboard (TBD)
+- 🔲 **Phase 5**: Pacer Dashboard (TBD)
+- 🔲 **Phase 6**: Runner Dashboard (TBD)
+- 🔲 **Phase 7**: Polish & Optimization (2-3 hours)
+- 🔲 **Phase 8**: Security Hardening (2-3 hours)
 
-### Phase 3
-- Database stores and retrieves data
-- CRUD operations work reliably
-- Data persists across deployments
+**Total Time So Far**: ~4.5 hours  
+**Estimated Remaining**: 4-6+ hours (excluding dashboard features)
 
 ---
 
-## Risk Assessment
-
-### High Priority Risks
-1. **Google OAuth Configuration**
-   - Risk: Misconfigured credentials block authentication
-   - Mitigation: Follow setup guide carefully, test locally first
-
-2. **Cloudflare Free Tier Limits**
-   - Risk: Exceeding free tier limits
-   - Mitigation: Monitor usage, implement caching, optimize queries
-
-3. **Security Vulnerabilities**
-   - Risk: Exposed credentials or insecure endpoints
-   - Mitigation: Follow security best practices, implement Phase 6
-
-### Medium Priority Risks
-1. **Browser Compatibility**
-   - Risk: OAuth doesn't work in some browsers
-   - Mitigation: Test across browsers, provide fallbacks
-
-2. **Session Management**
-   - Risk: Users get logged out unexpectedly
-   - Mitigation: Implement proper token refresh logic
-
----
-
-## Next Immediate Steps
-
-1. **Complete Phase 1 deployment**:
-   - [x] Get Google OAuth Client ID
-   - [x] Update app.js with Client ID
-   - [x] Test locally
-   - [ ] Deploy to Cloudflare Pages
-
-2. **Plan Phase 2**:
-   - [ ] Define API endpoints needed
-   - [ ] Create allowlist of authorized users
-   - [ ] Set up Wrangler project
-
-3. **Define Phase 4 features**:
-   - [ ] Determine PaceLeader's core purpose
-   - [ ] Create feature specifications
-   - [ ] Estimate development time
-
----
-
-## Time Tracking
-
-| Phase | Estimated | Actual | Variance | Notes |
-|-------|-----------|--------|----------|-------|
-| Phase 1 | 2-3h | _TBD_ | _TBD_ | Setup & Deployment |
-| Phase 2 | 3-4h | _TBD_ | _TBD_ | Backend Infrastructure |
-| Phase 3 | 2-3h | _TBD_ | _TBD_ | Database Setup |
-| Phase 4 | TBD | _TBD_ | _TBD_ | Core Features |
-| Phase 5 | 2-3h | _TBD_ | _TBD_ | Polish & Optimization |
-| Phase 6 | 2-3h | _TBD_ | _TBD_ | Security Hardening |
-| **Total** | **13-18h+** | **_TBD_** | **_TBD_** | |
-
----
-
-## Notes
-
-- This plan assumes using Windsurf for 90%+ of coding
-- Time estimates are for an experienced developer new to Cloudflare
-- Phase 4 time will depend heavily on feature complexity
-- Security (Phase 6) should not be skipped for production use
-- Consider adding CI/CD pipeline in future phases
-
----
-
-**Last Updated**: November 15, 2025  
-**Project Status**: Phase 1 - In Progress  
-**Next Milestone**: Complete Cloudflare Pages deployment
+**Live URL**: [https://paceleader.pages.dev](https://paceleader.pages.dev)  
+**Last Updated**: November 22, 2025  
+**Current Status**: Phase 3 Complete - Ready for Dashboard Development

@@ -1,0 +1,6 @@
+name = "paceleader"
+compatibility_date = "2025-11-23"
+
+[[kv_namespaces]]
+binding = "PACELEADER_KV"
+id = "ecbfc240abb04036bc031f7a7354c6cd"

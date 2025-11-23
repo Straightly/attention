@@ -560,5 +560,32 @@ For phase 3.  I want to save the three user list to kv in Cloudflare.  Plese upd
 Make sure you keep the hard coded lists as backup should the kv files got lost or corrupted.
 ```
 
+#### Prompt 10 (22:17)
+```
+Carry out phase 3.
+```
+
+#### Prompt 11 (22:25)
+```
+Instead of the init-kv.js, can we make it part of the app's start up that it will check if the kv is initialized and try initialize it if not?  I do not like to keep a step which is not part of the app.
+```
+
+#### Prompt 12 (22:28)
+```
+Go!
+```
+
+#### Prompt 13 (22:39)
+```
+Now add a few phases where I will create pages for admin, pacer and runner.  Just leave the tasks in the phases empty for now.  I will work on them one by one.
+```
+
+#### Prompt 14 (22:43)
+```
+Clean up the project plan please.
+```
+
+
+
 
 
