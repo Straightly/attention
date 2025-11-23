@@ -18,45 +18,18 @@ PaceLeader is a web application with Google OAuth authentication, deployed on Cl
 - [x] Obtain Google OAuth Client ID
 - [x] Configure Google Cloud Console credentials
 - [x] Test locally (http://localhost:8000)
-- [ ] Deploy to Cloudflare Pages
-- [ ] Update Google OAuth with production URL
-- [ ] Verify authentication works in production
+- [x] Deploy to Cloudflare Pages (https://paceleader.pages.dev)
+- [x] Update Google OAuth with production URL
+- [x] Verify authentication works in production
 
 ### Deliverables
 - ✅ Login page with Google sign-in
-- ✅ User info display after authentication
-- ✅ Sign out functionality
-- ✅ README with setup instructions
-
----
-
-## Phase 2: Backend Infrastructure
-**Status**: 🔲 Not Started  
-**Estimated Time**: 3-4 hours  
-**Actual Time**: _[To be filled]_
-
-### Tasks
-### Tasks
-- [ ] Create `functions/` directory for Pages Functions
-- [ ] Create authentication API endpoint (`functions/api/auth/verify.js`)
-- [ ] Implement user allowlist (hardcoded initially)
-- [ ] Add JWT token generation for sessions
-- [ ] Create middleware for auth verification
-- [ ] Test locally with `wrangler pages dev`
-- [ ] Connect frontend to backend API
-
-### Deliverables
-- Backend API with authentication
-- User allowlist enforcement
-- Secure session management
-- API documentation
-
-### Technical Details
-```
-API Endpoints:
-- POST /api/auth/verify - Verify Google token & check allowlist
-- POST /api/auth/refresh - Refresh session token
-- POST /api/auth/logout - Invalidate session
+2. API verifies token & extracts email/username.
+3. API checks 3 lists (Admins, Pacers, Runners).
+4. Response:
+   - No match: Return 403 "Not Admitted".
+   - 1 match: Return 200 with Role.
+   - >1 match: Return 200 with List of Roles (Frontend shows selector).
 ```
 
 ---
