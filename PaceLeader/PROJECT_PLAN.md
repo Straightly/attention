@@ -34,37 +34,43 @@ PaceLeader is a web application with Google OAuth authentication, deployed on Cl
 
 ---
 
-## Phase 3: Database Setup
+## Phase 3: User List Management with Cloudflare KV
 **Status**: 🔲 Not Started  
 **Estimated Time**: 2-3 hours  
 **Actual Time**: _[To be filled]_
 
 ### Tasks
-- [ ] Choose database (Cloudflare D1 vs KV)
-- [ ] Create database schema
-- [ ] Set up database migrations
-- [ ] Create database access layer
-- [ ] Implement CRUD operations
-- [ ] Add database seeding scripts
-- [ ] Test database operations
-- [ ] Deploy database to production
+- [ ] Create Cloudflare KV namespace for PaceLeader
+- [ ] Create initialization script to populate KV with user lists:
+    - [ ] `admins` list (array of emails)
+    - [ ] `pacers` list (array of emails)
+    - [ ] `runners` list (array of emails)
+- [ ] Update `functions/api/auth/verify.js` to read from KV with hardcoded fallback:
+    - [ ] Try reading from KV first
+    - [ ] Fall back to hardcoded arrays if KV read fails
+    - [ ] Keep existing hardcoded lists as backup
+- [ ] Bind KV namespace to Pages Functions
+- [ ] Test locally with `wrangler pages dev` using KV
+- [ ] Test fallback mechanism (simulate KV failure)
+- [ ] Deploy KV data to production
+- [ ] Create admin API endpoints (optional future enhancement):
+    - [ ] `POST /api/admin/users/add` - Add user to a list
+    - [ ] `DELETE /api/admin/users/remove` - Remove user from a list
+    - [ ] `GET /api/admin/users/list` - View all lists
 
 ### Deliverables
-- Database schema design
-- Migration scripts
-- Data access layer
-- Test data
+- ✅ KV namespace created and bound
+- ✅ User lists stored in KV (admins, pacers, runners)
+- ✅ Backend updated to read from KV
+- ✅ Initialization script for seeding data
 
-### Database Options
-**Selected: Cloudflare KV**
-- Pros: Simple key-value, very fast reads, stable, perfect for session tokens and simple lists
-- Free tier: 100K reads/day, 1K writes/day
+### Technical Details
+**KV Structure:**
+```
+Key: "admins"
+Value: ["zhian.job@gmail.com"]
 
----
-
-## Phase 4: Core Features (TBD)
-**Status**: 🔲 Not Started  
-**Estimated Time**: _[To be determined based on features]_  
+Key: "pacers"  
 **Actual Time**: _[To be filled]_
 
 ### Placeholder for Feature Development

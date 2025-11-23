@@ -550,3 +550,15 @@ Let proceed with the next step.
 Please log all my prompts in Journal/journal.md.  Then update my project plan for the progress I made.
 ```
 
+#### Prompt 8 (22:10)
+```
+For phase 3.  I want to save the three user list to kv in Cloudflare.  Plese update the project accordingly.
+```
+
+#### Prompt 9 (22:11)
+```
+Make sure you keep the hard coded lists as backup should the kv files got lost or corrupted.
+```
+
+
+
