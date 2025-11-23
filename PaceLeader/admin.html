@@ -67,6 +67,8 @@
             border-radius: 16px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             padding: 24px;
+            display: flex;
+            flex-direction: column;
         }
 
         .list-section h2 {
@@ -80,7 +82,7 @@
         .add-user-form {
             display: flex;
             gap: 8px;
-            margin-bottom: 20px;
+            margin-top: 20px;
         }
 
         .add-user-form input {
@@ -115,6 +117,7 @@
 
         .user-list {
             list-style: none;
+            flex-grow: 1;
         }
 
         .user-item {
@@ -192,35 +195,33 @@
         <div id="error-message" class="error-message"></div>
         <div id="success-message" class="success-message"></div>
 
-        <div class="lists-container">
-            <!-- Admins List -->
-            <div class="list-section">
-                <h2>👑 Admins</h2>
-                <div class="add-user-form">
-                    <input type="email" id="admin-email" placeholder="admin@gmail.com">
-                    <button class="add-btn" onclick="addUser('admins')">Add</button>
-                </div>
-                <ul id="admins-list" class="user-list"></ul>
+        <!-- Admins List -->
+        <div class="list-section">
+            <h2>👑 Admins</h2>
+            <ul id="admins-list" class="user-list"></ul>
+            <div class="add-user-form">
+                <input type="email" id="admin-email" placeholder="admin@gmail.com">
+                <button class="add-btn" onclick="addUser('admins')">Add</button>
             </div>
+        </div>
 
-            <!-- Pacers List -->
-            <div class="list-section">
-                <h2>🏃‍♂️ Pacers</h2>
-                <div class="add-user-form">
-                    <input type="email" id="pacer-email" placeholder="pacer@gmail.com">
-                    <button class="add-btn" onclick="addUser('pacers')">Add</button>
-                </div>
-                <ul id="pacers-list" class="user-list"></ul>
+        <!-- Pacers List -->
+        <div class="list-section">
+            <h2>🏃‍♂️ Pacers</h2>
+            <ul id="pacers-list" class="user-list"></ul>
+            <div class="add-user-form">
+                <input type="email" id="pacer-email" placeholder="pacer@gmail.com">
+                <button class="add-btn" onclick="addUser('pacers')">Add</button>
             </div>
+        </div>
 
-            <!-- Runners List -->
-            <div class="list-section">
-                <h2>🏃 Runners</h2>
-                <div class="add-user-form">
-                    <input type="email" id="runner-email" placeholder="runner@gmail.com">
-                    <button class="add-btn" onclick="addUser('runners')">Add</button>
-                </div>
-                <ul id="runners-list" class="user-list"></ul>
+        <!-- Runners List -->
+        <div class="list-section">
+            <h2>🏃 Runners</h2>
+            <ul id="runners-list" class="user-list"></ul>
+            <div class="add-user-form">
+                <input type="email" id="runner-email" placeholder="runner@gmail.com">
+                <button class="add-btn" onclick="addUser('runners')">Add</button>
             </div>
         </div>
     </div>

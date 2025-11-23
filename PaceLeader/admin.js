@@ -105,7 +105,7 @@ async function addUser(role) {
     // Add to list
     userLists[role].push(email);
 
-    // Save to backend
+    // Save to backend (will sort before saving)
     const success = await saveToBackend();
 
     if (success) {
@@ -131,7 +131,7 @@ async function deleteUser(role, email) {
     // Remove from list
     userLists[role] = userLists[role].filter(e => e !== email);
 
-    // Save to backend
+    // Save to backend (will sort before saving)
     const success = await saveToBackend();
 
     if (success) {
@@ -145,13 +145,20 @@ async function deleteUser(role, email) {
     }
 }
 
-// Save lists to backend
+// Save lists to backend (sorts alphabetically before saving)
 async function saveToBackend() {
     try {
+        // Sort all lists alphabetically (case-insensitive) before saving
+        const sortedLists = {
+            admins: [...userLists.admins].sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase())),
+            pacers: [...userLists.pacers].sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase())),
+            runners: [...userLists.runners].sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()))
+        };
+
         const response = await fetch('/api/admin/update-lists', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(userLists)
+            body: JSON.stringify(sortedLists)
         });
 
         if (!response.ok) {
