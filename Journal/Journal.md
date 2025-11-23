@@ -600,6 +600,17 @@ No.  I want ad admin can simple go to each of the list and add an gmail address 
 Rewrite the project plan again.
 ```
 
+#### Prompt 18 (23:01)
+```
+Implement phase 4.
+```
+
+#### Prompt 19 (23:20)
+```
+Now, change the logic from the login page such that, if a user logged in as an admin, route it to admin page.
+```
+
+
 
 
 

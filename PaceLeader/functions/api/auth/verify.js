@@ -1,13 +1,19 @@
 // Role-based authorization API for PaceLeader
 // Verifies Google OAuth tokens and checks user roles
 
-// Default user lists (used for auto-initialization and fallback)
+// Hardcoded fallback lists (matching data/*.json files)
 const DEFAULT_ADMINS = ['zhian.job@gmail.com'];
 const DEFAULT_PACERS = ['zhian.job@gmail.com', 'jianame@gmail.com'];
 const DEFAULT_RUNNERS = ['zhian.job@gmail.com', 'jianame@gmail.com'];
 
 // Get user lists from KV with auto-initialization and fallback
 async function getUserLists(KV) {
+  // If KV is not available, use defaults immediately
+  if (!KV) {
+    console.warn('KV not available, using hardcoded defaults');
+    return { admins: DEFAULT_ADMINS, pacers: DEFAULT_PACERS, runners: DEFAULT_RUNNERS };
+  }
+
   try {
     // Check if KV is initialized
     let admins = await KV.get('admins', 'json');
@@ -94,6 +100,7 @@ export async function onRequestPost(context) {
     });
 
   } catch (error) {
+    console.error('Verify error:', error);
     return new Response(JSON.stringify({ error: error.message }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' }

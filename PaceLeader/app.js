@@ -55,7 +55,21 @@ async function handleCredentialResponse(response) {
             body: JSON.stringify({ credential: response.credential })
         });
 
+        if (!apiResponse.ok) {
+            const errorText = await apiResponse.text();
+            console.error('API error:', apiResponse.status, errorText);
+            showError(`Sign-in failed: ${apiResponse.status}. Check console for details.`);
+            return;
+        }
+
         const result = await apiResponse.json();
+        console.log('Auth result:', result);
+
+        if (result.error) {
+            console.error('Auth error:', result.error);
+            showError('Sign-in error: ' + result.error);
+            return;
+        }
 
         if (!result.authorized) {
             // User not in any list
@@ -80,7 +94,7 @@ async function handleCredentialResponse(response) {
 
     } catch (error) {
         console.error('Error handling credential:', error);
-        showError('Failed to sign in. Please try again.');
+        showError('Failed to sign in. Please try again. Check console for details.');
     }
 }
 
@@ -144,8 +158,15 @@ function completeLogin(userInfo, role) {
         ...userInfo,
         selectedRole: role
     }));
+    localStorage.setItem('selectedRole', role);
 
-    // Display user info
+    // Redirect admins to admin dashboard
+    if (role === 'admin') {
+        window.location.href = 'admin.html';
+        return;
+    }
+
+    // Display user info for non-admins
     displayUserInfo(userInfo, role);
 }
 

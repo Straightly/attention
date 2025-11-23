@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PaceLeader - Admin Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 24px 32px;
+            margin-bottom: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #1a202c;
+        }
+
+        .sign-out-btn {
+            background: #e53e3e;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .sign-out-btn:hover {
+            background: #c53030;
+        }
+
+        .lists-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 24px;
+        }
+
+        .list-section {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 24px;
+        }
+
+        .list-section h2 {
+            font-size: 20px;
+            color: #1a202c;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .add-user-form {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .add-user-form input {
+            flex: 1;
+            padding: 10px 14px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.2s;
+        }
+
+        .add-user-form input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .add-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .add-btn:hover {
+            background: #5568d3;
+        }
+
+        .user-list {
+            list-style: none;
+        }
+
+        .user-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            margin-bottom: 8px;
+            background: #f7fafc;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+
+        .user-item:hover {
+            background: #edf2f7;
+        }
+
+        .user-email {
+            color: #2d3748;
+            font-size: 14px;
+        }
+
+        .delete-btn {
+            background: #fc8181;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .delete-btn:hover {
+            background: #f56565;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 32px;
+            color: #a0aec0;
+            font-size: 14px;
+        }
+
+        .error-message {
+            background: #fed7d7;
+            color: #c53030;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            font-size: 14px;
+            display: none;
+        }
+
+        .success-message {
+            background: #c6f6d5;
+            color: #2f855a;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            font-size: 14px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏃 Admin Dashboard</h1>
+            <button class="sign-out-btn" onclick="signOut()">Sign Out</button>
+        </div>
+
+        <div id="error-message" class="error-message"></div>
+        <div id="success-message" class="success-message"></div>
+
+        <div class="lists-container">
+            <!-- Admins List -->
+            <div class="list-section">
+                <h2>👑 Admins</h2>
+                <div class="add-user-form">
+                    <input type="email" id="admin-email" placeholder="admin@gmail.com">
+                    <button class="add-btn" onclick="addUser('admins')">Add</button>
+                </div>
+                <ul id="admins-list" class="user-list"></ul>
+            </div>
+
+            <!-- Pacers List -->
+            <div class="list-section">
+                <h2>🏃‍♂️ Pacers</h2>
+                <div class="add-user-form">
+                    <input type="email" id="pacer-email" placeholder="pacer@gmail.com">
+                    <button class="add-btn" onclick="addUser('pacers')">Add</button>
+                </div>
+                <ul id="pacers-list" class="user-list"></ul>
+            </div>
+
+            <!-- Runners List -->
+            <div class="list-section">
+                <h2>🏃 Runners</h2>
+                <div class="add-user-form">
+                    <input type="email" id="runner-email" placeholder="runner@gmail.com">
+                    <button class="add-btn" onclick="addUser('runners')">Add</button>
+                </div>
+                <ul id="runners-list" class="user-list"></ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+
+</html>
