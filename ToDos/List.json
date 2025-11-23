@@ -21,7 +21,7 @@
     {
       "id": 9,
       "text": "Write up my visit with  Zeal for purpose that my next trip will be better #family",
-      "completed": false,
+      "completed": true,
       "createdAt": "2025-10-19T15:22:40.803Z",
       "tags": [
         "family"
@@ -48,7 +48,7 @@
     {
       "id": 13,
       "text": "USBank review, due 11/15, show after 10/31  #apartment",
-      "completed": false,
+      "completed": true,
       "createdAt": "2025-10-24T23:07:02.866Z",
       "tags": [
         "apartment"
@@ -247,7 +247,7 @@
       "id": 38,
       "text": "Select Health insurance:  What is my current selection? How is it changed?",
       "tags": [],
-      "completed": false,
+      "completed": true,
       "createdAt": "2025-11-19T15:08:24.657Z"
     },
     {
@@ -256,7 +256,7 @@
       "tags": [
         "work"
       ],
-      "completed": false,
+      "completed": true,
       "createdAt": "2025-11-19T15:08:49.803Z"
     },
     {
@@ -265,7 +265,7 @@
       "tags": [
         "work"
       ],
-      "completed": false,
+      "completed": true,
       "createdAt": "2025-11-19T15:09:17.832Z"
     },
     {
@@ -274,7 +274,7 @@
       "tags": [
         "work"
       ],
-      "completed": false,
+      "completed": true,
       "createdAt": "2025-11-19T15:09:32.516Z"
     },
     {
