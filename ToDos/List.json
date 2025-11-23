@@ -285,6 +285,15 @@
       ],
       "completed": false,
       "createdAt": "2025-11-19T15:09:44.815Z"
+    },
+    {
+      "id": 43,
+      "text": "Watching demo of AI code fest and read outs",
+      "tags": [
+        "work"
+      ],
+      "completed": false,
+      "createdAt": "2025-11-23T14:55:36.847Z"
     }
   ]
 }
