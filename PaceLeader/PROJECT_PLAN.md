@@ -77,14 +77,36 @@ PaceLeader is a web application with Google OAuth authentication and role-based 
 
 ## Phase 4: Admin Dashboard
 **Status**: 🔲 Not Started  
-**Estimated Time**: _[To be determined]_  
+**Estimated Time**: 2-3 hours  
 **Actual Time**: _[To be filled]_
 
 ### Tasks
-_To be defined_
+- [ ] Create admin dashboard page (`admin.html`)
+- [ ] Implement admin-only access control
+  - [ ] Check if user has 'admin' role
+  - [ ] Redirect non-admins to main dashboard
+- [ ] Create UI to display three user lists:
+  - [ ] Admins list section with add/delete controls
+  - [ ] Pacers list section with add/delete controls
+  - [ ] Runners list section with add/delete controls
+- [ ] For each list section, implement:
+  - [ ] Input field for Gmail address
+  - [ ] "Add" button
+  - [ ] Display current users
+  - [ ] Delete button next to each user
+  - [ ] Email validation
+- [ ] Create backend endpoint:
+  - [ ] `POST /api/admin/update-lists` - Save modified lists to KV
+- [ ] Add confirmation dialog for deletions
+- [ ] Add error handling and user feedback
+- [ ] Test locally
+- [ ] Deploy to production
 
 ### Deliverables
-_To be defined_
+- Admin dashboard page with three list sections
+- Add/delete Gmail addresses directly in each list
+- Single backend endpoint for KV updates
+- Access control (admin-only page)
 
 ---
 
@@ -190,17 +212,17 @@ _To be defined_
 - ✅ **Phase 3**: User List Management with KV (~1 hour)
 
 ### Remaining Phases
-- 🔲 **Phase 4**: Admin Dashboard (TBD)
+- 🔲 **Phase 4**: Admin Dashboard (2-3 hours)
 - 🔲 **Phase 5**: Pacer Dashboard (TBD)
 - 🔲 **Phase 6**: Runner Dashboard (TBD)
 - 🔲 **Phase 7**: Polish & Optimization (2-3 hours)
 - 🔲 **Phase 8**: Security Hardening (2-3 hours)
 
 **Total Time So Far**: ~4.5 hours  
-**Estimated Remaining**: 4-6+ hours (excluding dashboard features)
+**Estimated Remaining**: 6-9+ hours (excluding Pacer/Runner dashboard features)
 
 ---
 
 **Live URL**: [https://paceleader.pages.dev](https://paceleader.pages.dev)  
 **Last Updated**: November 22, 2025  
-**Current Status**: Phase 3 Complete - Ready for Dashboard Development
+**Current Status**: Phase 3 Complete - Ready for Admin Dashboard Development
