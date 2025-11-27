@@ -708,3 +708,52 @@ Can you adjust the display so the button add a run is on the same line as the da
 **Prompt (~23:30 PST):**
 ```
 Add a run button will add an object called a run.  It should has the date (from the ux), the pacer (from the login), a startTime (a string, default to 8:00am), a pace (a string default to 10:00/ml), and a startPlace (a String, default to WF), and a list of singedUpRunners, started with only pacer in it. The run will ve save as the value in JSON under a key in the kv store.  When the pacer click on the button, three fields will be displayed on the same row with the date where the user can change these values.  The count of the runners will show as a clickable link in the format of "Runner count:  #" where # is the number of the signed up runners.  The value will be saved to the KV every time the user made change and move the focus out of the field.  
+```
+
+# November 26, 2025 — Load Existing Runs on Pacer Page
+
+**Prompt (~23:36 PST):**
+```
+Please check to load existing runs for this pacer and pre-populate rows when the page loads.
+```
+
+# November 26, 2025 — Pacer Pre-Load & Button Removal
+
+**Prompt (~23:40 PST):**
+```
+Create and save seemed to be working, but pre-load does not seem to work.  Also, when a run exists, the corresponding create button should be removed from the row.
+```
+
+# November 26, 2025 — Pacer Row Single-Line & Headers
+
+**Prompt (~23:45 PST):**
+```
+Adjust the page so for each date, everything will be displayed on the same line.  Also on top the fields, add a title Starting Time, Pace, and Starting Place.  Runner Count.  
+```
+
+# November 26, 2025 — Pacer Row Line-Break Bug
+
+**Prompt (~23:48 PST):**
+```
+The fields are not displayed on the same line.  Each filed now has a new line.  Please fix so all fields for the run will be on the same line.
+```
+
+# November 26, 2025 — Weekend Date Emphasis
+
+**Prompt (~23:51 PST):**
+```
+Great! Can you make the date string (with the week day) bold for Saturday and Sunday?
+```
+
+# November 26, 2025 — Hide Fields When No Run
+
+**Prompt (~23:52 PST):**
+```
+Also, hide these fields if no run was created for the date.
+```
+
+# November 26, 2025 — Pacer Date Alignment Fix
+
+**Prompt (~23:55 PST):**
+```
+Now the date for the ones with runs showed up on the right.  Please move them to the left, lined up with other dates.

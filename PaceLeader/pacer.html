@@ -59,24 +59,50 @@
         }
         .sign-out-btn:hover { background: #c53030; }
 
+        .schedule-header {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr 1fr 1.2fr 1.4fr;
+            column-gap: 12px;
+            margin-top: 16px;
+            margin-bottom: 6px;
+            font-size: 12px;
+            color: #718096;
+            text-align: left;
+        }
+
         .schedule {
             display: flex;
             flex-direction: column;
             gap: 10px;
-            margin-top: 8px;
+            margin-top: 4px;
             text-align: left;
         }
 
         .schedule-row {
-            display: flex;
+            display: grid;
+            grid-template-columns: 1.4fr 1fr 1fr 1.2fr 1.4fr auto;
+            column-gap: 12px;
             align-items: center;
-            justify-content: space-between;
-            gap: 12px;
         }
 
         .schedule-info {
             font-size: 14px;
             color: #2d3748;
+        }
+
+        .schedule-input {
+            width: 100%;
+            max-width: 90px;
+            padding: 4px 6px;
+            font-size: 13px;
+            border-radius: 4px;
+            border: 1px solid #CBD5E0;
+        }
+
+        .schedule-runner-link {
+            font-size: 13px;
+            color: #3182ce;
+            text-decoration: none;
         }
 
         .schedule-btn {
@@ -106,9 +132,18 @@
             You are signed in as a <strong>pacer</strong>.
         </p>
 
-        <p style="margin-top: 8px; margin-bottom: 20px; color: #718096; font-size: 14px;">
+        <p style="margin-top: 8px; margin-bottom: 12px; color: #718096; font-size: 14px;">
             Next 7 days (starting tomorrow): pick a day to plan a run.
         </p>
+
+        <div class="schedule-header">
+            <span>Date</span>
+            <span>Starting Time</span>
+            <span>Pace</span>
+            <span>Starting Place</span>
+            <span>Runner Count</span>
+            <span></span>
+        </div>
 
         <div id="pacerSchedule" class="schedule"></div>
 
@@ -157,49 +192,83 @@
             }
         }
 
-        function createRunRowControls(row, dateLabel, weekday, pacerEmail) {
-            // Left side: date + weekday
+        function createRunRowControls(row, dateLabel, weekday, pacerEmail, existingRun) {
+            // Column 1: date + weekday
             const info = document.createElement('div');
             info.className = 'schedule-info';
-            info.textContent = `${weekday} — ${dateLabel}`;
+            const isWeekend = weekday === 'Saturday' || weekday === 'Sunday';
+            const labelText = `${weekday} — ${dateLabel}`;
+            if (isWeekend) {
+                const strong = document.createElement('strong');
+                strong.textContent = labelText;
+                info.appendChild(strong);
+            } else {
+                info.textContent = labelText;
+            }
 
-            // Right side: button initially; details will be added on demand
-            const btn = document.createElement('button');
-            btn.className = 'schedule-btn';
-            btn.textContent = 'Add a run';
+            // Columns 2-4 & 5: inputs + runner link (created lazily for new runs)
+            let startTimeInput = null;
+            let paceInput = null;
+            let placeInput = null;
+            let runnerLink = null;
 
-            const details = document.createElement('div');
-            details.style.display = 'none';
-            details.style.marginTop = '4px';
-            details.style.fontSize = '13px';
+            const ensureFields = () => {
+                if (startTimeInput) return; // already created
 
-            // Attach once when button is clicked
-            btn.addEventListener('click', async () => {
-                if (details.childElementCount === 0) {
-                    const startTimeInput = document.createElement('input');
-                    startTimeInput.type = 'text';
-                    startTimeInput.value = '8:00am';
-                    startTimeInput.style.width = '80px';
-                    startTimeInput.style.marginRight = '6px';
+                startTimeInput = document.createElement('input');
+                startTimeInput.type = 'text';
+                startTimeInput.className = 'schedule-input';
+                startTimeInput.value = existingRun && existingRun.startTime ? existingRun.startTime : '8:00am';
 
-                    const paceInput = document.createElement('input');
-                    paceInput.type = 'text';
-                    paceInput.value = '10:00/ml';
-                    paceInput.style.width = '80px';
-                    paceInput.style.marginRight = '6px';
+                paceInput = document.createElement('input');
+                paceInput.type = 'text';
+                paceInput.className = 'schedule-input';
+                paceInput.value = existingRun && existingRun.pace ? existingRun.pace : '10:00/ml';
 
-                    const placeInput = document.createElement('input');
-                    placeInput.type = 'text';
-                    placeInput.value = 'WF';
-                    placeInput.style.width = '80px';
-                    placeInput.style.marginRight = '10px';
+                placeInput = document.createElement('input');
+                placeInput.type = 'text';
+                placeInput.className = 'schedule-input';
+                placeInput.value = existingRun && existingRun.startPlace ? existingRun.startPlace : 'WF';
 
-                    const runnerLink = document.createElement('a');
-                    runnerLink.href = 'javascript:void(0)';
-                    runnerLink.textContent = 'Runner count: 1';
-                    runnerLink.style.color = '#3182ce';
-                    runnerLink.style.textDecoration = 'none';
+                runnerLink = document.createElement('a');
+                runnerLink.href = 'javascript:void(0)';
+                const runnerCount = existingRun && Array.isArray(existingRun.signedUpRunners)
+                    ? existingRun.signedUpRunners.length
+                    : 1;
+                runnerLink.textContent = `Runner count: ${runnerCount}`;
+                runnerLink.className = 'schedule-runner-link';
 
+                const saveFromInputs = () => {
+                    upsertRun({
+                        date: dateLabel,
+                        pacer: pacerEmail,
+                        startTime: startTimeInput.value,
+                        pace: paceInput.value,
+                        startPlace: placeInput.value
+                    });
+                };
+
+                startTimeInput.addEventListener('blur', saveFromInputs);
+                paceInput.addEventListener('blur', saveFromInputs);
+                placeInput.addEventListener('blur', saveFromInputs);
+
+                // Insert fields into the row in the correct positions
+                // Row currently has: [info] or [info, btnSpacer]
+                row.appendChild(startTimeInput);
+                row.appendChild(paceInput);
+                row.appendChild(placeInput);
+                row.appendChild(runnerLink);
+            };
+
+            // Column 6: optional Add a run button
+            let btn = null;
+            if (!existingRun) {
+                btn = document.createElement('button');
+                btn.className = 'schedule-btn';
+                btn.textContent = 'Add a run';
+                btn.addEventListener('click', () => {
+                    ensureFields();
+                    // Initial save with defaults when creating a new run
                     const saveFromInputs = () => {
                         upsertRun({
                             date: dateLabel,
@@ -209,35 +278,69 @@
                             startPlace: placeInput.value
                         });
                     };
-
-                    startTimeInput.addEventListener('blur', saveFromInputs);
-                    paceInput.addEventListener('blur', saveFromInputs);
-                    placeInput.addEventListener('blur', saveFromInputs);
-
-                    details.appendChild(startTimeInput);
-                    details.appendChild(paceInput);
-                    details.appendChild(placeInput);
-                    details.appendChild(runnerLink);
-
-                    // Initial save with defaults
                     saveFromInputs();
+                    btn.disabled = true;
+                });
+            } else {
+                // Run exists already: create and show fields immediately
+                ensureFields();
+            }
+
+            // Append mandatory first column
+            row.appendChild(info);
+
+            // For existing runs, fields and runnerLink were already appended by ensureFields.
+            // For new runs, they will be appended once the button is clicked.
+
+            if (existingRun) {
+                // Fields already appended; add an empty spacer to keep grid alignment
+                const spacer = document.createElement('div');
+                row.appendChild(spacer);
+            } else {
+                if (btn) {
+                    // For new runs, we need to fill columns 2-5 with empty cells initially
+                    const empty2 = document.createElement('div');
+                    const empty3 = document.createElement('div');
+                    const empty4 = document.createElement('div');
+                    const empty5 = document.createElement('div');
+                    row.appendChild(empty2);
+                    row.appendChild(empty3);
+                    row.appendChild(empty4);
+                    row.appendChild(empty5);
+                    row.appendChild(btn);
                 }
-
-                details.style.display = 'block';
-            });
-
-            // Wrap info and button in a vertical stack on the left side
-            const left = document.createElement('div');
-            left.style.display = 'flex';
-            left.style.flexDirection = 'column';
-            left.appendChild(info);
-            left.appendChild(details);
-
-            row.appendChild(left);
-            row.appendChild(btn);
+            }
         }
 
-        function renderPacerSchedule() {
+        async function fetchExistingRuns(pacerEmail) {
+            try {
+                const response = await fetch('/api/pacer/runs', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ mode: 'getByPacer', pacer: pacerEmail })
+                });
+                if (!response.ok) {
+                    const text = await response.text();
+                    console.error('Failed to load existing runs', response.status, text);
+                    return {};
+                }
+                const data = await response.json();
+                const byDate = {};
+                if (Array.isArray(data.runs)) {
+                    for (const run of data.runs) {
+                        if (run && run.date) {
+                            byDate[run.date] = run;
+                        }
+                    }
+                }
+                return byDate;
+            } catch (err) {
+                console.error('Error loading existing runs', err);
+                return {};
+            }
+        }
+
+        async function renderPacerSchedule() {
             const container = document.getElementById('pacerSchedule');
             if (!container) return;
 
@@ -262,6 +365,8 @@
 
             container.innerHTML = '';
 
+            const existingByDate = await fetchExistingRuns(pacerEmail);
+
             const today = new Date();
 
             for (let i = 1; i <= 7; i++) {
@@ -274,7 +379,8 @@
                 const row = document.createElement('div');
                 row.className = 'schedule-row';
 
-                createRunRowControls(row, dateLabel, weekday, pacerEmail);
+                const existingRun = existingByDate[dateLabel];
+                createRunRowControls(row, dateLabel, weekday, pacerEmail, existingRun);
 
                 container.appendChild(row);
             }
