@@ -611,10 +611,79 @@ Now, change the logic from the login page such that, if a user logged in as an a
 ```
 
 
+---
+# November 26, 2025 — PaceLeader Cloudflare URL
 
+**Prompt (22:33 PST):**
+```
+I was working on the PaceLeader project.  Last time, I was working on the admin page for users logged in as an admin.  The last change broke my login process.  What is the URL in CloudFlare where I deployed this app?
+```
 
+# November 26, 2025 — Prompt Logging Reminder
 
+**Prompt (22:29 PST):**
+```
+Please remember to log all my prompts to Journal.md.
+```
 
+# November 26, 2025 — PaceLeader Redeploy Command
 
+**Prompt (22:34 PST):**
+```
+hmm... It say page not found.  What is the command for me to deploy again?  
+```
 
+# November 26, 2025 — Proceed With Deploy Help
 
+**Prompt (22:36 PST):**
+```
+Please.
+```
+
+# November 26, 2025 — Deployment Confirmation
+
+**Prompt (22:44 PST):**
+```
+Great.  Everything worked.  
+```
+
+# November 26, 2025 — Local Testing Question
+
+**Prompt (22:46 PST):**
+```
+Before I continue further, check my app and see if I can test the app locally before I deploy.  Deploying it every time to test is not very effecient.
+```
+
+# November 26, 2025 — Wrangler Dev Flag Error
+
+**Prompt (~22:51 PST):**
+```
+X [ERROR] Unknown arguments: project-name, projectName
+```
+
+# November 26, 2025 — Google OAuth Localhost Access
+
+**Prompt (~22:53 PST):**
+```
+Google is rejecting my logic.  Where do I go to manage the access?  I think I need to add the http://127.0.0.1:8788 to allowed URLs.
+```
+
+# November 26, 2025 — Wrangler Dev Reload Behavior
+
+**Prompt (~22:57 PST):**
+```
+Good.  Now my local server is working.  After I make change to the project, do I have to stop and re start the app to reflect the changes?
+```
+
+# November 26, 2025 — Duplicate Email Feedback Request
+
+**Prompt (~22:59 PST):**
+```
+Now, when I add an email address to any of these roles, if the email existed already, it is not added.  That is good.  But can you add a dialog to say the same so user know why the email was not added?
+```
+
+# November 26, 2025 — Pacer/Runner Pages Request
+
+**Prompt (~23:02 PST):**
+```
+Next, please add an empty page for pacer and runner and route to them if one login as pacer or runner.

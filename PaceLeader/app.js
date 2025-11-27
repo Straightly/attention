@@ -160,13 +160,21 @@ function completeLogin(userInfo, role) {
     }));
     localStorage.setItem('selectedRole', role);
 
-    // Redirect admins to admin dashboard
+    // Redirect based on role
     if (role === 'admin') {
         window.location.href = 'admin.html';
         return;
     }
+    if (role === 'pacer') {
+        window.location.href = 'pacer.html';
+        return;
+    }
+    if (role === 'runner') {
+        window.location.href = 'runner.html';
+        return;
+    }
 
-    // Display user info for non-admins
+    // Fallback: display user info on login page
     displayUserInfo(userInfo, role);
 }
 

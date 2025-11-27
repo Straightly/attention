@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PaceLeader - Pacer Dashboard</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 32px 40px;
+            max-width: 520px;
+            width: 100%;
+            text-align: center;
+        }
+        h1 {
+            font-size: 28px;
+            color: #1a202c;
+            margin-bottom: 8px;
+        }
+        p {
+            color: #4a5568;
+            margin-bottom: 16px;
+            font-size: 15px;
+        }
+        .badge {
+            display: inline-block;
+            margin-bottom: 16px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            background: #ebf4ff;
+            color: #434190;
+        }
+        .sign-out-btn {
+            margin-top: 24px;
+            background: #e53e3e;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+        .sign-out-btn:hover { background: #c53030; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="badge">Pacer</div>
+        <h1>🏃‍♂️ Pacer Dashboard (Coming Soon)</h1>
+        <p>
+            You are signed in as a <strong>pacer</strong>.
+            This page is a placeholder for future Pacer tools and views.
+        </p>
+        <p>
+            For now, you can use the Admin dashboard to manage user lists
+            if you are also an admin, or simply sign out to switch accounts.
+        </p>
+        <button class="sign-out-btn" onclick="pacerSignOut()">Sign Out</button>
+    </div>
+
+    <script>
+        function pacerSignOut() {
+            localStorage.clear();
+            window.location.href = 'index.html';
+        }
+
+        // Optional: simple access guard so non-pacers are bounced
+        document.addEventListener('DOMContentLoaded', () => {
+            const selectedRole = localStorage.getItem('selectedRole');
+            if (selectedRole !== 'pacer') {
+                alert('Access Denied: Pacer role required');
+                window.location.href = 'index.html';
+            }
+        });
+    </script>
+</body>
+</html>

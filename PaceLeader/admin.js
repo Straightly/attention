@@ -99,6 +99,7 @@ async function addUser(role) {
     // Check if already exists
     if (userLists[role].includes(email)) {
         showError('User already exists in this list');
+        alert(`The address ${email} is already in the ${role} list and was not added again.`);
         return;
     }
 
