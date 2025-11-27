@@ -173,6 +173,94 @@ async function onRequestPost3(context) {
 }
 __name(onRequestPost3, "onRequestPost");
 
+// api/pacer/runs.js
+async function onRequestPost4(context) {
+  const KV = context.env.PACELEADER_KV;
+  if (!KV) {
+    return new Response(JSON.stringify({ error: "KV storage not available" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" }
+    });
+  }
+  try {
+    const { request } = context;
+    const body = await request.json();
+    const { mode, pacer, date, startTime, pace, startPlace } = body || {};
+    let runs = [];
+    try {
+      const stored = await KV.get("runs", "json");
+      if (Array.isArray(stored)) {
+        runs = stored;
+      }
+    } catch (e) {
+      runs = [];
+    }
+    if (mode === "getByPacer") {
+      if (!pacer) {
+        return new Response(JSON.stringify({ error: "Missing pacer" }), {
+          status: 400,
+          headers: { "Content-Type": "application/json" }
+        });
+      }
+      const pacerRuns = runs.filter((r) => r.pacer === pacer);
+      return new Response(JSON.stringify({ runs: pacerRuns }), {
+        status: 200,
+        headers: { "Content-Type": "application/json" }
+      });
+    }
+    if (mode === "upsert") {
+      if (!pacer || !date) {
+        return new Response(JSON.stringify({ error: "Missing pacer or date" }), {
+          status: 400,
+          headers: { "Content-Type": "application/json" }
+        });
+      }
+      const defaults = {
+        startTime: "8:00am",
+        pace: "10:00/ml",
+        startPlace: "WF"
+      };
+      let run = runs.find((r) => r.pacer === pacer && r.date === date);
+      if (!run) {
+        run = {
+          date,
+          pacer,
+          startTime: startTime || defaults.startTime,
+          pace: pace || defaults.pace,
+          startPlace: startPlace || defaults.startPlace,
+          signedUpRunners: [pacer]
+        };
+        runs.push(run);
+      } else {
+        if (typeof startTime === "string") run.startTime = startTime;
+        if (typeof pace === "string") run.pace = pace;
+        if (typeof startPlace === "string") run.startPlace = startPlace;
+        if (!Array.isArray(run.signedUpRunners)) {
+          run.signedUpRunners = [pacer];
+        } else if (!run.signedUpRunners.includes(pacer)) {
+          run.signedUpRunners.push(pacer);
+        }
+      }
+      await KV.put("runs", JSON.stringify(runs));
+      return new Response(JSON.stringify({ run }), {
+        status: 200,
+        headers: { "Content-Type": "application/json" }
+      });
+    }
+    return new Response(JSON.stringify({ error: "Unknown mode" }), {
+      status: 400,
+      headers: { "Content-Type": "application/json" }
+    });
+  } catch (error) {
+    console.error("Pacer runs API error:", error);
+    return new Response(JSON.stringify({ error: error.message }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" }
+    });
+  }
+}
+__name(onRequestPost4, "onRequestPost");
+
 // ../.wrangler/tmp/pages-qP1LOU/functionsRoutes-0.04479416422965088.mjs
 var routes = [
   {
@@ -195,6 +283,13 @@ var routes = [
     method: "POST",
     middlewares: [],
     modules: [onRequestPost3]
+  },
+  {
+    routePath: "/api/pacer/runs",
+    mountPath: "/api/pacer",
+    method: "POST",
+    middlewares: [],
+    modules: [onRequestPost4]
   }
 ];
 
@@ -685,7 +780,7 @@ var jsonError = /* @__PURE__ */ __name(async (request, env, _ctx, middlewareCtx)
 }, "jsonError");
 var middleware_miniflare3_json_error_default = jsonError;
 
-// ../.wrangler/tmp/bundle-7k82V2/middleware-insertion-facade.js
+// ../.wrangler/tmp/bundle-KBNhx5/middleware-insertion-facade.js
 var __INTERNAL_WRANGLER_MIDDLEWARE__ = [
   middleware_ensure_req_body_drained_default,
   middleware_miniflare3_json_error_default
@@ -717,7 +812,7 @@ function __facade_invoke__(request, env, ctx, dispatch, finalMiddleware) {
 }
 __name(__facade_invoke__, "__facade_invoke__");
 
-// ../.wrangler/tmp/bundle-7k82V2/middleware-loader.entry.ts
+// ../.wrangler/tmp/bundle-KBNhx5/middleware-loader.entry.ts
 var __Facade_ScheduledController__ = class ___Facade_ScheduledController__ {
   constructor(scheduledTime, cron, noRetry) {
     this.scheduledTime = scheduledTime;

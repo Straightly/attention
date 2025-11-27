@@ -174,6 +174,93 @@ async function onRequestPost3(context) {
 }
 __name(onRequestPost3, "onRequestPost3");
 __name2(onRequestPost3, "onRequestPost");
+async function onRequestPost4(context) {
+  const KV = context.env.PACELEADER_KV;
+  if (!KV) {
+    return new Response(JSON.stringify({ error: "KV storage not available" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" }
+    });
+  }
+  try {
+    const { request } = context;
+    const body = await request.json();
+    const { mode, pacer, date, startTime, pace, startPlace } = body || {};
+    let runs = [];
+    try {
+      const stored = await KV.get("runs", "json");
+      if (Array.isArray(stored)) {
+        runs = stored;
+      }
+    } catch (e) {
+      runs = [];
+    }
+    if (mode === "getByPacer") {
+      if (!pacer) {
+        return new Response(JSON.stringify({ error: "Missing pacer" }), {
+          status: 400,
+          headers: { "Content-Type": "application/json" }
+        });
+      }
+      const pacerRuns = runs.filter((r) => r.pacer === pacer);
+      return new Response(JSON.stringify({ runs: pacerRuns }), {
+        status: 200,
+        headers: { "Content-Type": "application/json" }
+      });
+    }
+    if (mode === "upsert") {
+      if (!pacer || !date) {
+        return new Response(JSON.stringify({ error: "Missing pacer or date" }), {
+          status: 400,
+          headers: { "Content-Type": "application/json" }
+        });
+      }
+      const defaults = {
+        startTime: "8:00am",
+        pace: "10:00/ml",
+        startPlace: "WF"
+      };
+      let run = runs.find((r) => r.pacer === pacer && r.date === date);
+      if (!run) {
+        run = {
+          date,
+          pacer,
+          startTime: startTime || defaults.startTime,
+          pace: pace || defaults.pace,
+          startPlace: startPlace || defaults.startPlace,
+          signedUpRunners: [pacer]
+        };
+        runs.push(run);
+      } else {
+        if (typeof startTime === "string") run.startTime = startTime;
+        if (typeof pace === "string") run.pace = pace;
+        if (typeof startPlace === "string") run.startPlace = startPlace;
+        if (!Array.isArray(run.signedUpRunners)) {
+          run.signedUpRunners = [pacer];
+        } else if (!run.signedUpRunners.includes(pacer)) {
+          run.signedUpRunners.push(pacer);
+        }
+      }
+      await KV.put("runs", JSON.stringify(runs));
+      return new Response(JSON.stringify({ run }), {
+        status: 200,
+        headers: { "Content-Type": "application/json" }
+      });
+    }
+    return new Response(JSON.stringify({ error: "Unknown mode" }), {
+      status: 400,
+      headers: { "Content-Type": "application/json" }
+    });
+  } catch (error) {
+    console.error("Pacer runs API error:", error);
+    return new Response(JSON.stringify({ error: error.message }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" }
+    });
+  }
+}
+__name(onRequestPost4, "onRequestPost4");
+__name2(onRequestPost4, "onRequestPost");
 var routes = [
   {
     routePath: "/api/admin/get-lists",
@@ -195,6 +282,13 @@ var routes = [
     method: "POST",
     middlewares: [],
     modules: [onRequestPost3]
+  },
+  {
+    routePath: "/api/pacer/runs",
+    mountPath: "/api/pacer",
+    method: "POST",
+    middlewares: [],
+    modules: [onRequestPost4]
   }
 ];
 function lexer(str) {

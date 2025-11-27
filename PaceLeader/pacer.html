@@ -58,20 +58,60 @@
             transition: background 0.2s;
         }
         .sign-out-btn:hover { background: #c53030; }
+
+        .schedule {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 8px;
+            text-align: left;
+        }
+
+        .schedule-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .schedule-info {
+            font-size: 14px;
+            color: #2d3748;
+        }
+
+        .schedule-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 999px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: background 0.2s, transform 0.1s;
+            white-space: nowrap;
+        }
+
+        .schedule-btn:hover {
+            background: #5568d3;
+            transform: translateY(-1px);
+        }
     </style>
 </head>
 <body>
     <div class="card">
         <div class="badge">Pacer</div>
-        <h1>🏃‍♂️ Pacer Dashboard (Coming Soon)</h1>
+        <h1>🏃‍♂️ Pacer Dashboard</h1>
         <p>
             You are signed in as a <strong>pacer</strong>.
-            This page is a placeholder for future Pacer tools and views.
         </p>
-        <p>
-            For now, you can use the Admin dashboard to manage user lists
-            if you are also an admin, or simply sign out to switch accounts.
+
+        <p style="margin-top: 8px; margin-bottom: 20px; color: #718096; font-size: 14px;">
+            Next 7 days (starting tomorrow): pick a day to plan a run.
         </p>
+
+        <div id="pacerSchedule" class="schedule"></div>
+
         <button class="sign-out-btn" onclick="pacerSignOut()">Sign Out</button>
     </div>
 
@@ -81,13 +121,175 @@
             window.location.href = 'index.html';
         }
 
+        function formatDateLabel(date) {
+            // Format: YYYY-MM-DD (matching style from your todos file)
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+
+        function getWeekdayLabel(date) {
+            const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            return weekdays[date.getDay()];
+        }
+
+        async function upsertRun({ date, pacer, startTime, pace, startPlace }) {
+            try {
+                const response = await fetch('/api/pacer/runs', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        mode: 'upsert',
+                        date,
+                        pacer,
+                        startTime,
+                        pace,
+                        startPlace
+                    })
+                });
+                if (!response.ok) {
+                    const text = await response.text();
+                    console.error('Failed to save run', response.status, text);
+                }
+            } catch (err) {
+                console.error('Error saving run', err);
+            }
+        }
+
+        function createRunRowControls(row, dateLabel, weekday, pacerEmail) {
+            // Left side: date + weekday
+            const info = document.createElement('div');
+            info.className = 'schedule-info';
+            info.textContent = `${weekday} — ${dateLabel}`;
+
+            // Right side: button initially; details will be added on demand
+            const btn = document.createElement('button');
+            btn.className = 'schedule-btn';
+            btn.textContent = 'Add a run';
+
+            const details = document.createElement('div');
+            details.style.display = 'none';
+            details.style.marginTop = '4px';
+            details.style.fontSize = '13px';
+
+            // Attach once when button is clicked
+            btn.addEventListener('click', async () => {
+                if (details.childElementCount === 0) {
+                    const startTimeInput = document.createElement('input');
+                    startTimeInput.type = 'text';
+                    startTimeInput.value = '8:00am';
+                    startTimeInput.style.width = '80px';
+                    startTimeInput.style.marginRight = '6px';
+
+                    const paceInput = document.createElement('input');
+                    paceInput.type = 'text';
+                    paceInput.value = '10:00/ml';
+                    paceInput.style.width = '80px';
+                    paceInput.style.marginRight = '6px';
+
+                    const placeInput = document.createElement('input');
+                    placeInput.type = 'text';
+                    placeInput.value = 'WF';
+                    placeInput.style.width = '80px';
+                    placeInput.style.marginRight = '10px';
+
+                    const runnerLink = document.createElement('a');
+                    runnerLink.href = 'javascript:void(0)';
+                    runnerLink.textContent = 'Runner count: 1';
+                    runnerLink.style.color = '#3182ce';
+                    runnerLink.style.textDecoration = 'none';
+
+                    const saveFromInputs = () => {
+                        upsertRun({
+                            date: dateLabel,
+                            pacer: pacerEmail,
+                            startTime: startTimeInput.value,
+                            pace: paceInput.value,
+                            startPlace: placeInput.value
+                        });
+                    };
+
+                    startTimeInput.addEventListener('blur', saveFromInputs);
+                    paceInput.addEventListener('blur', saveFromInputs);
+                    placeInput.addEventListener('blur', saveFromInputs);
+
+                    details.appendChild(startTimeInput);
+                    details.appendChild(paceInput);
+                    details.appendChild(placeInput);
+                    details.appendChild(runnerLink);
+
+                    // Initial save with defaults
+                    saveFromInputs();
+                }
+
+                details.style.display = 'block';
+            });
+
+            // Wrap info and button in a vertical stack on the left side
+            const left = document.createElement('div');
+            left.style.display = 'flex';
+            left.style.flexDirection = 'column';
+            left.appendChild(info);
+            left.appendChild(details);
+
+            row.appendChild(left);
+            row.appendChild(btn);
+        }
+
+        function renderPacerSchedule() {
+            const container = document.getElementById('pacerSchedule');
+            if (!container) return;
+
+            const storedUserInfo = localStorage.getItem('user_info');
+            if (!storedUserInfo) {
+                console.error('No stored user info found for pacer.');
+                return;
+            }
+
+            let pacerEmail = null;
+            try {
+                const parsed = JSON.parse(storedUserInfo);
+                pacerEmail = parsed.email;
+            } catch (e) {
+                console.error('Failed to parse stored user info', e);
+            }
+
+            if (!pacerEmail) {
+                console.error('Pacer email not found in stored user info');
+                return;
+            }
+
+            container.innerHTML = '';
+
+            const today = new Date();
+
+            for (let i = 1; i <= 7; i++) {
+                const d = new Date(today);
+                d.setDate(today.getDate() + i);
+
+                const dateLabel = formatDateLabel(d);
+                const weekday = getWeekdayLabel(d);
+
+                const row = document.createElement('div');
+                row.className = 'schedule-row';
+
+                createRunRowControls(row, dateLabel, weekday, pacerEmail);
+
+                container.appendChild(row);
+            }
+        }
+
         // Optional: simple access guard so non-pacers are bounced
         document.addEventListener('DOMContentLoaded', () => {
             const selectedRole = localStorage.getItem('selectedRole');
             if (selectedRole !== 'pacer') {
                 alert('Access Denied: Pacer role required');
                 window.location.href = 'index.html';
+                return;
             }
+
+            renderPacerSchedule();
         });
     </script>
 </body>

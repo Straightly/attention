@@ -687,3 +687,24 @@ Now, when I add an email address to any of these roles, if the email existed alr
 **Prompt (~23:02 PST):**
 ```
 Next, please add an empty page for pacer and runner and route to them if one login as pacer or runner.
+```
+
+# November 26, 2025 — Pacer 7-Day Schedule UI
+
+**Prompt (~23:15 PST):**
+```
+For a pacer, On the pacer's page, it will display the dates in that format, and the weekday of that date for the next 7 days starting tomorrow.   Beside each date, add a button says "Add a run".  I will add function to the button later.  Don't worry about timezones.
+```
+
+# November 26, 2025 — Pacer Schedule Layout Tweak
+
+**Prompt (~23:17 PST):**
+```
+Can you adjust the display so the button add a run is on the same line as the dates?
+```
+
+# November 26, 2025 — Pacer Run Object & KV Behavior
+
+**Prompt (~23:30 PST):**
+```
+Add a run button will add an object called a run.  It should has the date (from the ux), the pacer (from the login), a startTime (a string, default to 8:00am), a pace (a string default to 10:00/ml), and a startPlace (a String, default to WF), and a list of singedUpRunners, started with only pacer in it. The run will ve save as the value in JSON under a key in the kv store.  When the pacer click on the button, three fields will be displayed on the same row with the date where the user can change these values.  The count of the runners will show as a clickable link in the format of "Runner count:  #" where # is the number of the signed up runners.  The value will be saved to the KV every time the user made change and move the focus out of the field.  
