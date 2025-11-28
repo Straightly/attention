@@ -122,6 +122,14 @@
             background: #5568d3;
             transform: translateY(-1px);
         }
+
+        .schedule-btn-danger {
+            background: #e53e3e;
+        }
+
+        .schedule-btn-danger:hover {
+            background: #c53030;
+        }
     </style>
 </head>
 <body>
@@ -169,7 +177,7 @@
             return weekdays[date.getDay()];
         }
 
-        async function upsertRun({ date, pacer, startTime, pace, startPlace }) {
+        async function upsertRun({ date, pacer, startTime, pace, startPlace, removed }) {
             try {
                 const response = await fetch('/api/pacer/runs', {
                     method: 'POST',
@@ -180,7 +188,8 @@
                         pacer,
                         startTime,
                         pace,
-                        startPlace
+                        startPlace,
+                        removed
                     })
                 });
                 if (!response.ok) {
@@ -205,6 +214,11 @@
             } else {
                 info.textContent = labelText;
             }
+
+            // Append mandatory first column *before* creating any other fields
+            row.appendChild(info);
+
+            const isRemoved = !!(existingRun && existingRun.removed);
 
             // Columns 2-4 & 5: inputs + runner link (created lazily for new runs)
             let startTimeInput = null;
@@ -235,7 +249,7 @@
                 const runnerCount = existingRun && Array.isArray(existingRun.signedUpRunners)
                     ? existingRun.signedUpRunners.length
                     : 1;
-                runnerLink.textContent = `Runner count: ${runnerCount}`;
+                runnerLink.textContent = `${runnerCount}`;
                 runnerLink.className = 'schedule-runner-link';
 
                 const saveFromInputs = () => {
@@ -244,7 +258,8 @@
                         pacer: pacerEmail,
                         startTime: startTimeInput.value,
                         pace: paceInput.value,
-                        startPlace: placeInput.value
+                        startPlace: placeInput.value,
+                        removed: false
                     });
                 };
 
@@ -260,7 +275,7 @@
                 row.appendChild(runnerLink);
             };
 
-            // Column 6: optional Add a run button
+            // Column 6: optional Add a run / Re Add / X button
             let btn = null;
             if (!existingRun) {
                 btn = document.createElement('button');
@@ -275,7 +290,8 @@
                             pacer: pacerEmail,
                             startTime: startTimeInput.value,
                             pace: paceInput.value,
-                            startPlace: placeInput.value
+                            startPlace: placeInput.value,
+                            removed: false
                         });
                     };
                     saveFromInputs();
@@ -286,16 +302,24 @@
                 ensureFields();
             }
 
-            // Append mandatory first column
-            row.appendChild(info);
-
-            // For existing runs, fields and runnerLink were already appended by ensureFields.
-            // For new runs, they will be appended once the button is clicked.
-
             if (existingRun) {
-                // Fields already appended; add an empty spacer to keep grid alignment
-                const spacer = document.createElement('div');
-                row.appendChild(spacer);
+                // Existing run: show either X or Re Add depending on removed flag
+                const actionBtn = document.createElement('button');
+                actionBtn.className = 'schedule-btn schedule-btn-danger';
+                actionBtn.textContent = isRemoved ? 'Re Add' : 'X';
+                actionBtn.addEventListener('click', async () => {
+                    const nextRemoved = !isRemoved;
+                    await upsertRun({
+                        date: dateLabel,
+                        pacer: pacerEmail,
+                        startTime: startTimeInput ? startTimeInput.value : (existingRun.startTime || '8:00am'),
+                        pace: paceInput ? paceInput.value : (existingRun.pace || '10:00/ml'),
+                        startPlace: placeInput ? placeInput.value : (existingRun.startPlace || 'WF'),
+                        removed: nextRemoved
+                    });
+                    renderPacerSchedule();
+                });
+                row.appendChild(actionBtn);
             } else {
                 if (btn) {
                     // For new runs, we need to fill columns 2-5 with empty cells initially

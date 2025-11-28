@@ -757,3 +757,52 @@ Also, hide these fields if no run was created for the date.
 **Prompt (~23:55 PST):**
 ```
 Now the date for the ones with runs showed up on the right.  Please move them to the left, lined up with other dates.
+```
+
+# November 26, 2025 — Prompt Journaling Reminder
+
+**Prompt (~23:59 PST):**
+```
+Please remember to journal all my prompts to Journal/journal.md.
+```
+
+# November 27, 2025 — Pacer Date Alignment Still Off
+
+**Prompt (~00:02 PST):**
+```
+Resuming working the PaceLeader page.  Now the dashboard has the date string on the right for the date with runs.  Please move the date string to the left like the dates without runs.
+```
+
+# November 27, 2025 — Runner Count Display Simplification
+
+**Prompt (~00:05 PST):**
+```
+Great!  Now for the Runner Count: 1 string, change it to just the number.  
+```
+
+# November 27, 2025 — Soft Delete & Re-Add Runs
+
+**Prompt (~00:10 PST):**
+```
+Add a button "X" for the rows with runs.  when user click on that, add a field removed to the object with value true and save it.  When loading, if the field removed is true, add a red button to say "Re-Add".  Click the button will get rid of the removed field.
+```
+
+# November 27, 2025 — Re Add Button Label Tweak
+
+**Prompt (~00:18 PST):**
+```
+when a run is soft deleted, change the button to say "Re Add"
+```
+
+# November 27, 2025 — Soft Delete Visual State Bug
+
+**Prompt (~00:20 PST):**
+```
+No.  What I meant was that click on X is not working.  It is still only showing the X button.  If the run is soft deleted, the button should say "Re Add" or "Re-Add".
+```
+
+# November 27, 2025 — Soft Deleted Fields Should Stay Visible
+
+**Prompt (~00:23 PST):**
+```
+It worked.  But you are hiding the field for the soft deleted fields.  Don't do that.  Leave them displayed.
