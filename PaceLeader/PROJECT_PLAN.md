@@ -75,64 +75,96 @@ PaceLeader is a web application with Google OAuth authentication and role-based 
 
 ---
 
-## Phase 4: Admin Dashboard
-**Status**: 🔲 Not Started  
+## Phase 4: Admin Dashboard ✅ COMPLETED
+**Status**: ✅ Complete  
 **Estimated Time**: 2-3 hours  
-**Actual Time**: _[To be filled]_
+**Actual Time**: _Multiple short sessions with AI assistance_
 
 ### Tasks
-- [ ] Create admin dashboard page (`admin.html`)
-- [ ] Implement admin-only access control
-  - [ ] Check if user has 'admin' role
-  - [ ] Redirect non-admins to main dashboard
-- [ ] Create UI to display three user lists:
-  - [ ] Admins list section with add/delete controls
-  - [ ] Pacers list section with add/delete controls
-  - [ ] Runners list section with add/delete controls
-- [ ] For each list section, implement:
-  - [ ] Input field for Gmail address
-  - [ ] "Add" button
-  - [ ] Display current users
-  - [ ] Delete button next to each user
-  - [ ] Email validation
-- [ ] Create backend endpoint:
-  - [ ] `POST /api/admin/update-lists` - Save modified lists to KV
-- [ ] Add confirmation dialog for deletions
-- [ ] Add error handling and user feedback
-- [ ] Test locally
-- [ ] Deploy to production
+- [x] Create admin dashboard page (`admin.html`)
+- [x] Implement admin-only access control
+  - [x] Check if user has 'admin' role
+  - [x] Redirect non-admins to main dashboard
+- [x] Create UI to display three user lists:
+  - [x] Admins list section with add/delete controls
+  - [x] Pacers list section with add/delete controls
+  - [x] Runners list section with add/delete controls
+- [x] For each list section, implement:
+  - [x] Input field for Gmail address
+  - [x] "Add" button
+  - [x] Display current users
+  - [x] Delete button next to each user (for own-role entries)
+  - [x] Email validation (Gmail-only, case-insensitive)
+- [x] Create backend endpoint:
+  - [x] `POST /api/admin/get-lists` - Read lists from KV with normalization
+  - [x] `POST /api/admin/update-lists` - Save modified lists to KV
+- [x] Store users as `{id, email, displayName}` with inline editing
+- [x] Implement UX-only role extension (admins also appear as pacers, pacers as runners) with derived entries read-only
+- [x] Add helper title text and basic error/success feedback
+- [x] Test locally and in production
 
 ### Deliverables
-- Admin dashboard page with three list sections
-- Add/delete Gmail addresses directly in each list
-- Single backend endpoint for KV updates
-- Access control (admin-only page)
+- ✅ Admin dashboard page with three list sections
+- ✅ Add/edit/delete Gmail users per role (with display names)
+- ✅ Structured user objects persisted in KV via dedicated admin APIs
+- ✅ Access control (admin-only page)
 
 ---
 
-## Phase 5: Pacer Dashboard
-**Status**: 🔲 Not Started  
-**Estimated Time**: _[To be determined]_  
-**Actual Time**: _[To be filled]_
+## Phase 5: Pacer Dashboard ✅ COMPLETED
+**Status**: ✅ Complete  
+**Estimated Time**: 2-3 hours  
+**Actual Time**: _Multiple short sessions with AI assistance_
 
 ### Tasks
-_To be defined_
+- [x] Create pacer dashboard page (`pacer.html`)
+- [x] Implement pacer-only access guard (role check + redirect)
+- [x] Show next 7 days starting tomorrow with date/weekday labels
+- [x] Allow pacer to configure runs per date:
+  - [x] Start time (with default)
+  - [x] Pace (with default)
+  - [x] Starting place (with default)
+  - [x] Runner count link
+- [x] Implement run creation/upsert API (`/api/pacer/runs` upsert mode)
+- [x] Persist runs in KV with fields: date, pacer, startTime, pace, startPlace, signedUpRunners, removed
+- [x] Implement soft delete / restore of runs with `removed` flag
+- [x] Ensure existing runs remain visible when soft-deleted (with proper controls)
+- [x] Add eye button to view signed-up runners for a run
+- [x] Add soft-delete warning when other runners are signed up, with custom dialog:
+  - [x] Primary button: "Pace, not quit."
+  - [x] Secondary button: "Quit anyway" (performs soft delete)
+- [x] Test locally and in production
 
 ### Deliverables
-_To be defined_
+- ✅ Pacer dashboard for configuring runs for the next 7 days
+- ✅ Cloudflare KV-backed pacer runs API with upsert and soft delete
+- ✅ UX to inspect signed-up runners and warn on quit
 
 ---
 
-## Phase 6: Runner Dashboard
-**Status**: 🔲 Not Started  
-**Estimated Time**: _[To be determined]_  
-**Actual Time**: _[To be filled]_
+## Phase 6: Runner Dashboard ✅ COMPLETED
+**Status**: ✅ Complete  
+**Estimated Time**: 2-3 hours  
+**Actual Time**: _Multiple short sessions with AI assistance_
 
 ### Tasks
-_To be defined_
+- [x] Create runner dashboard page (`runner.html`)
+- [x] Implement runner-only access guard (role check + redirect)
+- [x] Show next 7 days starting tomorrow as selectable date tabs
+- [x] Enable only dates that have pacer runs (via `/api/pacer/runs` getByDate)
+- [x] Display runs for selected date ordered by pacer
+- [x] Implement single-run-per-day selection per runner (enforced in backend)
+- [x] Implement `runnerSelect` mode in `/api/pacer/runs` to add/remove a runner from a run
+- [x] Add "My Coming Runs" summary section showing all runs the runner has signed up for
+- [x] Keep soft-deleted runs visible in "My Coming Runs" with label "Pacer Quited"
+- [x] Show pacer display names (not raw emails) in listings and summary
+- [x] Add UX text and styling refinements per feedback
+- [x] Test locally and in production
 
 ### Deliverables
-_To be defined_
+- ✅ Runner dashboard for discovering runs and signing up
+- ✅ Single-run-per-day constraint enforced in both UI and backend
+- ✅ "My Coming Runs" summary that reflects current and soft-deleted runs
 
 ---
 
@@ -210,19 +242,19 @@ _To be defined_
 - ✅ **Phase 1**: Setup & Deployment (~2 hours)
 - ✅ **Phase 2**: Backend Infrastructure & Authorization (~1.5 hours)
 - ✅ **Phase 3**: User List Management with KV (~1 hour)
+- ✅ **Phase 4**: Admin Dashboard (est. 2-3 hours)
+- ✅ **Phase 5**: Pacer Dashboard (est. 2-3 hours)
+- ✅ **Phase 6**: Runner Dashboard (est. 2-3 hours)
 
 ### Remaining Phases
-- 🔲 **Phase 4**: Admin Dashboard (2-3 hours)
-- 🔲 **Phase 5**: Pacer Dashboard (TBD)
-- 🔲 **Phase 6**: Runner Dashboard (TBD)
 - 🔲 **Phase 7**: Polish & Optimization (2-3 hours)
 - 🔲 **Phase 8**: Security Hardening (2-3 hours)
 
-**Total Time So Far**: ~4.5 hours  
-**Estimated Remaining**: 6-9+ hours (excluding Pacer/Runner dashboard features)
+**Total Time So Far**: _Several working sessions with AI assistance_  
+**Estimated Remaining**: 4-6+ hours (polish and security)
 
 ---
 
 **Live URL**: [https://paceleader.pages.dev](https://paceleader.pages.dev)  
-**Last Updated**: November 22, 2025  
-**Current Status**: Phase 3 Complete - Ready for Admin Dashboard Development
+**Last Updated**: November 29, 2025  
+**Current Status**: Phases 1–6 Complete (Admin, Pacer, Runner dashboards implemented)
