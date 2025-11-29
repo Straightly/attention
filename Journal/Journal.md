@@ -816,6 +816,16 @@ On the pacer page, when the user wanted to click on the X to soft delete a run, 
 
 **Action:** Updated the X/Re Add button handler in pacer.html so that when soft-deleting a run that has other signed-up runners (besides the pacer), it first shows an alert: "Runner signed up.  Please notify the user that you are no longer pacing the run." The soft delete then proceeds as before.
 
+# November 29, 2025 — Update Pacer Quit Dialog Message
+
+**Prompt (~00:58 PST):**
+```
+Change "Runner signed up.  Please notify the user that you are no longer pacing the run." to say "Runners have signed up. If you quit, new runners can no longer sign up, but the runners who already signed up will not be removed. They may NOT see that the run has been cancelled and no notification will be sent to them. Please notify the signed-up runners yourself."
+```
+
+**Action:** Updated the quit dialog message text in pacer.html to a clearer explanation: runners have signed up, new sign-ups will be blocked if the pacer quits, existing sign-ups remain, and no automatic notification is sent, so the pacer should notify signed-up runners directly.
+
+
 
 # November 29, 2025 — Runner Page Show Pacer Display Name Confirmation
 
