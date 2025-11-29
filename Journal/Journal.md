@@ -642,6 +642,29 @@ Now, change the logic from the login page such that, if a user logged in as an a
 
 **Action:** Resolved merge conflict by preserving all information and journal structure, merged both sides, and added this prompt as a new entry.
 
+# November 28, 2025 — Journal Logging & ToDos/List.json Issue
+
+**Prompt (22:01):** I accidentally moved ToDos/List.json to a different folder.  I have since moved it back.  But my ToDoApp still complain that ToDos/List.json not found.
+
+**Action:** Diagnosed the issue: ToDoApp expects ToDos/List.json at project root, but it was in Journal/ToDos/. Provided instructions to move it back to the correct location.
+
+# November 28, 2025 — Prompt Logging Confirmation
+
+**Prompt (22:04):** Did you add my prompts to the journal?
+
+**Action:** Confirmed that all prompts up to the last merge were in the journal. Clarified that new prompts will be added as requested.
+
+# November 28, 2025 — Journal Change List Confusion
+
+**Prompt (22:05):** But I did not see any change in my change list when I run git status.
+
+**Action:** Explained that no new journal changes were made since last commit, so the file did not appear as modified.
+
+# November 28, 2025 — Add All Prompts to Journal
+
+**Prompt (22:06):** I want ALL prompts be added to the journal, include this one and my previous few.
+
+**Action:** Logging all recent prompts (including this one) to the journal as new entries, with timestamps and action notes.
 **Prompt (06:04):** Please review the structure and flow of the article and suggest changes. Pay paticular attention to see if any repetitions that can be removed
 
 **Action:** Analyzed structure and identified repetitions: (1) "no guarantee" phrase repeated twice, (2) "minimum necessary" violation repeated in two sections, (3) "MCP is not HIPAA-compliant" stated twice, (4) "AI agents should generate code" repeated, (5) Section numbering inconsistent. Recommended restructuring into 3 clear sections with proper flow.
