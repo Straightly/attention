@@ -2,25 +2,44 @@ var __defProp = Object.defineProperty;
 var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
 
 // api/admin/get-lists.js
-var DEFAULT_ADMINS = ["zhian.job@gmail.com"];
-var DEFAULT_PACERS = ["zhian.job@gmail.com", "jianame@gmail.com"];
-var DEFAULT_RUNNERS = ["zhian.job@gmail.com", "jianame@gmail.com"];
+var DEFAULT_ADMINS = ["jianame@gmail.com"];
+var DEFAULT_PACERS = ["jianame@gmail.com"];
+var DEFAULT_RUNNERS = ["jianame@gmail.com"];
+function normalizeList(raw, role) {
+  if (!Array.isArray(raw)) return [];
+  return raw.map((entry) => {
+    if (typeof entry === "string") {
+      const email2 = entry;
+      const displayName2 = email2.split("@")[0] || email2;
+      const id2 = role + ":" + email2;
+      return { id: id2, email: email2, displayName: displayName2 };
+    }
+    const email = entry.email;
+    const displayName = entry.displayName && entry.displayName.length > 0 ? entry.displayName : email && email.split("@")[0] || email;
+    const id = entry.id && entry.id.length > 0 ? entry.id : role + ":" + email;
+    return { id, email, displayName };
+  });
+}
+__name(normalizeList, "normalizeList");
 async function onRequestPost(context) {
   try {
     const KV = context.env.PACELEADER_KV;
     let admins, pacers, runners;
     try {
-      admins = await KV.get("admins", "json");
-      pacers = await KV.get("pacers", "json");
-      runners = await KV.get("runners", "json");
-      if (!admins || admins.length === 0) admins = DEFAULT_ADMINS;
-      if (!pacers || pacers.length === 0) pacers = DEFAULT_PACERS;
-      if (!runners || runners.length === 0) runners = DEFAULT_RUNNERS;
+      const rawAdmins = await KV.get("admins", "json");
+      const rawPacers = await KV.get("pacers", "json");
+      const rawRunners = await KV.get("runners", "json");
+      const baseAdmins = !rawAdmins || rawAdmins.length === 0 ? DEFAULT_ADMINS : rawAdmins;
+      const basePacers = !rawPacers || rawPacers.length === 0 ? DEFAULT_PACERS : rawPacers;
+      const baseRunners = !rawRunners || rawRunners.length === 0 ? DEFAULT_RUNNERS : rawRunners;
+      admins = normalizeList(baseAdmins, "admins");
+      pacers = normalizeList(basePacers, "pacers");
+      runners = normalizeList(baseRunners, "runners");
     } catch (kvError) {
       console.error("KV read failed, using fallback:", kvError);
-      admins = DEFAULT_ADMINS;
-      pacers = DEFAULT_PACERS;
-      runners = DEFAULT_RUNNERS;
+      admins = normalizeList(DEFAULT_ADMINS, "admins");
+      pacers = normalizeList(DEFAULT_PACERS, "pacers");
+      runners = normalizeList(DEFAULT_RUNNERS, "runners");
     }
     return new Response(JSON.stringify({
       admins,
@@ -46,6 +65,19 @@ __name(onRequestPost, "onRequestPost");
 // api/admin/update-lists.js
 async function onRequestPost2(context) {
   try {
+    let validateList = function(list, role) {
+      for (const entry of list) {
+        if (!entry || typeof entry.email !== "string") {
+          return `Invalid entry in ${role} list`;
+        }
+        const email = entry.email;
+        if (!email.includes("@gmail.com")) {
+          return `Invalid email: ${email}`;
+        }
+      }
+      return null;
+    };
+    __name(validateList, "validateList");
     const { request } = context;
     const body = await request.json();
     const { admins, pacers, runners } = body;
@@ -55,14 +87,15 @@ async function onRequestPost2(context) {
         headers: { "Content-Type": "application/json" }
       });
     }
-    const allEmails = [...admins, ...pacers, ...runners];
-    for (const email of allEmails) {
-      if (!email.includes("@gmail.com")) {
-        return new Response(JSON.stringify({ error: `Invalid email: ${email}` }), {
-          status: 400,
-          headers: { "Content-Type": "application/json" }
-        });
-      }
+    const errAdmins = validateList(admins, "admins");
+    const errPacers = validateList(pacers, "pacers");
+    const errRunners = validateList(runners, "runners");
+    const firstError = errAdmins || errPacers || errRunners;
+    if (firstError) {
+      return new Response(JSON.stringify({ error: firstError }), {
+        status: 400,
+        headers: { "Content-Type": "application/json" }
+      });
     }
     const KV = context.env.PACELEADER_KV;
     if (!KV) {
@@ -92,13 +125,33 @@ async function onRequestPost2(context) {
 __name(onRequestPost2, "onRequestPost");
 
 // api/auth/verify.js
-var DEFAULT_ADMINS2 = ["zhian.job@gmail.com"];
-var DEFAULT_PACERS2 = ["zhian.job@gmail.com", "jianame@gmail.com"];
-var DEFAULT_RUNNERS2 = ["zhian.job@gmail.com", "jianame@gmail.com"];
+var DEFAULT_ADMINS2 = ["jianame@gmail.com"];
+var DEFAULT_PACERS2 = ["jianame@gmail.com"];
+var DEFAULT_RUNNERS2 = ["jianame@gmail.com"];
+function normalizeList2(raw, role) {
+  if (!Array.isArray(raw)) return [];
+  return raw.map((entry) => {
+    if (typeof entry === "string") {
+      const email2 = entry;
+      const displayName2 = email2.split("@")[0] || email2;
+      const id2 = role + ":" + email2;
+      return { id: id2, email: email2, displayName: displayName2 };
+    }
+    const email = entry.email;
+    const displayName = entry.displayName && entry.displayName.length > 0 ? entry.displayName : email && email.split("@")[0] || email;
+    const id = entry.id && entry.id.length > 0 ? entry.id : role + ":" + email;
+    return { id, email, displayName };
+  });
+}
+__name(normalizeList2, "normalizeList");
 async function getUserLists(KV) {
   if (!KV) {
     console.warn("KV not available, using hardcoded defaults");
-    return { admins: DEFAULT_ADMINS2, pacers: DEFAULT_PACERS2, runners: DEFAULT_RUNNERS2 };
+    return {
+      admins: normalizeList2(DEFAULT_ADMINS2, "admins"),
+      pacers: normalizeList2(DEFAULT_PACERS2, "pacers"),
+      runners: normalizeList2(DEFAULT_RUNNERS2, "runners")
+    };
   }
   try {
     let admins = await KV.get("admins", "json");
@@ -106,14 +159,26 @@ async function getUserLists(KV) {
       await KV.put("admins", JSON.stringify(DEFAULT_ADMINS2));
       await KV.put("pacers", JSON.stringify(DEFAULT_PACERS2));
       await KV.put("runners", JSON.stringify(DEFAULT_RUNNERS2));
-      return { admins: DEFAULT_ADMINS2, pacers: DEFAULT_PACERS2, runners: DEFAULT_RUNNERS2 };
+      return {
+        admins: normalizeList2(DEFAULT_ADMINS2, "admins"),
+        pacers: normalizeList2(DEFAULT_PACERS2, "pacers"),
+        runners: normalizeList2(DEFAULT_RUNNERS2, "runners")
+      };
     }
     const pacers = await KV.get("pacers", "json");
     const runners = await KV.get("runners", "json");
-    return { admins, pacers, runners };
+    return {
+      admins: normalizeList2(admins, "admins"),
+      pacers: normalizeList2(pacers || [], "pacers"),
+      runners: normalizeList2(runners || [], "runners")
+    };
   } catch (error) {
     console.error("KV read failed, using fallback:", error);
-    return { admins: DEFAULT_ADMINS2, pacers: DEFAULT_PACERS2, runners: DEFAULT_RUNNERS2 };
+    return {
+      admins: normalizeList2(DEFAULT_ADMINS2, "admins"),
+      pacers: normalizeList2(DEFAULT_PACERS2, "pacers"),
+      runners: normalizeList2(DEFAULT_RUNNERS2, "runners")
+    };
   }
 }
 __name(getUserLists, "getUserLists");
@@ -141,9 +206,15 @@ async function onRequestPost3(context) {
     const email = tokenInfo.email;
     const { admins, pacers, runners } = await getUserLists(context.env.PACELEADER_KV);
     const roles = [];
-    if (admins.includes(email)) roles.push("admin");
-    if (pacers.includes(email)) roles.push("pacer");
-    if (runners.includes(email)) roles.push("runner");
+    if (admins.some((u) => u.email === email)) roles.push("admin");
+    if (pacers.some((u) => u.email === email)) roles.push("pacer");
+    if (runners.some((u) => u.email === email)) roles.push("runner");
+    if (roles.includes("admin") && !roles.includes("pacer")) {
+      roles.push("pacer");
+    }
+    if (roles.includes("pacer") && !roles.includes("runner")) {
+      roles.push("runner");
+    }
     if (roles.length === 0) {
       return new Response(JSON.stringify({
         authorized: false,
@@ -185,7 +256,7 @@ async function onRequestPost4(context) {
   try {
     const { request } = context;
     const body = await request.json();
-    const { mode, pacer, date, startTime, pace, startPlace, removed } = body || {};
+    const { mode, pacer, date, startTime, pace, startPlace, removed, runnerEmail, selected } = body || {};
     let runs = [];
     try {
       const stored = await KV.get("runs", "json");
@@ -204,6 +275,19 @@ async function onRequestPost4(context) {
       }
       const pacerRuns = runs.filter((r) => r.pacer === pacer);
       return new Response(JSON.stringify({ runs: pacerRuns }), {
+        status: 200,
+        headers: { "Content-Type": "application/json" }
+      });
+    }
+    if (mode === "getByDate") {
+      if (!date) {
+        return new Response(JSON.stringify({ error: "Missing date" }), {
+          status: 400,
+          headers: { "Content-Type": "application/json" }
+        });
+      }
+      const dateRuns = runs.filter((r) => r.date === date);
+      return new Response(JSON.stringify({ runs: dateRuns }), {
         status: 200,
         headers: { "Content-Type": "application/json" }
       });
@@ -245,6 +329,39 @@ async function onRequestPost4(context) {
       }
       await KV.put("runs", JSON.stringify(runs));
       return new Response(JSON.stringify({ run }), {
+        status: 200,
+        headers: { "Content-Type": "application/json" }
+      });
+    }
+    if (mode === "runnerSelect") {
+      if (!date || !pacer || !runnerEmail || typeof selected !== "boolean") {
+        return new Response(JSON.stringify({ error: "Missing date, pacer, runnerEmail, or selected" }), {
+          status: 400,
+          headers: { "Content-Type": "application/json" }
+        });
+      }
+      for (const r of runs) {
+        if (r.date === date && Array.isArray(r.signedUpRunners)) {
+          r.signedUpRunners = r.signedUpRunners.filter((email) => email !== runnerEmail);
+        }
+      }
+      if (selected) {
+        const target = runs.find((r) => r.date === date && r.pacer === pacer);
+        if (!target) {
+          return new Response(JSON.stringify({ error: "Target run not found for given date and pacer" }), {
+            status: 404,
+            headers: { "Content-Type": "application/json" }
+          });
+        }
+        if (!Array.isArray(target.signedUpRunners)) {
+          target.signedUpRunners = [];
+        }
+        if (!target.signedUpRunners.includes(runnerEmail)) {
+          target.signedUpRunners.push(runnerEmail);
+        }
+      }
+      await KV.put("runs", JSON.stringify(runs));
+      return new Response(JSON.stringify({ ok: true }), {
         status: 200,
         headers: { "Content-Type": "application/json" }
       });
@@ -782,7 +899,7 @@ var jsonError = /* @__PURE__ */ __name(async (request, env, _ctx, middlewareCtx)
 }, "jsonError");
 var middleware_miniflare3_json_error_default = jsonError;
 
-// ../.wrangler/tmp/bundle-VCBjCU/middleware-insertion-facade.js
+// ../.wrangler/tmp/bundle-pmUznt/middleware-insertion-facade.js
 var __INTERNAL_WRANGLER_MIDDLEWARE__ = [
   middleware_ensure_req_body_drained_default,
   middleware_miniflare3_json_error_default
@@ -814,7 +931,7 @@ function __facade_invoke__(request, env, ctx, dispatch, finalMiddleware) {
 }
 __name(__facade_invoke__, "__facade_invoke__");
 
-// ../.wrangler/tmp/bundle-VCBjCU/middleware-loader.entry.ts
+// ../.wrangler/tmp/bundle-pmUznt/middleware-loader.entry.ts
 var __Facade_ScheduledController__ = class ___Facade_ScheduledController__ {
   constructor(scheduledTime, cron, noRetry) {
     this.scheduledTime = scheduledTime;

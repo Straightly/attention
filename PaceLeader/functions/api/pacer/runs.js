@@ -15,7 +15,7 @@ export async function onRequestPost(context) {
     try {
         const { request } = context;
         const body = await request.json();
-        const { mode, pacer, date, startTime, pace, startPlace, removed } = body || {};
+        const { mode, pacer, date, startTime, pace, startPlace, removed, runnerEmail, selected } = body || {};
 
         // Load existing runs (or empty array)
         let runs = [];
@@ -39,6 +39,21 @@ export async function onRequestPost(context) {
 
             const pacerRuns = runs.filter(r => r.pacer === pacer);
             return new Response(JSON.stringify({ runs: pacerRuns }), {
+                status: 200,
+                headers: { 'Content-Type': 'application/json' }
+            });
+        }
+
+        if (mode === 'getByDate') {
+            if (!date) {
+                return new Response(JSON.stringify({ error: 'Missing date' }), {
+                    status: 400,
+                    headers: { 'Content-Type': 'application/json' }
+                });
+            }
+
+            const dateRuns = runs.filter(r => r.date === date);
+            return new Response(JSON.stringify({ runs: dateRuns }), {
                 status: 200,
                 headers: { 'Content-Type': 'application/json' }
             });
@@ -87,6 +102,45 @@ export async function onRequestPost(context) {
             await KV.put('runs', JSON.stringify(runs));
 
             return new Response(JSON.stringify({ run }), {
+                status: 200,
+                headers: { 'Content-Type': 'application/json' }
+            });
+        }
+
+        if (mode === 'runnerSelect') {
+            if (!date || !pacer || !runnerEmail || typeof selected !== 'boolean') {
+                return new Response(JSON.stringify({ error: 'Missing date, pacer, runnerEmail, or selected' }), {
+                    status: 400,
+                    headers: { 'Content-Type': 'application/json' }
+                });
+            }
+
+            // Enforce at most one run per date per runner
+            for (const r of runs) {
+                if (r.date === date && Array.isArray(r.signedUpRunners)) {
+                    r.signedUpRunners = r.signedUpRunners.filter(email => email !== runnerEmail);
+                }
+            }
+
+            if (selected) {
+                const target = runs.find(r => r.date === date && r.pacer === pacer);
+                if (!target) {
+                    return new Response(JSON.stringify({ error: 'Target run not found for given date and pacer' }), {
+                        status: 404,
+                        headers: { 'Content-Type': 'application/json' }
+                    });
+                }
+                if (!Array.isArray(target.signedUpRunners)) {
+                    target.signedUpRunners = [];
+                }
+                if (!target.signedUpRunners.includes(runnerEmail)) {
+                    target.signedUpRunners.push(runnerEmail);
+                }
+            }
+
+            await KV.put('runs', JSON.stringify(runs));
+
+            return new Response(JSON.stringify({ ok: true }), {
                 status: 200,
                 headers: { 'Content-Type': 'application/json' }
             });

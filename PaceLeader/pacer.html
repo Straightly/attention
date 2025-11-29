@@ -130,6 +130,64 @@
         .schedule-btn-danger:hover {
             background: #c53030;
         }
+
+        .schedule-runners-panel {
+            margin-top: 6px;
+            padding: 8px 10px;
+            font-size: 13px;
+            color: #4a5568;
+            background: #f7fafc;
+            border-radius: 8px;
+        }
+
+        .quit-dialog-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.45);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 50;
+        }
+
+        .quit-dialog {
+            background: white;
+            border-radius: 12px;
+            padding: 20px 24px;
+            max-width: 360px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+            font-size: 14px;
+            color: #2d3748;
+        }
+
+        .quit-dialog-message {
+            margin-bottom: 16px;
+        }
+
+        .quit-dialog-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+        }
+
+        .quit-dialog-button {
+            border-radius: 999px;
+            padding: 6px 14px;
+            font-size: 13px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .quit-dialog-button-primary {
+            background: #e53e3e;
+            color: white;
+        }
+
+        .quit-dialog-button-secondary {
+            background: #edf2f7;
+            color: #2d3748;
+        }
     </style>
 </head>
 <body>
@@ -304,10 +362,58 @@
 
             if (existingRun) {
                 // Existing run: show either X or Re Add depending on removed flag
+                let runnersPanel = null;
+
+                const actionsCell = document.createElement('div');
+                actionsCell.style.display = 'flex';
+                actionsCell.style.gap = '6px';
+                actionsCell.style.justifyContent = 'flex-end';
+
+                const viewBtn = document.createElement('button');
+                viewBtn.className = 'schedule-btn';
+                viewBtn.textContent = '👁';
+                viewBtn.title = 'View signed-up runners';
+                viewBtn.addEventListener('click', () => {
+                    if (runnersPanel && runnersPanel.parentNode) {
+                        runnersPanel.parentNode.removeChild(runnersPanel);
+                        runnersPanel = null;
+                        return;
+                    }
+
+                    runnersPanel = document.createElement('div');
+                    runnersPanel.className = 'schedule-runners-panel';
+
+                    const list = Array.isArray(existingRun.signedUpRunners) ? existingRun.signedUpRunners : [];
+                    if (!list.length) {
+                        runnersPanel.textContent = 'No runners have signed up yet.';
+                    } else {
+                        const title = document.createElement('div');
+                        title.textContent = 'Signed-up runners:';
+                        title.style.fontWeight = '600';
+                        title.style.marginBottom = '4px';
+                        runnersPanel.appendChild(title);
+
+                        const ul = document.createElement('ul');
+                        ul.style.paddingLeft = '18px';
+                        for (const email of list) {
+                            const li = document.createElement('li');
+                            li.textContent = email;
+                            ul.appendChild(li);
+                        }
+                        runnersPanel.appendChild(ul);
+                    }
+
+                    const parent = row.parentNode;
+                    if (parent) {
+                        parent.insertBefore(runnersPanel, row.nextSibling);
+                    }
+                });
+
                 const actionBtn = document.createElement('button');
                 actionBtn.className = 'schedule-btn schedule-btn-danger';
                 actionBtn.textContent = isRemoved ? 'Re Add' : 'X';
-                actionBtn.addEventListener('click', async () => {
+
+                const performSoftDelete = async () => {
                     const nextRemoved = !isRemoved;
                     await upsertRun({
                         date: dateLabel,
@@ -318,8 +424,63 @@
                         removed: nextRemoved
                     });
                     renderPacerSchedule();
+                };
+
+                const showQuitDialog = () => {
+                    const overlay = document.createElement('div');
+                    overlay.className = 'quit-dialog-overlay';
+
+                    const dialog = document.createElement('div');
+                    dialog.className = 'quit-dialog';
+
+                    const msg = document.createElement('div');
+                    msg.className = 'quit-dialog-message';
+                    msg.textContent = 'Runner signed up.  Please notify the user that you are no longer pacing the run.';
+
+                    const actions = document.createElement('div');
+                    actions.className = 'quit-dialog-actions';
+
+                    const stayBtn = document.createElement('button');
+                    stayBtn.className = 'quit-dialog-button quit-dialog-button-primary';
+                    stayBtn.textContent = 'Pace, not quit.';
+                    stayBtn.addEventListener('click', () => {
+                        document.body.removeChild(overlay);
+                    });
+
+                    const quitBtn = document.createElement('button');
+                    quitBtn.className = 'quit-dialog-button quit-dialog-button-secondary';
+                    quitBtn.textContent = 'Quit anyway';
+                    quitBtn.addEventListener('click', async () => {
+                        document.body.removeChild(overlay);
+                        await performSoftDelete();
+                    });
+
+                    actions.appendChild(stayBtn);
+                    actions.appendChild(quitBtn);
+
+                    dialog.appendChild(msg);
+                    dialog.appendChild(actions);
+                    overlay.appendChild(dialog);
+
+                    document.body.appendChild(overlay);
+                };
+
+                actionBtn.addEventListener('click', async () => {
+                    // If other runners (besides the pacer) are signed up, show custom dialog
+                    if (!isRemoved && existingRun && Array.isArray(existingRun.signedUpRunners)) {
+                        const others = existingRun.signedUpRunners.filter(email => email && email !== pacerEmail);
+                        if (others.length > 0) {
+                            showQuitDialog();
+                            return;
+                        }
+                    }
+
+                    await performSoftDelete();
                 });
-                row.appendChild(actionBtn);
+
+                actionsCell.appendChild(viewBtn);
+                actionsCell.appendChild(actionBtn);
+                row.appendChild(actionsCell);
             } else {
                 if (btn) {
                     // For new runs, we need to fill columns 2-5 with empty cells initially

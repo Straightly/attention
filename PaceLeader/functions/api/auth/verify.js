@@ -2,41 +2,69 @@
 // Verifies Google OAuth tokens and checks user roles
 
 // Hardcoded fallback lists (matching data/*.json files)
-const DEFAULT_ADMINS = ['zhian.job@gmail.com'];
-const DEFAULT_PACERS = ['zhian.job@gmail.com', 'jianame@gmail.com'];
-const DEFAULT_RUNNERS = ['zhian.job@gmail.com', 'jianame@gmail.com'];
+const DEFAULT_ADMINS = ['jianame@gmail.com'];
+const DEFAULT_PACERS = ['jianame@gmail.com'];
+const DEFAULT_RUNNERS = ['jianame@gmail.com'];
+
+function normalizeList(raw, role) {
+  if (!Array.isArray(raw)) return [];
+  return raw.map((entry) => {
+    if (typeof entry === 'string') {
+      const email = entry;
+      const displayName = email.split('@')[0] || email;
+      const id = role + ':' + email;
+      return { id, email, displayName };
+    }
+    const email = entry.email;
+    const displayName = entry.displayName && entry.displayName.length > 0
+      ? entry.displayName
+      : (email && email.split('@')[0]) || email;
+    const id = entry.id && entry.id.length > 0 ? entry.id : (role + ':' + email);
+    return { id, email, displayName };
+  });
+}
 
 // Get user lists from KV with auto-initialization and fallback
 async function getUserLists(KV) {
-  // If KV is not available, use defaults immediately
   if (!KV) {
     console.warn('KV not available, using hardcoded defaults');
-    return { admins: DEFAULT_ADMINS, pacers: DEFAULT_PACERS, runners: DEFAULT_RUNNERS };
+    return {
+      admins: normalizeList(DEFAULT_ADMINS, 'admins'),
+      pacers: normalizeList(DEFAULT_PACERS, 'pacers'),
+      runners: normalizeList(DEFAULT_RUNNERS, 'runners')
+    };
   }
 
   try {
-    // Check if KV is initialized
     let admins = await KV.get('admins', 'json');
 
     if (!admins) {
-      // Auto-initialize KV on first run
       await KV.put('admins', JSON.stringify(DEFAULT_ADMINS));
       await KV.put('pacers', JSON.stringify(DEFAULT_PACERS));
       await KV.put('runners', JSON.stringify(DEFAULT_RUNNERS));
 
-      // Use defaults for this request
-      return { admins: DEFAULT_ADMINS, pacers: DEFAULT_PACERS, runners: DEFAULT_RUNNERS };
+      return {
+        admins: normalizeList(DEFAULT_ADMINS, 'admins'),
+        pacers: normalizeList(DEFAULT_PACERS, 'pacers'),
+        runners: normalizeList(DEFAULT_RUNNERS, 'runners')
+      };
     }
 
-    // Read from KV
     const pacers = await KV.get('pacers', 'json');
     const runners = await KV.get('runners', 'json');
 
-    return { admins, pacers, runners };
+    return {
+      admins: normalizeList(admins, 'admins'),
+      pacers: normalizeList(pacers || [], 'pacers'),
+      runners: normalizeList(runners || [], 'runners')
+    };
   } catch (error) {
-    // Fallback to hardcoded lists if KV fails
     console.error('KV read failed, using fallback:', error);
-    return { admins: DEFAULT_ADMINS, pacers: DEFAULT_PACERS, runners: DEFAULT_RUNNERS };
+    return {
+      admins: normalizeList(DEFAULT_ADMINS, 'admins'),
+      pacers: normalizeList(DEFAULT_PACERS, 'pacers'),
+      runners: normalizeList(DEFAULT_RUNNERS, 'runners')
+    };
   }
 }
 
@@ -71,11 +99,19 @@ export async function onRequestPost(context) {
     // Get user lists from KV (with auto-init and fallback)
     const { admins, pacers, runners } = await getUserLists(context.env.PACELEADER_KV);
 
-    // Check roles
     const roles = [];
-    if (admins.includes(email)) roles.push('admin');
-    if (pacers.includes(email)) roles.push('pacer');
-    if (runners.includes(email)) roles.push('runner');
+    if (admins.some(u => u.email === email)) roles.push('admin');
+    if (pacers.some(u => u.email === email)) roles.push('pacer');
+    if (runners.some(u => u.email === email)) roles.push('runner');
+
+    // UX-only role extension: admins are also pacers, pacers are also runners.
+    // This does NOT modify the underlying KV lists, only what the frontend sees.
+    if (roles.includes('admin') && !roles.includes('pacer')) {
+      roles.push('pacer');
+    }
+    if (roles.includes('pacer') && !roles.includes('runner')) {
+      roles.push('runner');
+    }
 
     // Build response
     if (roles.length === 0) {

@@ -60,22 +60,144 @@ function renderAllLists() {
     renderList('runners');
 }
 
+function getDisplayEntries(role) {
+    const admins = userLists.admins || [];
+    const pacers = userLists.pacers || [];
+    const runners = userLists.runners || [];
+
+    if (role === 'admins') {
+        return admins.map(entry => ({ entry, sourceRole: 'admins' }));
+    }
+
+    if (role === 'pacers') {
+        const result = [];
+        for (const e of pacers) {
+            result.push({ entry: e, sourceRole: 'pacers' });
+        }
+        const pacerEmails = new Set(pacers.map(e => e.email));
+        for (const e of admins) {
+            if (!pacerEmails.has(e.email)) {
+                result.push({ entry: e, sourceRole: 'admins' });
+            }
+        }
+        return result;
+    }
+
+    if (role === 'runners') {
+        const result = [];
+        for (const e of runners) {
+            result.push({ entry: e, sourceRole: 'runners' });
+        }
+        const runnerEmails = new Set(runners.map(e => e.email));
+        const pacerEmails = new Set(pacers.map(e => e.email));
+        for (const e of pacers) {
+            if (!runnerEmails.has(e.email)) {
+                result.push({ entry: e, sourceRole: 'pacers' });
+            }
+        }
+        for (const e of admins) {
+            if (!runnerEmails.has(e.email) && !pacerEmails.has(e.email)) {
+                result.push({ entry: e, sourceRole: 'admins' });
+            }
+        }
+        return result;
+    }
+
+    return [];
+}
+
 // Render a specific list
 function renderList(role) {
     const listElement = document.getElementById(`${role}-list`);
-    const users = userLists[role];
+    const items = getDisplayEntries(role);
 
-    if (users.length === 0) {
+    if (items.length === 0) {
         listElement.innerHTML = '<div class="empty-state">No users yet</div>';
         return;
     }
 
-    listElement.innerHTML = users.map(email => `
-        <li class="user-item">
-            <span class="user-email">${email}</span>
-            <button class="delete-btn" onclick="deleteUser('${role}', '${email}')">Delete</button>
-        </li>
-    `).join('');
+    listElement.innerHTML = '';
+
+    items.forEach(({ entry, sourceRole }) => {
+        const li = document.createElement('li');
+        li.className = 'user-item';
+
+        const isOwn = sourceRole === role;
+
+        const nameInput = document.createElement('input');
+        nameInput.type = 'text';
+        nameInput.value = entry.displayName || (entry.email || '');
+        nameInput.className = 'user-email';
+        nameInput.style.marginRight = '8px';
+
+        const emailInput = document.createElement('input');
+        emailInput.type = 'email';
+        emailInput.value = entry.email || '';
+        emailInput.className = 'user-email';
+
+        if (!isOwn) {
+            nameInput.disabled = true;
+            emailInput.disabled = true;
+        } else {
+            const originalName = entry.displayName || (entry.email || '');
+            const originalEmail = entry.email || '';
+
+            nameInput.addEventListener('blur', async () => {
+                const newName = nameInput.value.trim();
+                if (newName === originalName) return;
+                const list = userLists[role] || [];
+                const idx = list.findIndex(u => u.id === entry.id);
+                if (idx === -1) return;
+                list[idx] = { ...list[idx], displayName: newName };
+                const ok = await saveToBackend();
+                if (!ok) {
+                    list[idx] = { ...list[idx], displayName: originalName };
+                    nameInput.value = originalName;
+                } else {
+                    await loadUserLists();
+                }
+            });
+
+            emailInput.addEventListener('blur', async () => {
+                const newEmail = emailInput.value.trim();
+                if (newEmail === originalEmail) return;
+                if (!newEmail.includes('@gmail.com')) {
+                    showError('Please enter a valid Gmail address');
+                    emailInput.value = originalEmail;
+                    return;
+                }
+                const list = userLists[role] || [];
+                const idx = list.findIndex(u => u.id === entry.id);
+                if (idx === -1) return;
+                list[idx] = { ...list[idx], email: newEmail };
+                const ok = await saveToBackend();
+                if (!ok) {
+                    list[idx] = { ...list[idx], email: originalEmail };
+                    emailInput.value = originalEmail;
+                } else {
+                    await loadUserLists();
+                }
+            });
+        }
+
+        const deleteBtn = document.createElement('button');
+        deleteBtn.className = 'delete-btn';
+        deleteBtn.textContent = 'Delete';
+        if (!isOwn) {
+            deleteBtn.disabled = true;
+            deleteBtn.style.opacity = '0.5';
+        } else {
+            deleteBtn.addEventListener('click', () => {
+                deleteUser(role, entry.email);
+            });
+        }
+
+        li.appendChild(nameInput);
+        li.appendChild(emailInput);
+        li.appendChild(deleteBtn);
+
+        listElement.appendChild(li);
+    });
 }
 
 // Add user to a list
@@ -84,6 +206,7 @@ async function addUser(role) {
         role === 'pacers' ? 'pacer-email' : 'runner-email';
     const input = document.getElementById(inputId);
     const email = input.value.trim();
+    const lowerEmail = email.toLowerCase();
 
     // Validate email
     if (!email) {
@@ -91,20 +214,21 @@ async function addUser(role) {
         return;
     }
 
-    if (!email.includes('@gmail.com')) {
+    if (!lowerEmail.endsWith('@gmail.com')) {
         showError('Please enter a valid Gmail address');
         return;
     }
 
-    // Check if already exists
-    if (userLists[role].includes(email)) {
+    // Check if already exists in this role list by email
+    if ((userLists[role] || []).some(u => (u.email || '').toLowerCase() === lowerEmail)) {
         showError('User already exists in this list');
         alert(`The address ${email} is already in the ${role} list and was not added again.`);
         return;
     }
 
-    // Add to list
-    userLists[role].push(email);
+    const displayName = email.split('@')[0] || email;
+    const id = role + ':' + email;
+    userLists[role].push({ id, email, displayName });
 
     // Save to backend (will sort before saving)
     const success = await saveToBackend();
@@ -116,7 +240,7 @@ async function addUser(role) {
         showSuccess(`Added ${email} to ${role}`);
     } else {
         // Rollback if save failed
-        userLists[role] = userLists[role].filter(e => e !== email);
+        userLists[role] = (userLists[role] || []).filter(e => (e.email || '').toLowerCase() !== lowerEmail);
     }
 }
 
@@ -129,8 +253,8 @@ async function deleteUser(role, email) {
     // Store original list for rollback
     const originalList = [...userLists[role]];
 
-    // Remove from list
-    userLists[role] = userLists[role].filter(e => e !== email);
+    // Remove from list by email
+    userLists[role] = userLists[role].filter(e => (e.email || '') !== email);
 
     // Save to backend (will sort before saving)
     const success = await saveToBackend();
@@ -149,11 +273,10 @@ async function deleteUser(role, email) {
 // Save lists to backend (sorts alphabetically before saving)
 async function saveToBackend() {
     try {
-        // Sort all lists alphabetically (case-insensitive) before saving
         const sortedLists = {
-            admins: [...userLists.admins].sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase())),
-            pacers: [...userLists.pacers].sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase())),
-            runners: [...userLists.runners].sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()))
+            admins: [...userLists.admins].slice().sort((a, b) => (a.email || '').toLowerCase().localeCompare((b.email || '').toLowerCase())),
+            pacers: [...userLists.pacers].slice().sort((a, b) => (a.email || '').toLowerCase().localeCompare((b.email || '').toLowerCase())),
+            runners: [...userLists.runners].slice().sort((a, b) => (a.email || '').toLowerCase().localeCompare((b.email || '').toLowerCase()))
         };
 
         const response = await fetch('/api/admin/update-lists', {

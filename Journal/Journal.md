@@ -716,3 +716,112 @@ Now, change the logic from the login page such that, if a user logged in as an a
 **Prompt (06:50):** Add that line to my post please.
 
 **Action:** Added article link to MCP-HIPAA-LinkedIn-Post-Short.md before hashtags: "Read the full analysis in my article: [URL]". Post now ready to publish with link driving traffic to the detailed article.
+
+# November 28, 2025 — Continue Pacer Page Work
+
+**Prompt (~22:50 PST):**
+```
+Continue to work on the Pacer page for project PaceLeader.  Please add all my prompts to Journal/journal.md.
+```
+
+**Action:** Added this prompt to the journal and will continue working on the Pacer page. All future prompts will be logged in the journal.
+
+# November 28, 2025 — Switch to Runner Page Work
+
+**Prompt (~22:54 PST):**
+```
+Changed my mind.  I want to start working on the Runner's page.
+```
+
+**Action:** Added this prompt to the journal and will continue working on the Runner page. All future prompts will be logged in the journal.
+
+# November 28, 2025 — Runner Page Requirements
+
+**Prompt (~23:00 PST):**
+```
+For the runner page, I want to have a list of dates on the top.   The date string will be enabled as a selectable choice if there are runs on that data entered by pacers.  When the user click on the link, it will show the runs for that data by different pacers, order by the pacers' addresses.  The runs will be have a checkbox on the left and the user can choose one.  When the choice is made, the Run object will be changed to reflect that.  Click on a choosen link will de-select it.
+```
+
+**Action:** Added this prompt to the journal and will continue working on the Runner page. All future prompts will be logged in the journal.
+
+# November 28, 2025 — Runner Page Single-Run-Per-Day Clarification
+
+**Prompt (~23:27 PST):**
+```
+Add this prompt to the journal.
+```
+
+**Action:** Added this prompt to the journal and confirmed the title update for the Runner page.
+
+# November 29, 2025 — Runner My Coming Runs Shows Soft-Deleted Runs
+
+**Prompt (~00:37 PST):**
+```
+Currently, in the runner page, if a run is soft deleted, it is no longer showing in the My Coming Runs.  Change it to still display them but add an Label say "Pacer Quited".
+```
+
+**Action:** Updated runner.html so My Coming Runs is built from all runs (including soft-deleted ones). Soft-deleted runs are still hidden from the selectable list but remain in My Coming Runs with a secondary label "Pacer Quited" under the pacer name.
+
+# November 29, 2025 — Change Default Seed User to jianame@gmail.com
+
+**Prompt (~00:04 PST):**
+```
+No.  That is good.  But can you please chagne it to jianame@gmail.com instead?
+```
+
+**Action:** Changed the special seeded account from zhian.job@gmail.com to jianame@gmail.com as requested.
+
+# November 29, 2025 — Admin Page Helper Title
+
+**Prompt (~00:08 PST):**
+```
+Please add a title to admin page  say "Enter email to add a user to the role"
+```
+
+**Action:** Added title to Admin page as requested, and later changed its text color to white for readability on the background.
+
+# November 29, 2025 — Limit Admin Lists to 4 Entries with Scrollbar
+
+**Prompt (~00:13 PST):**
+```
+Limit each list to 4 entries and display a scrollbar if there are more.
+```
+
+**Action:** Added this prompt to the journal and will implement the change to limit admin lists to 4 entries with a scrollbar.
+
+# November 29, 2025 — Runner Page Show Pacer Display Name
+
+**Prompt (~00:20 PST):**
+```
+In the runner page, change the display of the run to not user the email address of the pacer in the the list and in the summary.  show the display name instead.
+```
+
+**Action:** Updated runner.html so the runner page shows each pacer’s display name (derived from run.pacerDisplayName when present, otherwise from the email’s username) instead of the raw email in both the main runs list and the My Coming Runs summary.
+
+# November 29, 2025 — Pacer Page Eye Button to View Signed-Up Runners
+
+**Prompt (~00:30 PST):**
+```
+On the pacer page, on the left of X button where there is a run, add another button with an eye in it.  When it is clicked, display a list of all the singed up runners for the run.  Pick an UX interaction that it will disappear appropriately.
+```
+
+**Action:** Updated pacer.html to add an eye (👁) button next to the X/Re Add button for existing runs. Clicking it toggles a runners panel inserted directly below that row, listing all signed-up runners’ emails (or a “No runners have signed up yet.” message). Clicking the eye again hides the panel.
+
+# November 29, 2025 — Pacer Soft Delete Warning When Runners Signed Up
+
+**Prompt (~00:41 PST):**
+```
+On the pacer page, when the user wanted to click on the X to soft delete a run, and there is other runners signed up for the run, raise a dialog saying "Runner signed up.  Please notify the user that you are no longer pacing the run."
+```
+
+**Action:** Updated the X/Re Add button handler in pacer.html so that when soft-deleting a run that has other signed-up runners (besides the pacer), it first shows an alert: "Runner signed up.  Please notify the user that you are no longer pacing the run." The soft delete then proceeds as before.
+
+
+# November 29, 2025 — Runner Page Show Pacer Display Name Confirmation
+
+**Prompt (~00:22 PST):**
+```
+Add this prompt to the journal.
+```
+
+**Action:** Added this prompt to the journal and confirmed the title update for the Runner page.

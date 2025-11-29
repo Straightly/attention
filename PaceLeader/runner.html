@@ -20,23 +20,23 @@
             border-radius: 16px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             padding: 32px 40px;
-            max-width: 520px;
+            max-width: 640px;
             width: 100%;
-            text-align: center;
+            text-align: left;
         }
         h1 {
-            font-size: 28px;
+            font-size: 26px;
             color: #1a202c;
-            margin-bottom: 8px;
+            margin-bottom: 4px;
         }
         p {
             color: #4a5568;
-            margin-bottom: 16px;
-            font-size: 15px;
+            margin-bottom: 10px;
+            font-size: 14px;
         }
         .badge {
             display: inline-block;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
             padding: 4px 10px;
             border-radius: 999px;
             font-size: 12px;
@@ -45,33 +45,119 @@
             background: #f0fff4;
             color: #276749;
         }
+
+        .date-tabs {
+            display: flex;
+            gap: 8px;
+            margin-top: 16px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .date-tab {
+            padding: 6px 10px;
+            border-radius: 999px;
+            font-size: 13px;
+            border: 1px solid #E2E8F0;
+            background: #F7FAFC;
+            color: #A0AEC0; /* light grey text for days without runs */
+            cursor: default;
+            opacity: 0.6;
+        }
+
+        .date-tab.enabled {
+            cursor: pointer;
+            background: #ebf4ff;
+            color: #434190;
+            border-color: #A3BFFA;
+            opacity: 1;
+        }
+
+        .date-tab.enabled:hover {
+            background: #E2E8F0;
+        }
+
+        .date-tab.active {
+            background: #667eea;
+            color: white;
+            border-color: #5A67D8;
+        }
+
+        .runs-list {
+            margin-top: 8px;
+            border-top: 1px solid #E2E8F0;
+            padding-top: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .run-row {
+            display: grid;
+            grid-template-columns: auto 1.2fr 1fr 1fr 1.4fr;
+            column-gap: 10px;
+            align-items: center;
+            font-size: 13px;
+            color: #2D3748;
+        }
+
+        .run-meta {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .run-meta span {
+            line-height: 1.3;
+        }
+
+        .run-secondary {
+            font-size: 12px;
+            color: #718096;
+        }
+
+        .checkbox-cell {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .runs-empty {
+            font-size: 13px;
+            color: #718096;
+            margin-top: 8px;
+        }
+
         .sign-out-btn {
-            margin-top: 24px;
+            margin-top: 20px;
             background: #e53e3e;
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 8px 16px;
             border-radius: 8px;
             cursor: pointer;
             font-size: 14px;
             font-weight: 600;
             transition: background 0.2s;
         }
+
         .sign-out-btn:hover { background: #c53030; }
     </style>
 </head>
 <body>
     <div class="card">
         <div class="badge">Runner</div>
-        <h1>🏃 Runner Dashboard (Coming Soon)</h1>
+        <h1>Welcome, runner.</h1>
         <p>
-            You are signed in as a <strong>runner</strong>.
-            This page is a placeholder for future Runner tools and views.
+            Click on highlighted dates to signe up.
         </p>
-        <p>
-            For now, you can sign out and sign back in with another role
-            if you need different access.
-        </p>
+
+        <div id="dateTabs" class="date-tabs"></div>
+
+        <div id="runsContainer" class="runs-list"></div>
+
+        <p style="margin-top: 12px; font-weight: 600; font-size: 14px;">My Coming Runs</p>
+        <div id="myRunsSection" class="runs-list" style="border-top: 1px solid #E2E8F0; margin-top: 8px; padding-top: 12px;"></div>
+
         <button class="sign-out-btn" onclick="runnerSignOut()">Sign Out</button>
     </div>
 
@@ -81,13 +167,311 @@
             window.location.href = 'index.html';
         }
 
-        // Optional: simple access guard so non-runners are bounced
-        document.addEventListener('DOMContentLoaded', () => {
+        function formatDateLabel(date) {
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+
+        function getWeekdayLabel(date) {
+            const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            return weekdays[date.getDay()];
+        }
+
+        async function fetchRunsByDate(dateLabel) {
+            try {
+                const response = await fetch('/api/pacer/runs', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ mode: 'getByDate', date: dateLabel })
+                });
+                if (!response.ok) {
+                    const text = await response.text();
+                    console.error('Failed to load runs by date', response.status, text);
+                    return [];
+                }
+                const data = await response.json();
+                if (Array.isArray(data.runs)) {
+                    return data.runs;
+                }
+                return [];
+            } catch (err) {
+                console.error('Error loading runs by date', err);
+                return [];
+            }
+        }
+
+        async function toggleRunnerSelection({ dateLabel, pacerEmail, runnerEmail, selected }) {
+            try {
+                const response = await fetch('/api/pacer/runs', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        mode: 'runnerSelect',
+                        date: dateLabel,
+                        pacer: pacerEmail,
+                        runnerEmail,
+                        selected
+                    })
+                });
+                if (!response.ok) {
+                    const text = await response.text();
+                    console.error('Failed to update runner selection', response.status, text);
+                }
+            } catch (err) {
+                console.error('Error updating runner selection', err);
+            }
+        }
+
+        async function renderRunnerDashboard() {
             const selectedRole = localStorage.getItem('selectedRole');
             if (selectedRole !== 'runner') {
                 alert('Access Denied: Runner role required');
                 window.location.href = 'index.html';
+                return;
             }
+
+            const storedUserInfo = localStorage.getItem('user_info');
+            if (!storedUserInfo) {
+                alert('No user info found. Please sign in again.');
+                window.location.href = 'index.html';
+                return;
+            }
+
+            let runnerEmail = null;
+            try {
+                const parsed = JSON.parse(storedUserInfo);
+                runnerEmail = parsed.email;
+            } catch (e) {
+                console.error('Failed to parse stored user info', e);
+            }
+
+            if (!runnerEmail) {
+                alert('Runner email not found. Please sign in again.');
+                window.location.href = 'index.html';
+                return;
+            }
+
+            function getPacerDisplayName(run) {
+                const email = run && typeof run.pacer === 'string' ? run.pacer : '';
+                if (run && typeof run.pacerDisplayName === 'string' && run.pacerDisplayName.trim().length > 0) {
+                    return run.pacerDisplayName.trim();
+                }
+                if (!email) {
+                    return 'Unknown pacer';
+                }
+                const local = email.split('@')[0] || email;
+                return local;
+            }
+
+            const dateTabsEl = document.getElementById('dateTabs');
+            const runsContainer = document.getElementById('runsContainer');
+            if (!dateTabsEl || !runsContainer) return;
+
+            dateTabsEl.innerHTML = '';
+            runsContainer.innerHTML = '';
+
+            const today = new Date();
+            const dates = [];
+            for (let i = 1; i <= 7; i++) {
+                const d = new Date(today);
+                d.setDate(today.getDate() + i);
+                dates.push(d);
+            }
+
+            const runsByDate = {};
+            const runsByDateAll = {};
+
+            // Preload runs for each date to know which tabs are enabled
+            for (const d of dates) {
+                const dateLabel = formatDateLabel(d);
+                const runs = await fetchRunsByDate(dateLabel);
+                runsByDateAll[dateLabel] = runs;
+                // Filter out removed runs for selection list
+                runsByDate[dateLabel] = runs.filter(r => !r.removed);
+            }
+
+            let activeDateLabel = null;
+
+            const myRunsSection = document.getElementById('myRunsSection');
+
+            const renderMyRuns = () => {
+                if (!myRunsSection) return;
+                myRunsSection.innerHTML = '';
+
+                const allSelected = [];
+                for (const [dateLabel, runs] of Object.entries(runsByDateAll)) {
+                    for (const run of runs) {
+                        if (Array.isArray(run.signedUpRunners) && run.signedUpRunners.includes(runnerEmail)) {
+                            allSelected.push({ dateLabel, run });
+                        }
+                    }
+                }
+
+                if (!allSelected.length) {
+                    const empty = document.createElement('div');
+                    empty.className = 'runs-empty';
+                    empty.textContent = 'You have not signed up for any runs yet.';
+                    myRunsSection.appendChild(empty);
+                    return;
+                }
+
+                for (const item of allSelected) {
+                    const { dateLabel, run } = item;
+                    const row = document.createElement('div');
+                    row.className = 'run-row';
+
+                    const dateCell = document.createElement('div');
+                    dateCell.textContent = dateLabel;
+
+                    const timeCell = document.createElement('div');
+                    timeCell.textContent = run.startTime || '8:00am';
+
+                    const paceCell = document.createElement('div');
+                    paceCell.textContent = run.pace || '10:00/ml';
+
+                    const placeCell = document.createElement('div');
+                    placeCell.textContent = run.startPlace || 'WF';
+
+                    const metaCell = document.createElement('div');
+                    metaCell.className = 'run-meta';
+                    const pacerSpan = document.createElement('span');
+                    pacerSpan.textContent = getPacerDisplayName(run);
+                    metaCell.appendChild(pacerSpan);
+
+                    if (run.removed) {
+                        const removedSpan = document.createElement('span');
+                        removedSpan.className = 'run-secondary';
+                        removedSpan.textContent = 'Pacer Quited';
+                        metaCell.appendChild(removedSpan);
+                    }
+
+                    row.appendChild(dateCell);
+                    row.appendChild(timeCell);
+                    row.appendChild(paceCell);
+                    row.appendChild(placeCell);
+                    row.appendChild(metaCell);
+
+                    myRunsSection.appendChild(row);
+                }
+            };
+
+            const renderRunsForDate = (dateLabel) => {
+                runsContainer.innerHTML = '';
+                const runs = (runsByDate[dateLabel] || []).slice().sort((a, b) => {
+                    const aEmail = (a.pacer || '').toLowerCase();
+                    const bEmail = (b.pacer || '').toLowerCase();
+                    if (aEmail < bEmail) return -1;
+                    if (aEmail > bEmail) return 1;
+                    return 0;
+                });
+
+                if (!runs.length) {
+                    const empty = document.createElement('div');
+                    empty.className = 'runs-empty';
+                    empty.textContent = 'No runs available for this date.';
+                    runsContainer.appendChild(empty);
+                    return;
+                }
+
+                for (const run of runs) {
+                    const row = document.createElement('div');
+                    row.className = 'run-row';
+
+                    const checkboxCell = document.createElement('div');
+                    checkboxCell.className = 'checkbox-cell';
+                    const checkbox = document.createElement('input');
+                    checkbox.type = 'checkbox';
+                    const isSelected = Array.isArray(run.signedUpRunners) && run.signedUpRunners.includes(runnerEmail);
+                    checkbox.checked = isSelected;
+                    checkbox.addEventListener('change', async () => {
+                        const newSelected = checkbox.checked;
+                        await toggleRunnerSelection({
+                            dateLabel,
+                            pacerEmail: run.pacer,
+                            runnerEmail,
+                            selected: newSelected
+                        });
+                        // Reload runs for this date to enforce single selection
+                        const freshRuns = await fetchRunsByDate(dateLabel);
+                        runsByDateAll[dateLabel] = freshRuns;
+                        runsByDate[dateLabel] = freshRuns.filter(r => !r.removed);
+                        renderRunsForDate(dateLabel);
+                        renderMyRuns();
+                    });
+                    checkboxCell.appendChild(checkbox);
+
+                    const timeCell = document.createElement('div');
+                    timeCell.textContent = run.startTime || '8:00am';
+
+                    const paceCell = document.createElement('div');
+                    paceCell.textContent = run.pace || '10:00/ml';
+
+                    const placeCell = document.createElement('div');
+                    placeCell.textContent = run.startPlace || 'WF';
+
+                    const metaCell = document.createElement('div');
+                    metaCell.className = 'run-meta';
+                    const pacerSpan = document.createElement('span');
+                    pacerSpan.textContent = getPacerDisplayName(run);
+                    const secondarySpan = document.createElement('span');
+                    secondarySpan.className = 'run-secondary';
+                    const count = Array.isArray(run.signedUpRunners) ? run.signedUpRunners.length : 0;
+                    secondarySpan.textContent = `Current runners: ${count}`;
+                    metaCell.appendChild(pacerSpan);
+                    metaCell.appendChild(secondarySpan);
+
+                    row.appendChild(checkboxCell);
+                    row.appendChild(timeCell);
+                    row.appendChild(paceCell);
+                    row.appendChild(placeCell);
+                    row.appendChild(metaCell);
+
+                    runsContainer.appendChild(row);
+                }
+            };
+
+            dates.forEach((d) => {
+                const dateLabel = formatDateLabel(d);
+                const weekday = getWeekdayLabel(d);
+                const tab = document.createElement('button');
+                tab.type = 'button';
+                tab.className = 'date-tab';
+                const hasRuns = (runsByDate[dateLabel] || []).length > 0;
+                tab.textContent = `${weekday} — ${dateLabel}`;
+
+                if (hasRuns) {
+                    tab.classList.add('enabled');
+                    tab.addEventListener('click', () => {
+                        activeDateLabel = dateLabel;
+                        // Update active styling
+                        Array.from(dateTabsEl.children).forEach(child => child.classList.remove('active'));
+                        tab.classList.add('active');
+                        renderRunsForDate(dateLabel);
+                    });
+                }
+
+                dateTabsEl.appendChild(tab);
+            });
+
+            // Auto-select the first date that has runs
+            for (let i = 0; i < dateTabsEl.children.length; i++) {
+                const child = dateTabsEl.children[i];
+                if (child.classList.contains('enabled')) {
+                    child.classList.add('active');
+                    const d = dates[i];
+                    const dateLabel = formatDateLabel(d);
+                    activeDateLabel = dateLabel;
+                    renderRunsForDate(dateLabel);
+                    renderMyRuns();
+                    break;
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderRunnerDashboard();
         });
     </script>
 </body>

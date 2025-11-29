@@ -118,6 +118,8 @@
         .user-list {
             list-style: none;
             flex-grow: 1;
+            max-height: 220px; /* roughly 4 items */
+            overflow-y: auto;
         }
 
         .user-item {
@@ -194,6 +196,10 @@
 
         <div id="error-message" class="error-message"></div>
         <div id="success-message" class="success-message"></div>
+
+        <p style="margin: 12px 0 20px 0; color: #ffffff; font-size: 14px;">
+            Enter email to add a user to the role
+        </p>
 
         <!-- Admins List -->
         <div class="list-section">
