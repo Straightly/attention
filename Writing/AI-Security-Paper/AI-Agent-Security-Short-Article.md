@@ -19,7 +19,7 @@ AI agents have been here for a long time—they're called programmers. This simp
 
 A common misconception is that AI agents introduce new attack vectors because they have access to "powerful tools such as programming languages." This reasoning is fundamentally flawed—it assumes the adversary is incompetent before AI agents. Sound security design must assume the counterparty is powerful, competent, and has access to all available tools, including AI agents.
 
-**Key Insight:** AI agents do not make attackers more powerful; they make exploitation faster and easier to attempt. This increases urgency but does not change fundamental security requirements. The principle remains: design security assuming a capable, well-equipped adversary.
+**Key Insight:** AI agents do not make attackers more powerful; they make exploitation faster and easier to try. This increases urgency but does not change fundamental security requirements. The principle remains: design security assuming a capable, well-equipped adversary.
 
 ## For Agent Users: Never Grant Credentials
 
