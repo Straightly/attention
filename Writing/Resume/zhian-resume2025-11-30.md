@@ -5,26 +5,19 @@ Email: zhian.job@gmail.com
 
 ---
 
-## Summary
+# Summary
 
 - Extensive software development, design, and architecture experience (full stack).
 - Strong problem solving, data modeling, and algorithm capabilities.
 - Ph.D. in Computer Science in Artificial Intelligence.
-- AI Experience:  98% vibe coding; LLM in Electrical Medical Record workflows.
+- AI Experience: Using LLM Electrical Medical Record workflows, in production; 98% vibe coding;
 
 ---
 
-## Technical Skills
+# Technical Skills
 
-### Languages and Platforms
-
-- Python, JavaScript, TypeScript, Java, C#, Smalltalk, Perl, etc.
-
-### Development Environments
-
-- Git, IntelliJ, Visual Studio Code, VisualAge, WASD, CVS, Visual Studio, Perforce
-
-### Technologies
+- Languages: Python, JavaScript, TypeScript, Java, C#, Smalltalk, Perl, etc.
+- Development Environments: Git, IntelliJ, Visual Studio Code, VisualAge, WASD, CVS, Visual Studio, Perforce
 - Backend: OpenAI, AWS, Azure, etc
 - Frontend: React, JavaScript
 - Databases: Snowflake, PostgreSQL, Oracle, SQL Server, MySQL
@@ -33,7 +26,7 @@ Email: zhian.job@gmail.com
 
 ---
 
-## Education
+# Education
 
 - Ph.D. in Computer Science, major in Artificial Intelligence / Uncertain Reasoning, University of Ulster, United Kingdom
 - M.S. in Computer Science, major in Artificial Intelligence / Uncertain Reasoning and Expert Systems, Jilin University, China
@@ -41,9 +34,9 @@ Email: zhian.job@gmail.com
 
 ---
 
-## Experience
+# Experiences
 
-### Principal Member, Technical Staff — AthenaHealth Inc
+## Principal Member, Technical Staff — AthenaHealth Inc
 *January 2023 – Present*
 
 - Working on an initiative building a customer-facing decision support system for provider customers using an LLM model.
@@ -57,7 +50,7 @@ Email: zhian.job@gmail.com
 - Designed and implemented the Medication History download module to address information overload for providers by filtering information before it is added to the chart.
   - Contributed to the external interoperability architecture of which medication history download is a component.
 
-### Senior Staff Software Engineer — GE Healthcare
+## Senior Staff Software Engineer — GE Healthcare
 *July 2016 – December 2022*
 
 - Delivered an Azure-based service with a front end in GEHC’s legacy application to provide real-time medication information to doctors.
@@ -68,7 +61,7 @@ Email: zhian.job@gmail.com
   - Created zero-downtime deployment, continuous monitoring, and alerting procedures.
   - Worked the service through a DEA certification process.
 
-### Senior Software Development Engineer — Microsoft
+## Senior Software Development Engineer — Microsoft
 *August 2011 – July 2016*
 
 - Extended the data model to support multiple programs and multiple users with different roles/permissions for Microsoft’s developers and vendors.
@@ -84,7 +77,7 @@ Email: zhian.job@gmail.com
   - Provided guidelines on approach and strategy.
 - Learned and used Microsoft enterprise application tools such as development tools, BI environments, Azure, etc.
 
-### Senior Software Development Engineer — Amazon
+## Senior Software Development Engineer — Amazon
 *March 2008 – August 2011*
 
 - Served as DBA for the team, created the data model, built a horizontally partitioned database to handle large transaction volumes, and tuned key query performance.
@@ -102,7 +95,7 @@ Email: zhian.job@gmail.com
 - Used many AWS solutions: EC2, S3, SimpleDB, SQS, SNS.
 - Created wrappers for provisioning and SMPP APIs to access APIs from wireless carriers such as Sprint and AT&T.
 
-### Independent Consultant
+## Independent Consultant
 *April 2004 – March 2008*
 
 - **Oct 2006 – Dec 2008** — Startup developing mobile applications for doctors to write prescriptions.
@@ -142,7 +135,7 @@ Email: zhian.job@gmail.com
 - **Apr 2004 – Jun 2004** — Refactored a data repository component at a large mortgage underwriting company.
   - Re-architected data structure for performance and scalability using Java, MQ Series, UML.
 
-### Senior Software Architect — ThoughtWorks Inc.
+## Senior Software Architect — ThoughtWorks Inc.
 *May 2003 – April 2004*
 
 - Led development of a manufacturing defect monitoring application for a large earth moving equipment manufacturer.
@@ -159,7 +152,7 @@ Email: zhian.job@gmail.com
   - Restored application to short, regular, repeatable development, testing, and release cycles.
   - Extended a testing tool and XML tag wrappers.
 
-### Principal Developer / Architect / Project Manager — Private Business Inc.
+## Principal Developer / Architect / Project Manager / VP Software Management — Private Business Inc.
 *Dec 1993 – May 2003*
 
 **As Architect and Developer**
@@ -210,14 +203,14 @@ Email: zhian.job@gmail.com
   - Developed PL/SQL procedures embedded as extensions, Oracle Forms, and Oracle Reports.
 - Managed and participated in developing a BI solution using Oracle Discoverer.
 
-### Software Engineer — The Peer Group, Ontario, Canada
+## Software Engineer — The Peer Group, Ontario, Canada
 *May 1993 – Dec 1993*
 
 - Developed a data collection application as part of a factory automation system, allowing end users to define customized data collection forms on the fly.
 - Developed a data collection application for a barcode reader with an embedded 286 processor.
 - Developed a communication layer on PC to a messaging/workflow system on SunOS over TCP/IP.
 
-### Researcher — University of Guelph, Ontario, Canada
+## Researcher — University of Guelph, Ontario, Canada
 *Mar 1992 – May 1993*
 
 - Conducted AI research and developed research projects using C++ and X-Windows.
@@ -229,7 +222,7 @@ Email: zhian.job@gmail.com
 
 ---
 
-## Publications
+# Publications
 
 - Z. An and M. McLeish. **RES: Formalism for Reasoning with Relative-Strength Defaults.** Proc. 2nd European Conf. on Symbolic and Quantitative Approaches to Reasoning and Uncertainty, pp. 1–8, Nov. 1993.
 - Z. An and M. McLeish. **Differences made by uncertainty measures.** Proc. AI93, Australia, Nov. 1993.
