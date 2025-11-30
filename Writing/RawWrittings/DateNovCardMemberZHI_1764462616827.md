@@ -1,40 +1,131 @@
----
-title: Date
-Nov 3
-Card Member
-ZHI AN - 35015
-Contact Information...
-date: 2025-11-29
-tags: #idea #raw-thought
-context: Captured via web app
-status: raw-idea
----
-
-## Initial Spark
-
+Entertainment - Associations
+LA FITNESS CORP INTLIRVINE CA
+$20.39
 Date
 Nov 3
 Card Member
-ZHI AN - 35015
+Zhi An - 35015
 Contact Information
 3161 MICHELSON DR STE 600
 IRVINE, CA 92612-6536
 (949) 255-8100
 
-## Key Concepts
+Entertainment - Associations
+LA FITNESS CORP INTLIRVINE CA
+$20.39
+Date
+Oct 3
+Card Member
+Zhi An - 35015
+Contact Information
+3161 MICHELSON DR STE 600
+IRVINE, CA 92612-6536
+(949) 255-8100
 
-- [To be filled in later]
+Entertainment - Associations
+LA FITNESS CORP INTLIRVINE CA
+$20.39
+Date
+Sep 3
+Card Member
+Zhi An - 35015
+Contact Information
+3161 MICHELSON DR STE 600
+IRVINE, CA 92612-6536
+(949) 255-8100
 
-## Questions to Explore
+Entertainment - Associations
+LA FITNESS CORP INTLIRVINE CA
+$20.39
+Date
+Aug 3
+Card Member
+Zhi An - 35015
+Contact Information
+3161 MICHELSON DR STE 600
+IRVINE, CA 92612-6536
+(949) 255-8100
 
-- [To be filled in later]
+Entertainment - Associations
+LA FITNESS CORP INTLIRVINE CA
+$20.39
+Date
+Jul 3
+Card Member
+Zhi An - 35015
+Contact Information
+3161 MICHELSON DR STE 600
+IRVINE, CA 92612-6536
+(949) 255-8100
 
-## Potential Connections
+Entertainment - Associations
+LA FITNESS CORP INTLIRVINE CA
+$20.39
+Date
+Jun 3
+Card Member
+Zhi An - 35015
+Contact Information
+3161 MICHELSON DR STE 600
+IRVINE, CA 92612-6536
+(949) 255-8100
 
-- [To be filled in later]
+Entertainment - Associations
+LA FITNESS CORP INTLIRVINE CA
+$20.39
+Date
+May 3
+Card Member
+Zhi An - 35015
+Contact Information
+3161 MICHELSON DR STE 600
+IRVINE, CA 92612-6536
+(949) 255-8100
 
-## Next Steps
+Entertainment - Associations
+LA FITNESS CORP INTLIRVINE CA
+$20.39
+Date
+Apr 3
+Card Member
+Zhi An - 35015
+Contact Information
+3161 MICHELSON DR STE 600
+IRVINE, CA 92612-6536
+(949) 255-8100
 
-- Review and expand this raw idea
-- Add key concepts and questions
-- Connect to related writings
+Entertainment - Associations
+LA FITNESS CORP INTLIRVINE CA
+$20.39
+Date
+Mar 3
+Card Member
+Zhi An - 35015
+Contact Information
+3161 MICHELSON DR STE 600
+IRVINE, CA 92612-6536
+(949) 255-8100
+
+Entertainment - Associations
+LA FITNESS CORP INTLIRVINE CA
+$20.39
+Date
+Feb 3
+Card Member
+Zhi An - 35015
+Contact Information
+3161 MICHELSON DR STE 600
+IRVINE, CA 92612-6536
+(949) 255-8100
+
+Entertainment - Associations
+LA FITNESS CORP INTLIRVINE CA
+$20.39
+Date
+Jan 3
+Card Member
+Zhi An - 35015
+Contact Information
+3161 MICHELSON DR STE 600
+IRVINE, CA 92612-6536
+(949) 255-8100
