@@ -2,7 +2,7 @@
 
 Phone: (571) 213 2214  
 Email: zhian.job@gmail.com
-
+Full CV:  https://docs.google.com/document/d/1JwufDUbM-OaRyvWG-av2AYHyx9hSKAnsBN3FzwznXxk/edit?usp=sharing
 ---
 
 # Summary
@@ -39,7 +39,7 @@ Email: zhian.job@gmail.com
 ## Principal Member, Technical Staff — AthenaHealth Inc
 *January 2023 – Present*
 
-- Working on an initiative building a customer-facing decision support system for provider customers using an LLM model.
+- Working on initiatives building a customer-facing decision support system for provider customers using an LLM models.
   - Implementing a "Small Agent Model" which can be injected into workflows so that:
     - PHI information is isolated from the LLM model where information may be public.
     - Workflow contexts are automatically gathered and formatted into prompts, saving providers from prompt engineering and improving accuracy while minimizing hallucinations.
@@ -222,7 +222,7 @@ Email: zhian.job@gmail.com
 
 ---
 
-# Publications
+# Publications: https://docs.google.com/document/d/1zxfCrLX0KRs1teCTcVw4AbsplXdlaWC6N8mUpuGgrf8/edit?usp=sharing
 
 - Z. An and M. McLeish. **RES: Formalism for Reasoning with Relative-Strength Defaults.** Proc. 2nd European Conf. on Symbolic and Quantitative Approaches to Reasoning and Uncertainty, pp. 1–8, Nov. 1993.
 - Z. An and M. McLeish. **Differences made by uncertainty measures.** Proc. AI93, Australia, Nov. 1993.

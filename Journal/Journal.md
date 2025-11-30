@@ -610,19 +610,23 @@ Implement phase 4.
 Now, change the logic from the login page such that, if a user logged in as an admin, route it to admin page.
 ```
 
----
 
 # November 16, 2025 — Switching to MCP Security & HIPAA Article
 
 **Prompt (04:16):** I am switch gear to work on an article on MCP security and HIPPA. Please remember to record all my prompts going forward.
-
 **Action:** Acknowledged context switch from PaceLeader to MCP security and HIPAA article work. Will continue journaling all prompts.
 
-**Prompt (04:31):** Under Writing/AI-Security-Paper, please start a LinkedIn post with title "MCP with PHI access is HIPPA violation. What to do?" the following key points: 1. MCP, by design, is HIPPA violation with PHI Access. 2. The only way to make MCP HIPPA compliant is to not allow access to PHI or PII APIs. 3. Solutions to take advantage of LLM's intelligence while safeguard PHI and PII and keep the system HIPPA compliant are already existing and existing security measures in existing systems should be strictly enforced. Arguments for allowing agent more flexibitity as it may hinder the usage of AI agents should be promptly rejected.
+# November 30, 2025 — CV, Publications, and Google Docs Workflow
 
-**Action:** Created comprehensive LinkedIn post at Writing/AI-Security-Paper/MCP-HIPAA-LinkedIn-Post.md covering: (1) Why MCP's design violates HIPAA with PHI access, (2) The only compliant path is restricting PHI/PII access, (3) Five proven security solutions (API Gateway, De-identification, RAG with guardrails, Human-in-the-loop, RBAC), (4) Rejection of "flexibility" arguments with cost analysis, and (5) Actionable steps for organizations.
+**Prompt (09:05–11:02):** Multiple prompts about LinkedIn "Open to work" status, converting a Word resume to Markdown, choosing formats (plain text vs RTF/ODT), and how to host CV and publication list as public links (Google Docs vs GitHub). Asked to keep `.md` as the source of truth, create a dedicated Markdown publication list and a shortened resume, and journal all prompts.
 
-**Prompt (04:42):** I do not like your watered down/gentle verbage on why MCP with PHI is a HIPPA violation. Please use the verbase that is in Writing/RawWrittings/MeMCPwassupposedstandard_1763294441266.md
+**Action:**
+- Converted `Writing/Resume/zhian-resume2029-11-30.txt` into structured Markdown CV (`zhian-resume2025-11-30.md`) and refined it as the master resume.
+- Helped establish a workflow where the `.md` resume is edited in Windsurf, exported as plain text or opened directly in Google Docs (File → Open → Upload) to avoid dark-theme formatting issues.
+- Confirmed that full CV and publication list are best published as **view-only Google Docs** and linked from the Markdown files and LinkedIn.
+- Created `Writing/Resume/publications.md` containing the full publication list, with a reference to the Google Docs URL as the public version.
+- Created a shortened job-search resume `Writing/Resume/zhian-resume.md` highlighting recent roles (AthenaHealth, GE Healthcare, Microsoft, Amazon), key AI experience, and core skills, with links to the full CV and publications in Google Docs.
+- Documented this as the ongoing workflow: edit in Markdown locally, publish/refresh Google Docs by opening the `.md`/`.txt` file in Docs when needed.
 
 **Action:** Rewrote Section 1 and 3 of LinkedIn post using stronger, more direct language from raw writing. Added specific HIPAA regulation citations (45 CFR § 164.502, 45 CFR § 164.312), detailed the three immediate violations (Minimum Necessary Principle, Improper Access Controls, Audit Trail Gaps), explained the Discoverability Problem with two specific violations, and added table showing MCP's gaps vs HIPAA requirements. Changed tone from gentle explanation to direct statement of violations.
 
@@ -797,6 +801,12 @@ In the runner page, change the display of the run to not user the email address 
 ```
 
 **Action:** Updated runner.html so the runner page shows each pacer’s display name (derived from run.pacerDisplayName when present, otherwise from the email’s username) instead of the raw email in both the main runs list and the My Coming Runs summary.
+
+# November 30, 2025 — Request to Journal All Prompts
+
+**Prompt (~11:07 PST):** Please journal all my prompts in Journal/Journal.md, including this one.
+
+**Action:** Confirmed that Journal/Journal.md is the central log for all prompts. Added this entry and will continue appending new prompts and corresponding actions there going forward.
 
 # November 29, 2025 — Pacer Page Eye Button to View Signed-Up Runners
 
