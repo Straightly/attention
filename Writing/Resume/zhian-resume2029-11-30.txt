@@ -1,0 +1,172 @@
+
+
+
+
+SUMMARY 
+
+* Extensive software development, design, architect experiences; Full stack.  Strong problem solving, data modeling, algorithm capability; Ph.D. of Computer Science in Artificial Intelligence.
+
+Technical Skills
+
+Languages and platforms:Python, JavaScript, TypeScript, C#, Java, Smalltalk, Pearl etc.Developing Environments:Git, IntelliJ Visual Studio Code, VisualAge, WASD, CVS, Visual Studio, PerforceOpen Source Tools:JUnit, Mock Object, HttpUnit, jWebUnit, Struts, JBoss, Tomcat, Ant, CruiseControl, Hibernate, Spring Framework, ehcache, Commons, Log4j, JiBX, Mock, Fake, etc.Server Technologies:WebSphere, WebLogic, Oracle Application Server; Portal and Content Management; Business Intelligence; Data Warehouse; AWS (EC2, S3, SQS, SNS, etc.); Amazon High Availability and Large Scale Service tools; IIS, WCF, Azure.Database:Snowflake, PostgreSQL, Oracle, SqlServer, MySqlOperating Systems:Linus, Windows, UNIX/SunOSEnterprise Applications:Oracle Applications 11i (ERP and CRM)
+EDUCATION
+
+* Ph.D. in Computer Science, Major in artificial intelligence, uncertain reasoning, University of Ulster, United Kingdom
+* M.S. in Computer Science, Major in artificial intelligence, uncertain reasoning, Jilin University, China
+* B.S. in Computer Science, GuiZhou University, China
+
+EXPERIENCE
+	Principal Member, Technical Staff, AthenaHealth Inc,   				January 2023—-      
+* Working on an initiative building a customer facing decision support system for our provider customers taking advantage of a LLM model.  Implementing a “Small Agent Model” which can be injected into our software’s workflow such that
+o PHI information is isolated from the LLM model where information may be public.
+o Contexts of the workflow are automatically gathered and formatted into prompts, saving providers the burden of having to craft prompts that work with LLMs, increasing accuracy of the decisions and minimizing hallucinations.
+o Working around resource limitations to take advantage of LLM knowledge and inference capability to fill in care gaps, balancing the size of the prompts and result sizes.
+o Automating the actions to save provider time in adapting the recommendations.
+o Working on mechanism to capture provider feedback automatically, building data sets which can be used to fine tune the LLM model.
+* Research and proposed a technology modernization plan for the Med Zone to lift ourself out of the constraints of the existing system developed over the years using Perl. 
+* Designed and implement the Medication History download module which enhanced the existing medication history downloads to address the issue of information overflow issue with providers where information is filtered before it was added to the chart for providers.  Contributed to the External interoperability architect which medication history download is a component.
+
+	Senior Staff Software  Engineer, General Electric Healthcare,   		July 2016—-December 2022      
+* Delivered an Azure based service with front end in GEHC’s front end legacy application to allow delivery of real time medication information to doctors which will significantly benefit both the doctors and patients.  Served as the team lead, architect, and scrum master.  The challenges were to find ways to go through the legacy application and satisfying the stringent security requirements.
+* Jumped in a team with Azure project to support electronic prescription of controlled substance.  Straightened out its development cycle, created its zero downtime deployment, continuous monitoring and alerting supporting procedure.  Worked the service through a DEA certification process. 
+
+
+	Senior Software Development Engineer, Microsoft,   				August 2011—July 2016-      
+* Extended the data model to support multiple programs and multiple users with different roles/permissions of Microsoft’s diversified developers and vendors to promote growth.
+* Served in the Windows Phone Services Division, worked on services that support developer registration and providing supporting market setup meta data for other services of Windows Phone.
+* Created a security scheme where applications validated by the operating system can communicate with corresponding services through privileged channels with different levels of security.
+* Designed, implemented, and worked with device programmers to enable Enterprise Applications and their management on Windows Phones, enhance without compromise of the security boundary of the Windows phone execution environment while provide the flexibility needed by enterprise applications.  Provided design and execution guides in implementing the full capability in stages.   
+* Designed and implemented support of selling Applications and Games in the China Market using local currency.
+* Create and integrated emulators for a workflow admin service and execution engineer to facilitate better component and life cycle, end to end tests.
+* Create many emulators for external services to facilitate automated tests, including create a fake protocol so service API calls do not need to relay on external component, simplifies the test setup.
+* Create a prototype to facilitate a deployment model promoting better separation of service development and service deployment, working with the engineering team to work it into the engineering tool set.
+* Migrated the developer services into separated services as we are moving to more SOA type of service organization.  Provided guidelines to the team on the approach and strategy.
+* Learned the Microsoft’s enterprise application tools set such as its development tools, BI environments, Azure, etc. 
+
+	Senior Software Development Engineer, Amazon,   				March. 2008 – August 2011
+* Served as the DBA for the team created the data model for our services, created a horizontal partitioning database to handle the large volume of transactions, and tuned the performance of the key queries for our services.
+* Developing software to support the revolutionary Kindle E-Reader.  Providing the supporting software to make the e-reader device to purchase and download books wirelessly on Kindle.  Instrumental in understanding the requirements, analyzing the required system components, designing and developing the complete solution.
+* Gained many experiences and much knowledge in design, develop, and support very large scale and high availability systems.  For example, 
+o create an abstract layer on top of multiple oracle databases to allow horizontal scaling of our application; 
+o create a UDP based notification system using Server directed redirection based on consistent hashing algorithm, avoiding load balancers and state replications; 
+o used Hadoop to aggregate very large volume of data; 
+o used messaging systems to make services scalable and avoid performance and SLA dependencies on external partners.
+* Used many styles of APIs of services such as SOAP, Rest, and customized data packets, in both synchronized and asynchronized API calls. 
+* Patent pending on the solution to balance device load without load balancers.
+* Used many Amazon tools for developing/building/deploying enterprise software.  Extended Amazon’s existing tools in its production environment and make them applicable to EC2 environments, including a deployment tool, a log pushing solution, and a health monitor solution, using EC2 server management APIs.
+* Used many of AWS (Amazon Web Service) solutions such as EC2, S3, SimpleDB, SQS, SNS.
+* Created wrappers for provisioning and Smpp APIs to access APIs from various wireless carriers such as Sprint and ATT.
+
+	Independent consultant  					April. 2004 – March 2008
+
+* Oct. 2006 – December 2008, a small start up company developing mobile application for doctors to write prescriptions.  Lead the data service department providing the necessary BI function to support the company’s business model.  
+o Envision, design, and implemented a thread model to handle remote tasks of different characteristics to allow the hand held device to downgrade gracefully when the WI-FI network is not available or not stable and to improve its performance and to take full advantage of the back end server when WI-FI improves.
+o Served as the Oracle DBA for the company.  Sized, acquired, installed, and maintained an Oracle instance using RAC (Real Application Cluster) and Storage Area Network.
+o Tutoring the team to adopt Agile practices such as continuous integration and test driven development. 
+o Used C# (Visual Studio), Crystal Reports, Business Objects, Open Portal, and Oracle.
+o Created the data loading and updating process to create the drug list based on source data from MediSpan, a primary data source for drug and prescription information. 
+o Created the process to identify adverse drug reactions based on prescribed drug and patient’s existing prescriptions.
+o Defined the main performance indicators for the business and application and created a DSS dashboard.  Integrated the dashboard with other applications and reports using Crystal reports. 
+* June 2006 – Dec. 2006, consulted at a service provider providing Ring Tone, Ring Back Tone, Music_On_Demand, Video_On_Demand Services to Telecom companies world wide.  Served the team lead and tutor on a team of 5; re-built the admin suite of the Ring Back Tone product using portal technology to provide personalization capabilities.  The project was the company’s first “semi” agile project and successfully deployed on schedule and in budget.  
+o Used multiple open source tools such as JBoss, Hibernate, JiBX, Spring Framework.
+o Used AJAX to improve user experiences to allow user to expand/shrink sections of a long list.
+o Used OpenPortal to provide personalization capability to brand the application for different vendors.
+o Used JProfiler to profile CPU and memory of service tasks, identified and improved performance based on the profiling results.
+o Used JMeter; designed user profiles; load and stress tested the service application to verify its volume capability and resource requirements. 
+
+* June 2005 – Nov. 2006, a Fortune 500 IT consulting/defense contractor
+o SBI:  Member of the winning team in bidding for the multi-billion dollar Homeland Security Secure Border Initiative (SBI) project.  Create a TCP/IP layer to switch the transportation/physical layer of an application using WiMax and Satellite short burst text messages when a patrolling vehicle is out the WiMax range.
+o TUM5:  Implementing Oracle eBuisnessSuite’s HTML service module for the Transportation Security Administration to handle various customer inquiries and support requests. Working on Oracle 11i Applications implementation creating Java extension components based on J2EE and OAF,  providing deployment automation scripts (Perl, Korn Shell, ANT, PL/SQL, DataLoader), and writing data migration scripts (PL/SQL).
+o Developing and improving source code versioning process with ClearCase
+o January 2006 --- May, 2006, Working on implementing a confederated ID management system with multiple LDAP directory services using JNDI and SAML.
+o Developing proposals for various government agencies;
+o Reviewing architectural and design document for software applications
+* October 2004 – June 2005, serving as the lead and architect on a project developing an on-line tutoring system for medical professionals.  Worked part time setting up the development, QA, and production environment using Flash, ColdFusion, Apache, JBoss (and its embedded Tomcat), Eclipse, CVS.  Set up the application architecture using Oracle HTMLDB, Struts, JDBC, ANT, and Log4J.  Mentored developers working through working examples.  Create an extensible authorization framework using filters.
+* August 2004 – August 2005, serving as the architect on a new project for an association of colleges building statistical analysis application which will help student in optimizing their studying efforts on the nation wide entrance exams.  The project involves very large data volume, stringent business requirements, and complicated interactions with existing applications as well as applications under development.
+* September 2004 – June 2005, taught C#.Net at Northern Virginia Community College.
+* June 2004 – August 2004, worked on J2EE project for an educational company using RUP, Rational tools, and WebLogic.  The administrative application will manage its most critical business process involving many kinds of users and handle very high peak volumes.  Most students in the United States will use the application before they attend colleges.
+* April 2004 – June 2004, re-factored a data repository component at a large mortgage underwriting company.  Re-architected the data structure to address the performance and scalability issue.  Using Java, MQ Series, and UML(Rational Rose).
+
+	ThoughtWorks Inc. 												May. 2003 – April. 2004
+	Senior Software Architect
+* Led the development of a manufacturing defect monitoring application for a large earth moving equipment manufacture using Java, JDBC, JUnit, Mock Object, HttpUnit, jWebUnit, JSP, Struts, Tomcat, Ant, CruiseControl, CVS, WebSphere, Oracle.  Set up the architecture of the application and coached client developers on XP practices. (Dec. 2003 – April 2004)
+* Led the development of a client review application for a large nation wide insurance company presenting quarterly client reviews to producers to speed up the reviewing process and identify potential business opportunities.  Provided the architecture designed.  Used Java, WebSphere, JUnit, HttpUnit together jWebUnit, Tomcat, Struts, JSP, Oracle, CVS, and Java.  Used Agile methodology and XP practices. (Jul. 2003 – Dec. 2003)
+* Worked on a pension plan proposal application for a large nation wide insurance company. Used Java, WebSphere, Struts, XML, Java.  Used Agile methodology and XP practices. (Jun. 2003 – Jul. 2003).  Participated in establishing architecture based the document based workflow.
+* Worked on a clearing house project for the largest pay-per-view company using Java, and TIBCO EAI tools.  Worked on its testing structure.   Restore the application back into a mode to have short, regular, and repeatable cycle of development, testing, and release. Extended a testing tool and its XML tag wrappers. 
+
+	Private Business Inc. 														Dec. 1993 – May, 2003
+	Principal Developer/Architect/Project Manager 
+Experienced in all the aspects of software product life cycle, including making technical decisions and living through them.  Worked on products from their initial perception through multiple revisions.
+	As architect and developer:
+* Enhancing an application to enable two-way data transmission through secured Internet connection using HTTP, SSL, Web Server (Apache), Application Server (WebLogic and Oracle Application Server), servlet, and Oracle.  
+* Used XML as the data format and avoided customized parsing.
+* Developed a data conversion utility using XML as data mapping definitions.
+* Designed a report generation framework using different reporting tools (ReportWriter, CrystalReports, and Actuate.).
+* Built an automated tool to automatically update our application and developed an administration tool for it.
+* Designed a UI based testing framework for use cases testing and supervised its implementation.
+* Designed a UI framework.
+* Used OMT methodology and Jacobson use cases methodology.
+* Developed a persistence framework.  The framework provided the needed encapsulation to switch the OODB system in our application without any major modifications.  (Tensegrity, a file server based OO Persistence System, and GemStone, an industry strength active OO database.)
+* Re-factored the application to improve flexibility using OO principle and design patterns.  
+* Tuned performance.   Used profiling tools to analyze performance issues.  Creatively utilized customized data structure and extended UI widgets to improve performances.
+* Designed and administered the versioning procedure using ENVY.  Simple rules are set to enable developers to focus on software development quickly.
+* Re-engineered the workflow of our application to improve large scale processing efficiency of our application.
+* Supported the application’s successful usage and revision for multiple years.
+* Became the business expert of the products
+
+	As Project Manager 
+* Managed three successful projects, all the way through to their deployment and support:  
+* Enhanced our application to enable communication between the application in the field and our centralized server. 
+* Re-engineered the workflow of our application for better efficiency for a larger scale of operation through automated workflow.
+* Migrated our application from using a file based persistence system to using an OO database and a 3-tier architecture.  Increased the scalability of the application by more than a magnitude. 
+* Managed the resources and schedule of projects using MS Project and Netmosphere.  
+* Negotiated and coordinated resources with department heads and other project managers.
+* Procured the needed software and hardware to set up the development and testing environment.  Created the needed environment so our developers and testers can focus on their tasks and be productive.
+* Coordinated the training of needed skill sets, mentored team members for their continued improvements.
+* Managed the development of software specifications, development, and testing; 
+* Instituted the short development cycles methodology and shortened time to production.
+* Coordinated the development of end-user training materials and the training of end-users.
+* Managed the deployment process, including sizing the hardware, monitor the purchasing and setup of needed software.
+* Established procedures to monitor the production system to make sure all procedures are properly followed after the deployment.
+
+	Oracle Applications 11i Implementation: Served as the internal project Manager and technical lead from the perception phase all the way through to the deployment and stabilization of 6 Oracle Applications modules: TeleServices (Customer Supports), Order Management, Advanced Pricing, Contracts, Account Receivables, Incentive Compensations.
+* Prepared the project proposal; Analyzed and scoped the project; Secured top management’s buy-in and funding; Prepared RFP, reviewed and hired a consulting group.
+* Served as co-project manager for the implementation phase with a consultant project manager.
+* Played the advocate for business process improvements and coordinated business process changes.
+* Served as the main developer for the project’s integration.  Designed the data flow from Order Management to A/R to Incentive Compensations; Written the integration concurrent programs for Oracle Order Management using Java and PL/SQL stored procedures; Written many data conversion programs using Oracle Applications APIs.  Developed PL/SQL procedures to be embedded in Oracle Applications as extensions; Developed Oracle Forms, and Oracle Reports.
+* Managed and participated in developing a Business Intelligence solution using Oracle Discoverer.
+
+The Peer Group, Ontario, Canada 										May 1993 – Dec. 1993
+	Software Engineer
+* A data collection application as part of a factory automation system, allowing end user to define customized data collection forms on the fly.
+* A data collection application for a bar code reader with embedded 286 processor.  
+* A communication layer on PC to a messaging/workflow system running on SunOS, through TCP/IP.
+
+	University of Guelph, Ontario, Canada 									Mar. 1992 – May 1993
+	Researcher
+* Researched in various areas in AI and developed research projects using C++ and X-Windows.
+
+	Jilin Universisty, ChangChun, China 										Jun. 1987 – Sep. 1989
+* Taught various computer science subjects.
+
+PUBLICATION LIST
+
+* Z. An and M. McLeish. RES: Formalism for Reasoning with Relative-Strength Defaults. Proc. 2nd European Conf. on Symbolic and Quantitative Approaches to Reasoning and Uncertainty, Pages 1--8, Nov. 1993.
+* Z. An and M. McLeish. Differences made by uncertainty measures. Proc. AI93, Australia, Nov. 1993.
+* D.Bell, Z. An, and J. Guan. Knowledge discovery from medical databases.  In Proc. 11th Conf. on Medical Informatics Europe, 18-22 April 1993.
+* Z. An, D. Bell, and J. Hughes. How did the tiger rumble the donkey? In Proc. FLAIRS'93, Florida, April 1993.
+* Z. An, D. Bell, and J. Hughes. On the axiomization of conditional independence. Kybernetes: Int. J. of System and Cybernetics, 21(7), pages 48-58, 1993.
+* Z. An, D. Bell, and J. Hughes. Relation based evidential reasoning. Int. J. on Approximate Reasoning, 8(3), May 1993, pages 205--230.
+* Z. An, D. Bell, and J. Hughes. RES---relative evidential supports. Int. J. on Approximate Reasoning, 8(3), 1993, May 1993, pages 231--251.
+* Z. An, D. Bell, and J. Hughes. RES---a relation based method for evidential reasoning. In Proc. 8th Conf. on Uncertainty in AI, pages 1--8, 1992.
+* Z. An, D. Bell, and J. Hughes. Relative possibility. In Proc. IEEE-Fuzzy'92, pages 1105-1112, 1992.
+* Z An, D. Bell, and J. Hughes. What do hedges do? a pragmatic study. In Proc. 4th IPMU, July 1992.
+* Z. An. RES---Relative Evidential Support. Ph.D. thesis, University of Ulster, 1992.
+* Z. An, D. Bell, and J. Hughes. An evidential reasoning system using relations. In Proc. 3rd. Int. Conf. IPMU, pages 96-98, 1990.
+* Z. An. An extension of operator fuzzy logic. Master's thesis, Jilin University, PRC., 1987.
+* X. Liu and Z. An. Generalized resolution using paramodulation. Science Bulletin, 31(21), Nov. 1986.
+
+Zhi An, (571) 213 2214	zhian.job@gmail.com
+
+
+
